@@ -60,7 +60,7 @@ export default function Contact() {
     {
       icon: 'ph-phone',
       label: 'Phone',
-      value: '+91 6205872519',
+      value: '+916205872519',
       href: 'tel:+916205872519'
     },
     {
