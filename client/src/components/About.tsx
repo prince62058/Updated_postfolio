@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import profileImage from "@assets/IMG_8367_1754392069275.jpg";
+import profileImage from "@assets/profile_1754392213606.png";
 
 export default function About() {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -42,7 +42,11 @@ export default function About() {
             <img 
               src={profileImage} 
               alt="Prince Kumar Profile" 
-              className="w-80 h-80 object-cover rounded-full glassmorphic p-2 mx-auto hover:scale-105 transition-transform duration-500"
+              className="w-80 h-80 object-cover rounded-full glassmorphic p-1 mx-auto hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/50"
+              style={{ 
+                background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(139, 92, 246, 0.1))',
+                border: '2px solid rgba(14, 165, 233, 0.3)'
+              }}
             />
           </div>
           
