@@ -6,14 +6,13 @@ services:
     staticPublishPath: ./dist/public
     routes:
       - type: rewrite
+        source: /api/contact
+        destination: /.netlify/functions/contact
+      - type: rewrite
         source: /*
         destination: /index.html
     envVars:
       - key: GMAIL_USER
         sync: false
       - key: GMAIL_APP_PASSWORD
-        sync: false
-      - key: SENDGRID_API_KEY
-        sync: false
-      - key: MONGODB_URI
         sync: false
