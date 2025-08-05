@@ -97,12 +97,19 @@ Your static files are ready in the `dist/public/` directory:
 - Responsive design for all devices
 - About, Projects, Tech Stack, and Education sections
 - Social media links and professional branding
+- Contact form with email client fallback (opens default email app)
 
 ❌ **Not Available (Static Only):**
 - Contact form database storage
-- Email notifications
+- Automatic email notifications via server
 - Admin interface (/database route)
 - MongoDB integration
+
+**Contact Form Behavior in Static Mode:**
+- Form validates input properly
+- On submission, opens user's default email client
+- Email is pre-filled with all form data
+- User can send email directly from their email app
 
 ## Contact Form Alternatives for Static Site
 

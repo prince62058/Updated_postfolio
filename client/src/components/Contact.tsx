@@ -63,10 +63,24 @@ export default function Contact() {
         });
       }
     } catch (error) {
+      // Fallback for static deployment - open email client
+      const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
+      const body = encodeURIComponent(`Hi Prince,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}\n\nBest regards,\n${formData.name}`);
+      const mailtoUrl = `mailto:princekumar5252@gmail.com?subject=${subject}&body=${body}`;
+      
+      window.open(mailtoUrl, '_blank');
+      
       toast({
-        title: "Error",
-        description: "Failed to send message. Please check your connection and try again.",
-        variant: "destructive",
+        title: "Email client opened!",
+        description: "Your default email app should open with the message pre-filled. Please send the email to complete your message.",
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
       });
     } finally {
       setIsSubmitting(false);
