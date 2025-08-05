@@ -28,10 +28,10 @@ export default function Education() {
     <section id="education" className="py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className="education-title text-5xl font-light mb-6 text-accent">
             Education Journey
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light">
             My academic path and continuous learning journey in technology and computer science.
           </p>
         </div>
