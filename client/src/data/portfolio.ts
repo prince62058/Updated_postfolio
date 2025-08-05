@@ -8,7 +8,7 @@ export const projects = [
       { name: "MySQL", color: "bg-blue-500/20 text-blue-300" },
       { name: "JDBC", color: "bg-green-500/20 text-green-300" }
     ],
-    liveDemo: "#",
+    liveDemo: "https://github.com/prince62058/Online-Reservation-Using-JDBC-IN-JAVA",
     downloadLink: "https://github.com/prince62058/Online-Reservation-Using-JDBC-IN-JAVA/archive/refs/heads/main.zip"
   },
   {
