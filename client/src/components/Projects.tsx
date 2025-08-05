@@ -79,7 +79,7 @@ export default function Projects() {
           <Button
             variant="outline"
             className="glassmorphic px-8 py-4 rounded-full font-light hover:bg-primary transition-all duration-300 btn-glow border-0"
-            onClick={() => window.open('https://github.com/prince62058', '_blank')}
+            onClick={() => window.open('https://github.com/prince62058/Online-Reservation-Using-JDBC-IN-JAVA', '_blank')}
           >
             <i className="ph-github-logo mr-2"></i>
             View All on GitHub
