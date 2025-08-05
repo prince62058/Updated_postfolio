@@ -81,7 +81,7 @@ This message was sent from your portfolio website contact form.
 function createNodemailerTransporter() {
   // Check if Gmail credentials are available
   const gmailUser = process.env.GMAIL_USER;
-  const gmailPassword = process.env.GMAIL_APP_PASSWORD;
+  const gmailPassword = process.env.GMAIL_PASS;
   
   if (!gmailUser || !gmailPassword) {
     console.warn('Gmail credentials not set - trying alternative email methods');
