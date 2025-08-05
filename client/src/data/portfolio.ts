@@ -68,8 +68,8 @@ export const projects = [
       { name: "Backend", color: "bg-green-500/20 text-green-300" },
       { name: "Frontend", color: "bg-blue-500/20 text-blue-300" }
     ],
-    liveDemo: "#",
-    downloadLink: "#"
+    liveDemo: "https://prince62058.github.io/Seridorr-Full-Stack/",
+    downloadLink: "https://github.com/prince62058/Seridorr-Full-Stack/archive/refs/heads/main.zip"
   }
 ];
 
