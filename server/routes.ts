@@ -250,10 +250,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
+      // Handle MongoDB Binary objects properly
+      let fileBuffer: Buffer;
+      
+      if (Buffer.isBuffer(resume.fileData)) {
+        fileBuffer = resume.fileData;
+      } else if (resume.fileData && typeof resume.fileData.value === 'function') {
+        // MongoDB Binary object - call value() to get the Buffer
+        fileBuffer = resume.fileData.value();
+      } else if (resume.fileData && resume.fileData.buffer) {
+        // Alternative format - use the buffer property directly
+        fileBuffer = resume.fileData.buffer;
+      } else {
+        // Fallback
+        fileBuffer = Buffer.from(resume.fileData);
+      }
+
+      if (!fileBuffer || fileBuffer.length === 0) {
+        return res.status(500).json({
+          success: false,
+          message: 'Resume file is empty'
+        });
+      }
+
+      // Set headers and send file
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', `attachment; filename="${resume.filename}"`);
-      res.setHeader('Content-Length', resume.fileData.length.toString());
-      res.end(resume.fileData);
+      res.setHeader('Cache-Control', 'no-cache');
+      
+      // Send the buffer directly
+      res.end(fileBuffer);
     } catch (error) {
       console.error('Resume download error:', error);
       res.status(500).json({
