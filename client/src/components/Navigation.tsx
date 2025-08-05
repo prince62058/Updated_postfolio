@@ -26,9 +26,7 @@ export default function Navigation() {
     <nav className={`fixed top-0 w-full z-50 p-6 transition-all duration-300 ${isScrolled ? 'backdrop-blur-md' : ''}`}>
       <div className="glassmorphic max-w-6xl mx-auto rounded-2xl px-8 py-4">
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-light text-accent cursor-pointer" onClick={() => scrollToSection('home')}>
-            PK
-          </div>
+          <div className="text-2xl font-light text-accent cursor-pointer text-left" onClick={() => scrollToSection('home')}>PRINCE</div>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
