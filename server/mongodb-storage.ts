@@ -5,7 +5,9 @@ import type {
   User, 
   InsertUser, 
   ContactSubmission, 
-  InsertContactSubmission 
+  InsertContactSubmission,
+  Resume,
+  InsertResume
 } from '@shared/mongodb-schema';
 
 export interface IMongoStorage {
@@ -14,6 +16,9 @@ export interface IMongoStorage {
   createUser(user: InsertUser): Promise<User>;
   createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission>;
   getAllContactSubmissions(): Promise<ContactSubmission[]>;
+  createResume(resume: InsertResume): Promise<Resume>;
+  getActiveResume(): Promise<Resume | undefined>;
+  getAllResumes(): Promise<Resume[]>;
 }
 
 export class MongoStorage implements IMongoStorage {
@@ -23,6 +28,10 @@ export class MongoStorage implements IMongoStorage {
 
   private get contactSubmissionsCollection(): Collection<ContactSubmission> {
     return getDatabase().collection<ContactSubmission>('contact_submissions');
+  }
+
+  private get resumesCollection(): Collection<Resume> {
+    return getDatabase().collection<Resume>('resumes');
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -67,6 +76,37 @@ export class MongoStorage implements IMongoStorage {
       .toArray();
     
     return submissions;
+  }
+
+  async createResume(insertResume: InsertResume): Promise<Resume> {
+    // Deactivate all existing resumes
+    await this.resumesCollection.updateMany({}, { $set: { isActive: false } });
+
+    const resume: Resume = {
+      id: nanoid(),
+      filename: insertResume.filename,
+      contentType: insertResume.contentType,
+      fileData: insertResume.fileData,
+      uploadedAt: new Date(),
+      isActive: true,
+    };
+
+    await this.resumesCollection.insertOne(resume);
+    return resume;
+  }
+
+  async getActiveResume(): Promise<Resume | undefined> {
+    const resume = await this.resumesCollection.findOne({ isActive: true });
+    return resume || undefined;
+  }
+
+  async getAllResumes(): Promise<Resume[]> {
+    const resumes = await this.resumesCollection
+      .find({})
+      .sort({ uploadedAt: -1 })
+      .toArray();
+    
+    return resumes;
   }
 
   // Additional helper methods for MongoDB operations

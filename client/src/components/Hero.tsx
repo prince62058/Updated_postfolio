@@ -15,12 +15,34 @@ export default function Hero() {
     }
   }, []);
 
-  const downloadResume = () => {
-    // Create a download link for resume
-    const link = document.createElement('a');
-    link.href = '#'; // Would be actual resume URL
-    link.download = 'Prince_Kumar_Resume.pdf';
-    link.click();
+  const downloadResume = async () => {
+    try {
+      // Fetch the resume from our API
+      const response = await fetch('/api/resume/download');
+      
+      if (!response.ok) {
+        console.error('Failed to download resume:', response.statusText);
+        return;
+      }
+
+      // Create a temporary URL for the file
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      
+      // Create and trigger download
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Prince_Kumar_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      
+      // Clean up
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+    }
   };
 
   const scrollToContact = () => {

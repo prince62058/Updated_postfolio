@@ -3,6 +3,8 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { sendContactEmailAlternative } from './email';
 import { insertContactSubmissionSchema } from "@shared/mongodb-schema";
+import fs from 'fs';
+import path from 'path';
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission endpoint
@@ -232,6 +234,104 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         message: 'Failed to check database status'
+      });
+    }
+  });
+
+  // Resume download endpoint
+  app.get('/api/resume/download', async (req, res) => {
+    try {
+      const resume = await storage.getActiveResume();
+      
+      if (!resume) {
+        return res.status(404).json({
+          success: false,
+          message: 'Resume not found'
+        });
+      }
+
+      res.setHeader('Content-Type', resume.contentType);
+      res.setHeader('Content-Disposition', `attachment; filename="${resume.filename}"`);
+      res.send(resume.fileData);
+    } catch (error) {
+      console.error('Resume download error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to download resume'
+      });
+    }
+  });
+
+  // Get resume info endpoint
+  app.get('/api/resume/info', async (req, res) => {
+    try {
+      const resume = await storage.getActiveResume();
+      
+      if (!resume) {
+        return res.status(404).json({
+          success: false,
+          message: 'Resume not found'
+        });
+      }
+
+      // Return resume info without the file data
+      const resumeInfo = {
+        id: resume.id,
+        filename: resume.filename,
+        contentType: resume.contentType,
+        uploadedAt: resume.uploadedAt,
+        isActive: resume.isActive
+      };
+
+      res.json({
+        success: true,
+        resume: resumeInfo
+      });
+    } catch (error) {
+      console.error('Resume info error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to get resume info'
+      });
+    }
+  });
+
+  // Upload/Initialize resume endpoint (for initial setup)
+  app.post('/api/resume/upload', async (req, res) => {
+    try {
+      const { filename, contentType, fileData } = req.body;
+
+      if (!filename || !contentType || !fileData) {
+        return res.status(400).json({
+          success: false,
+          message: 'Missing required fields: filename, contentType, fileData'
+        });
+      }
+
+      // Convert base64 to Buffer if needed
+      let buffer: Buffer;
+      if (typeof fileData === 'string') {
+        buffer = Buffer.from(fileData, 'base64');
+      } else {
+        buffer = Buffer.from(fileData as ArrayBuffer);
+      }
+
+      const resume = await storage.createResume({
+        filename,
+        contentType,
+        fileData: buffer
+      });
+
+      res.json({
+        success: true,
+        message: 'Resume uploaded successfully',
+        resumeId: resume.id
+      });
+    } catch (error) {
+      console.error('Resume upload error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to upload resume'
       });
     }
   });

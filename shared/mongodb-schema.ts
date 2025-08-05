@@ -19,6 +19,16 @@ export interface ContactSubmission {
   submittedAt: Date;
 }
 
+export interface Resume {
+  _id?: ObjectId;
+  id: string;
+  filename: string;
+  contentType: string;
+  fileData: Buffer;
+  uploadedAt: Date;
+  isActive: boolean;
+}
+
 // Validation schemas
 export const insertUserSchema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -32,5 +42,12 @@ export const insertContactSubmissionSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
+export const insertResumeSchema = z.object({
+  filename: z.string().min(1, "Filename is required"),
+  contentType: z.string().min(1, "Content type is required"),
+  fileData: z.instanceof(Buffer),
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
+export type InsertResume = z.infer<typeof insertResumeSchema>;

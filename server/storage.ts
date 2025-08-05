@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type ContactSubmission, type InsertContactSubmission } from "@shared/mongodb-schema";
+import { type User, type InsertUser, type ContactSubmission, type InsertContactSubmission, type Resume, type InsertResume } from "@shared/mongodb-schema";
 import { connectToMongoDB } from './mongodb';
 import { MongoStorage } from './mongodb-storage';
 import { nanoid } from 'nanoid';
@@ -10,16 +10,21 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission>;
   getAllContactSubmissions(): Promise<ContactSubmission[]>;
+  createResume(resume: InsertResume): Promise<Resume>;
+  getActiveResume(): Promise<Resume | undefined>;
+  getAllResumes(): Promise<Resume[]>;
 }
 
 // Fallback in-memory storage for development/testing
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
   private contactSubmissions: Map<string, ContactSubmission>;
+  private resumes: Map<string, Resume>;
 
   constructor() {
     this.users = new Map();
     this.contactSubmissions = new Map();
+    this.resumes = new Map();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -53,6 +58,31 @@ export class MemStorage implements IStorage {
   async getAllContactSubmissions(): Promise<ContactSubmission[]> {
     return Array.from(this.contactSubmissions.values()).sort(
       (a, b) => b.submittedAt.getTime() - a.submittedAt.getTime()
+    );
+  }
+
+  async createResume(insertResume: InsertResume): Promise<Resume> {
+    // Deactivate all existing resumes
+    this.resumes.forEach(resume => resume.isActive = false);
+
+    const id = nanoid();
+    const resume: Resume = {
+      ...insertResume,
+      id,
+      uploadedAt: new Date(),
+      isActive: true,
+    };
+    this.resumes.set(id, resume);
+    return resume;
+  }
+
+  async getActiveResume(): Promise<Resume | undefined> {
+    return Array.from(this.resumes.values()).find(resume => resume.isActive);
+  }
+
+  async getAllResumes(): Promise<Resume[]> {
+    return Array.from(this.resumes.values()).sort(
+      (a, b) => b.uploadedAt.getTime() - a.uploadedAt.getTime()
     );
   }
 }
@@ -104,5 +134,17 @@ export const storage = {
   async getAllContactSubmissions(): Promise<ContactSubmission[]> {
     const storageInstance = await getStorage();
     return storageInstance.getAllContactSubmissions();
+  },
+  async createResume(resume: InsertResume): Promise<Resume> {
+    const storageInstance = await getStorage();
+    return storageInstance.createResume(resume);
+  },
+  async getActiveResume(): Promise<Resume | undefined> {
+    const storageInstance = await getStorage();
+    return storageInstance.getActiveResume();
+  },
+  async getAllResumes(): Promise<Resume[]> {
+    const storageInstance = await getStorage();
+    return storageInstance.getAllResumes();
   }
 };
