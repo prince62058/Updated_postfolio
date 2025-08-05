@@ -17,6 +17,8 @@ export default function Contact() {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     if (typeof window !== 'undefined' && window.gsap) {
       if (titleRef.current) titleRef.current.style.opacity = '0';
@@ -25,22 +27,50 @@ export default function Contact() {
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Simulate form submission
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    });
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Message Sent Successfully!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        });
+
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        toast({
+          title: "Failed to Send Message",
+          description: result.message || "Please try again later.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please check your connection and try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -84,20 +114,20 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 relative z-10">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="contact" className="py-12 sm:py-16 lg:py-20 relative z-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <h2 
           ref={titleRef}
-          className="contact-title text-5xl font-light text-center mb-16 text-accent"
+          className="contact-title text-3xl sm:text-4xl lg:text-5xl font-light text-center mb-12 sm:mb-16 text-accent"
         >
           Get In Touch
         </h2>
         
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Info */}
           <div ref={infoRef} className="contact-info">
-            <h3 className="text-2xl font-light mb-8 text-accent">Let's Connect</h3>
-            <p className="text-muted-foreground mb-8 font-light">
+            <h3 className="text-xl sm:text-2xl font-light mb-6 sm:mb-8 text-accent">Let's Connect</h3>
+            <p className="text-muted-foreground mb-6 sm:mb-8 font-light text-sm sm:text-base">
               Whether you're looking for a developer, have a question about my projects, or just want to say hello, I'd love to hear from you.
             </p>
             
