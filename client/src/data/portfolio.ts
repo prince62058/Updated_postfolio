@@ -21,7 +21,7 @@ export const projects = [
       { name: "JavaScript", color: "bg-yellow-500/20 text-yellow-300" }
     ],
     liveDemo: "https://prince62058.github.io/MusicWeb-APP/",
-    downloadLink: "#"
+    downloadLink: "https://github.com/prince62058/MusicWeb-APP/archive/refs/heads/main.zip"
   },
   {
     title: "Face Recognition System",
