@@ -15,7 +15,8 @@ The portfolio includes sections for hero/landing, about, projects, and contact, 
 - Added comprehensive API endpoints for CRUD operations with pagination support
 - Built admin database management interface at /database route for monitoring submissions
 - Verified database connectivity with mongoose connection testing
-- Enhanced contact form system with robust database persistence and email notifications
+- Enhanced contact form system with robust database persistence and Nodemailer email notifications
+- Configured Gmail SMTP integration for sending contact form submissions to princekumar5252@gmail.com
 - Added database status monitoring and real-time connection health checks
 - Populated database with 5 sample contact form submissions for testing
 
