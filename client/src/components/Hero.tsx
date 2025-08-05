@@ -32,7 +32,7 @@ export default function Hero() {
       // Create and trigger download
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'Prince_Kumar_Resume.pdf';
+      link.download = 'Prince_Kumar_Updated_Resume.pdf';
       document.body.appendChild(link);
       link.click();
       

@@ -289,6 +289,66 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Resume update endpoint (for internal use)
+  app.post('/api/resume/update-from-file', async (req, res) => {
+    try {
+      const { filePath } = req.body;
+      
+      if (!filePath) {
+        return res.status(400).json({
+          success: false,
+          message: 'File path is required'
+        });
+      }
+
+      // Read the file from the provided path
+      const fs = await import('fs');
+      const path = await import('path');
+      
+      const resumePath = path.join(process.cwd(), filePath);
+      
+      if (!fs.existsSync(resumePath)) {
+        return res.status(404).json({
+          success: false,
+          message: 'Resume file not found'
+        });
+      }
+
+      const fileBuffer = fs.readFileSync(resumePath);
+      
+      // First, get all existing resumes to verify removal
+      const existingResumes = await storage.getAllResumes();
+      console.log('Existing resumes before update:', existingResumes.length);
+
+      // Use storage to create new resume (this should deactivate old ones)
+      const resumeData = {
+        filename: 'Prince_Kumar_Updated_Resume.pdf',
+        contentType: 'application/pdf',
+        fileData: fileBuffer
+      };
+
+      const result = await storage.createResume(resumeData);
+      
+      // Verify the new resume is active
+      const newActiveResume = await storage.getActiveResume();
+      console.log('New active resume:', newActiveResume?.filename);
+      
+      res.json({
+        success: true,
+        message: 'Resume updated successfully',
+        resumeId: result.id,
+        size: fileBuffer.length
+      });
+
+    } catch (error) {
+      console.error('Resume update error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to update resume'
+      });
+    }
+  });
+
   // Get resume info endpoint
   app.get('/api/resume/info', async (req, res) => {
     try {

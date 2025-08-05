@@ -53,9 +53,10 @@ The portfolio includes sections for hero/landing, about, projects, and contact, 
 - Created comprehensive API endpoints for resume upload, download, and info retrieval
 - Fixed MongoDB Binary object conversion issues for proper PDF file extraction
 - Added resume download functionality to Hero section with direct database connection
-- Uploaded Prince Kumar's resume (298,752 bytes) to MongoDB with proper indexing
+- **UPDATED**: Uploaded Prince Kumar's latest resume (298,754 bytes) to MongoDB with proper indexing
+- Added resume update API endpoint for seamless content management
 - Tested and verified PDF download works correctly with proper file format preservation
-- Enhanced portfolio with professional resume download capability
+- Enhanced portfolio with professional resume download capability and update system
 
 **Portfolio Branding & Visual Enhancement (August 5, 2025)**
 - Created custom futuristic favicon with "P" logo in brand gradient colors (blue-cyan-purple)
