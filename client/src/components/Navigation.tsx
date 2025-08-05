@@ -33,6 +33,7 @@ export default function Navigation() {
             {[
               { label: 'Home', id: 'home' },
               { label: 'About', id: 'about' },
+              { label: 'Education', id: 'education' },
               { label: 'Projects', id: 'projects' },
               { label: 'Contact', id: 'contact' }
             ].map((item) => (
@@ -64,6 +65,7 @@ export default function Navigation() {
               {[
                 { label: 'Home', id: 'home' },
                 { label: 'About', id: 'about' },
+                { label: 'Education', id: 'education' },
                 { label: 'Projects', id: 'projects' },
                 { label: 'Contact', id: 'contact' }
               ].map((item) => (

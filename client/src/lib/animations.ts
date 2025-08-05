@@ -86,6 +86,54 @@ export function initializeScrollAnimations() {
       ease: 'power3.out'
     }, '-=0.3');
 
+  // Education Section Animation
+  const educationTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#education',
+      start: 'top 80%',
+      end: 'bottom 20%',
+      toggleActions: 'play none none reverse',
+      scrub: false
+    }
+  });
+
+  educationTimeline
+    .fromTo('.education-timeline', {
+      opacity: 0,
+      y: 100,
+      filter: 'blur(10px)'
+    }, {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      duration: 1.2,
+      ease: 'power3.out'
+    })
+    .fromTo('.education-item', {
+      opacity: 0,
+      y: 80,
+      scale: 0.9
+    }, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1,
+      ease: 'back.out(1.4)',
+      stagger: 0.3
+    }, '-=0.6')
+    .fromTo('.certification-card', {
+      opacity: 0,
+      y: 60,
+      scale: 0.8
+    }, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: 'power2.out',
+      stagger: 0.1
+    }, '-=0.4');
+
   // Projects Section Animations
   const projectsTimeline = gsap.timeline({
     scrollTrigger: {

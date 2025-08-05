@@ -135,6 +135,32 @@
     opacity: 0;
     filter: blur(15px);
   }
+
+  .education-timeline {
+    position: relative;
+  }
+
+  .education-item {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .education-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .certification-card {
+    transition: all 0.3s ease;
+    background: rgba(20, 20, 30, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+  }
+
+  .certification-card:hover {
+    background: rgba(79, 70, 229, 0.1);
+    border-color: rgba(79, 70, 229, 0.4);
+    box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2);
+  }
 }
 
 @keyframes float {
