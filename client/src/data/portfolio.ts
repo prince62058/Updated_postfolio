@@ -32,8 +32,8 @@ export const projects = [
       { name: "Python", color: "bg-blue-500/20 text-blue-300" },
       { name: "ML", color: "bg-purple-500/20 text-purple-300" }
     ],
-    liveDemo: "#",
-    downloadLink: "#"
+    liveDemo: "https://github.com/prince62058/Face-Recognition-Attendance-Systems",
+    downloadLink: "https://github.com/prince62058/Face-Recognition-Attendance-Systems/archive/refs/heads/main.zip"
   },
   {
     title: "Login Signup System",
