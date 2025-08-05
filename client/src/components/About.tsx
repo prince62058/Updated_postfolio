@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import profileImage from "@assets/IMG_8367_1754392069275.jpg";
+import profileImage from "@assets/Adobe Express - file_1754392722119.png";
 
 export default function About() {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -23,8 +23,8 @@ export default function About() {
     if (typeof window !== 'undefined' && window.gsap) {
       if (imageRef.current) {
         imageRef.current.style.opacity = '0';
-        imageRef.current.style.transform = 'translateY(100px)';
-        imageRef.current.style.filter = 'blur(10px)';
+        imageRef.current.style.transform = 'translateY(150px) scale(0.8)';
+        imageRef.current.style.filter = 'blur(15px)';
       }
       if (contentRef.current) {
         contentRef.current.style.opacity = '0';

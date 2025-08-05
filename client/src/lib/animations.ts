@@ -63,14 +63,16 @@ export function initializeScrollAnimations() {
   aboutTimeline
     .fromTo('.about-image', {
       opacity: 0,
-      y: 100,
-      filter: 'blur(10px)'
+      y: 150,
+      scale: 0.8,
+      filter: 'blur(15px)'
     }, {
       opacity: 1,
       y: 0,
+      scale: 1,
       filter: 'blur(0px)',
-      duration: 1.2,
-      ease: 'power3.out'
+      duration: 1.5,
+      ease: 'back.out(1.7)'
     })
     .fromTo('.about-content', {
       opacity: 0,
