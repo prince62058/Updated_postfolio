@@ -44,8 +44,8 @@ export const projects = [
       { name: "CSS", color: "bg-blue-500/20 text-blue-300" },
       { name: "JavaScript", color: "bg-yellow-500/20 text-yellow-300" }
     ],
-    liveDemo: "#",
-    downloadLink: "#"
+    liveDemo: "https://prince62058.github.io/Login-Signup/",
+    downloadLink: "https://github.com/prince62058/Login-Signup/archive/refs/heads/main.zip"
   },
   {
     title: "Human Resource Management System",
