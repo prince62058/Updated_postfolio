@@ -56,8 +56,8 @@ export const projects = [
       { name: "Database", color: "bg-blue-500/20 text-blue-300" },
       { name: "Management", color: "bg-green-500/20 text-green-300" }
     ],
-    liveDemo: "#",
-    downloadLink: "#"
+    liveDemo: "https://prince62058.github.io/HRMS/",
+    downloadLink: "https://github.com/prince62058/HRMS/archive/refs/heads/main.zip"
   },
   {
     title: "Servidor Full Stack",
