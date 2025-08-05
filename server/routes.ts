@@ -250,9 +250,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      res.setHeader('Content-Type', resume.contentType);
+      res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', `attachment; filename="${resume.filename}"`);
-      res.send(resume.fileData);
+      res.setHeader('Content-Length', resume.fileData.length.toString());
+      res.end(resume.fileData);
     } catch (error) {
       console.error('Resume download error:', error);
       res.status(500).json({
