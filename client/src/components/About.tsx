@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import profileImage from "@assets/IMG_8367_1754392069275.jpg";
 
 export default function About() {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -20,8 +21,16 @@ export default function About() {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.gsap) {
-      if (imageRef.current) imageRef.current.style.opacity = '0';
-      if (contentRef.current) contentRef.current.style.opacity = '0';
+      if (imageRef.current) {
+        imageRef.current.style.opacity = '0';
+        imageRef.current.style.transform = 'translateY(100px)';
+        imageRef.current.style.filter = 'blur(10px)';
+      }
+      if (contentRef.current) {
+        contentRef.current.style.opacity = '0';
+        contentRef.current.style.transform = 'translateY(80px)';
+        contentRef.current.style.filter = 'blur(8px)';
+      }
     }
   }, []);
 
@@ -31,7 +40,7 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div ref={imageRef} className="about-image">
             <img 
-              src="https://prince-rf2e.onrender.com/assets/Prince%20(2)-DXqp_Svi.jpg" 
+              src={profileImage} 
               alt="Prince Kumar Profile" 
               className="w-80 h-80 object-cover rounded-full glassmorphic p-2 mx-auto hover:scale-105 transition-transform duration-500"
             />

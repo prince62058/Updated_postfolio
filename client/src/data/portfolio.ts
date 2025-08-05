@@ -82,7 +82,7 @@ export const personalInfo = {
   phone: "+91 6205872519",
   location: "Bhopal, Madhya Pradesh",
   github: "https://github.com/prince62058",
-  profileImage: "https://prince-rf2e.onrender.com/assets/Prince%20(2)-DXqp_Svi.jpg",
+  profileImage: "@assets/IMG_8367_1754392069275.jpg",
   gpa: "8.56",
   projectsCompleted: "3+",
   technologies: "5+",

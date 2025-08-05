@@ -63,26 +63,26 @@ export function initializeScrollAnimations() {
   aboutTimeline
     .fromTo('.about-image', {
       opacity: 0,
-      x: -100,
+      y: 100,
       filter: 'blur(10px)'
     }, {
       opacity: 1,
-      x: 0,
+      y: 0,
       filter: 'blur(0px)',
-      duration: 1,
-      ease: 'power2.out'
+      duration: 1.2,
+      ease: 'power3.out'
     })
     .fromTo('.about-content', {
       opacity: 0,
-      x: 100,
-      filter: 'blur(10px)'
+      y: 80,
+      filter: 'blur(8px)'
     }, {
       opacity: 1,
-      x: 0,
+      y: 0,
       filter: 'blur(0px)',
       duration: 1,
-      ease: 'power2.out'
-    }, '-=0.5');
+      ease: 'power3.out'
+    }, '-=0.3');
 
   // Projects Section Animations
   const projectsTimeline = gsap.timeline({
