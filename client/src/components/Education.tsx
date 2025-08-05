@@ -1,4 +1,4 @@
-import { Calendar, MapPin, Award, GraduationCap, Star } from "lucide-react";
+import { Calendar, MapPin, GraduationCap, Star } from "lucide-react";
 
 export default function Education() {
   const educationData = [
@@ -22,28 +22,7 @@ export default function Education() {
     }
   ];
 
-  const certifications = [
-    {
-      title: "Java Programming",
-      subtitle: "Fundamental certification",
-      icon: "☕"
-    },
-    {
-      title: "BI & Analytics",
-      subtitle: "Lumenore certification", 
-      icon: "📊"
-    },
-    {
-      title: "MERN Stack",
-      subtitle: "Coding Ninjas (In Progress)",
-      icon: "⚛️"
-    },
-    {
-      title: "Deloitte Simulation",
-      subtitle: "Technology Job Simulation",
-      icon: "🏢"
-    }
-  ];
+  
 
   return (
     <section id="education" className="py-20 relative z-10">
@@ -114,39 +93,7 @@ export default function Education() {
           ))}
         </div>
 
-        {/* Certifications Section */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Certifications & Achievements
-            </h3>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {certifications.map((cert, index) => (
-              <div key={index} className="certification-card glassmorphic p-6 rounded-xl border border-purple-500/20 hover:border-purple-400/40 transition-all duration-500 hover:shadow-xl hover:shadow-purple-400/20 hover:-translate-y-2">
-                <div className="text-center">
-                  <div className="text-4xl mb-4">{cert.icon}</div>
-                  <h4 className="text-lg font-bold text-white mb-2">{cert.title}</h4>
-                  <p className="text-gray-400 text-sm">{cert.subtitle}</p>
-                  {cert.subtitle.includes('In Progress') && (
-                    <div className="mt-3">
-                      <div className="w-full bg-gray-700 rounded-full h-2">
-                        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 h-2 rounded-full w-3/4 animate-pulse"></div>
-                      </div>
-                      <span className="text-xs text-yellow-400 mt-1 block">75% Complete</span>
-                    </div>
-                  )}
-                  {!cert.subtitle.includes('In Progress') && (
-                    <div className="mt-3 flex justify-center">
-                      <Award className="w-5 h-5 text-green-400" />
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+
       </div>
     </section>
   );
