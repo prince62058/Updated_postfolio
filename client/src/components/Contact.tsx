@@ -31,62 +31,40 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // Create professional loading experience
+    toast({
+      title: "Sending your message...",
+      description: "Please wait while I process your contact form.",
+    });
+    
     try {
-      // Try serverless function first, then fallback to local server
-      const endpoints = ['/api/contact', 'http://localhost:5000/api/contact'];
-      let success = false;
+      // For static sites, we'll use a more user-friendly approach
+      // Simulate processing time for better UX
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
-      for (const endpoint of endpoints) {
-        try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-
-          const result = await response.json();
-
-          if (result.success) {
-            toast({
-              title: "Message Sent Successfully!",
-              description: result.emailSent 
-                ? "Thank you for your message. I've received your email and will get back to you soon!"
-                : "Thank you for your message. It has been saved and I'll get back to you soon!",
-            });
-
-            // Reset form
-            setFormData({
-              name: '',
-              email: '',
-              subject: '',
-              message: ''
-            });
-            success = true;
-            break;
-          }
-        } catch (endpointError) {
-          console.log(`Failed to reach ${endpoint}:`, endpointError);
-          continue;
-        }
-      }
-
-      if (!success) {
-        throw new Error('All endpoints failed');
-      }
-
-    } catch (error) {
-      // Fallback for static deployment - open email client
+      // Since this is a static deployment, use mailto as the primary method
+      // but make it feel more professional
       const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
-      const body = encodeURIComponent(`Hi Prince,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}\n\nBest regards,\n${formData.name}`);
+      const body = encodeURIComponent(
+        `Hi Prince,\n\n` +
+        `I'm reaching out through your portfolio website.\n\n` +
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Subject: ${formData.subject}\n\n` +
+        `Message:\n${formData.message}\n\n` +
+        `Best regards,\n${formData.name}\n\n` +
+        `---\nSent from your portfolio contact form`
+      );
+      
       const mailtoUrl = `mailto:princekumar5252@gmail.com?subject=${subject}&body=${body}`;
       
+      // Open email client
       window.open(mailtoUrl, '_blank');
       
+      // Show success message
       toast({
-        title: "Email Client Opened!",
-        description: "Your default email app should open with the message pre-filled. Please send the email to complete your message.",
+        title: "Ready to Send!",
+        description: "Your email client is opening with your message pre-filled. Just click send to complete!",
       });
 
       // Reset form
@@ -95,6 +73,15 @@ export default function Contact() {
         email: '',
         subject: '',
         message: ''
+      });
+
+    } catch (error) {
+      console.error('Contact form error:', error);
+      
+      // Fallback error handling
+      toast({
+        title: "Contact Alternative",
+        description: "You can reach me directly at princekumar5252@gmail.com or +916205872519",
       });
     } finally {
       setIsSubmitting(false);
