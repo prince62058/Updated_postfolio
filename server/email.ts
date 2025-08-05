@@ -1,11 +1,21 @@
 import { MailService } from '@sendgrid/mail';
 
-if (!process.env.SENDGRID_API_KEY) {
-  throw new Error("SENDGRID_API_KEY environment variable must be set");
-}
+// Initialize mail service only when needed and if API key is available
+let mailService: MailService | null = null;
 
-const mailService = new MailService();
-mailService.setApiKey(process.env.SENDGRID_API_KEY);
+function getMailService(): MailService | null {
+  if (!process.env.SENDGRID_API_KEY) {
+    console.warn('SENDGRID_API_KEY not set - email functionality will be disabled');
+    return null;
+  }
+  
+  if (!mailService) {
+    mailService = new MailService();
+    mailService.setApiKey(process.env.SENDGRID_API_KEY);
+  }
+  
+  return mailService;
+}
 
 interface ContactFormData {
   name: string;
@@ -16,6 +26,12 @@ interface ContactFormData {
 
 export async function sendContactEmail(formData: ContactFormData): Promise<boolean> {
   try {
+    const service = getMailService();
+    if (!service) {
+      console.warn('Email service not available - contact form submission logged only');
+      return false;
+    }
+
     const emailContent = {
       to: 'princekumar5252@gmail.com', // Your email
       from: 'noreply@prince-portfolio.com', // Verified sender (you'll need to verify this domain)
@@ -52,7 +68,7 @@ This message was sent from your portfolio website contact form.
       `
     };
 
-    await mailService.send(emailContent);
+    await service.send(emailContent);
     return true;
   } catch (error) {
     console.error('SendGrid email error:', error);
@@ -63,6 +79,12 @@ This message was sent from your portfolio website contact form.
 // Alternative email function using a verified sender
 export async function sendContactEmailAlternative(formData: ContactFormData): Promise<boolean> {
   try {
+    const service = getMailService();
+    if (!service) {
+      console.warn('Email service not available - contact form submission logged only');
+      return false;
+    }
+
     const emailContent = {
       to: 'princekumar5252@gmail.com',
       from: 'princekumar5252@gmail.com', // Use your own verified email
@@ -87,7 +109,7 @@ export async function sendContactEmailAlternative(formData: ContactFormData): Pr
       `
     };
 
-    await mailService.send(emailContent);
+    await service.send(emailContent);
     return true;
   } catch (error) {
     console.error('SendGrid email error:', error);
