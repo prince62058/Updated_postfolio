@@ -9,7 +9,7 @@ export const projects = [
       { name: "JDBC", color: "bg-green-500/20 text-green-300" }
     ],
     liveDemo: "#",
-    downloadLink: "#"
+    downloadLink: "https://github.com/prince62058/Online-Reservation-Using-JDBC-IN-JAVA.git"
   },
   {
     title: "Music Webapp",
