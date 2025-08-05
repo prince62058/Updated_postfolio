@@ -1,0 +1,50 @@
+2025-08-05T18:06:17.882814635Z 
+2025-08-05T18:06:17.882821165Z 69 packages are looking for funding
+2025-08-05T18:06:17.882828075Z   run `npm fund` for details
+2025-08-05T18:06:17.927058693Z 
+2025-08-05T18:06:17.927098044Z 8 vulnerabilities (3 low, 5 moderate)
+2025-08-05T18:06:17.927132434Z 
+2025-08-05T18:06:17.927139215Z To address issues that do not require attention, run:
+2025-08-05T18:06:17.927145865Z   npm audit fix
+2025-08-05T18:06:17.927151565Z 
+2025-08-05T18:06:17.927158505Z To address all issues (including breaking changes), run:
+2025-08-05T18:06:17.927165575Z   npm audit fix --force
+2025-08-05T18:06:17.927172415Z 
+2025-08-05T18:06:17.927179025Z Run `npm audit` for details.
+2025-08-05T18:06:17.968553397Z ==> Running build command 'npm install; npm run build'...
+2025-08-05T18:06:20.027890353Z 
+2025-08-05T18:06:20.027942504Z up to date, audited 535 packages in 2s
+2025-08-05T18:06:20.027958604Z 
+2025-08-05T18:06:20.027979664Z 69 packages are looking for funding
+2025-08-05T18:06:20.027997225Z   run `npm fund` for details
+2025-08-05T18:06:20.079644469Z 
+2025-08-05T18:06:20.079686849Z 8 vulnerabilities (3 low, 5 moderate)
+2025-08-05T18:06:20.079692289Z 
+2025-08-05T18:06:20.079698089Z To address issues that do not require attention, run:
+2025-08-05T18:06:20.079703149Z   npm audit fix
+2025-08-05T18:06:20.079707999Z 
+2025-08-05T18:06:20.07971308Z To address all issues (including breaking changes), run:
+2025-08-05T18:06:20.07971928Z   npm audit fix --force
+2025-08-05T18:06:20.07972426Z 
+2025-08-05T18:06:20.07972968Z Run `npm audit` for details.
+2025-08-05T18:06:20.356088433Z 
+2025-08-05T18:06:20.356120353Z > rest-express@1.0.0 build
+2025-08-05T18:06:20.356126803Z > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-08-05T18:06:20.356133643Z 
+2025-08-05T18:06:20.726562666Z vite v5.4.19 building for production...
+2025-08-05T18:06:20.819943496Z transforming...
+2025-08-05T18:06:26.63990589Z ✓ 1681 modules transformed.
+2025-08-05T18:06:27.008833813Z rendering chunks...
+2025-08-05T18:06:27.023449701Z computing gzip size...
+2025-08-05T18:06:27.042662168Z ../dist/public/index.html                                                  1.62 kB │ gzip:  0.76 kB
+2025-08-05T18:06:27.042687368Z ../dist/public/assets/Adobe Express - file_1754392722119-CRRh6dKC.png  2,005.01 kB
+2025-08-05T18:06:27.042861201Z ../dist/public/assets/index-CsF8C7a7.css                                  68.56 kB │ gzip: 12.31 kB
+2025-08-05T18:06:27.043043933Z ../dist/public/assets/index-DHZGJ9gt.js                                  316.03 kB │ gzip: 98.81 kB
+2025-08-05T18:06:27.043514889Z ✓ built in 6.28s
+2025-08-05T18:06:27.135435621Z 
+2025-08-05T18:06:27.135469231Z   dist/index.js  26.0kb
+2025-08-05T18:06:27.135473401Z 
+2025-08-05T18:06:27.135477521Z ⚡ Done in 11ms
+2025-08-05T18:06:27.153407212Z ==> Publish directory client/dist does not exist!
+2025-08-05T18:06:27.153432702Z ==> Build failed 😞
+2025-08-05T18:06:27.153437332Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

@@ -2,8 +2,8 @@ services:
   - type: web
     name: prince-portfolio
     env: static
-    buildCommand: vite build
-    staticPublishPath: ./client/dist
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist/public
     routes:
       - type: rewrite
         source: /*
