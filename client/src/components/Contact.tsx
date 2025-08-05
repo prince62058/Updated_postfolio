@@ -32,36 +32,50 @@ export default function Contact() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      // Try serverless function first, then fallback to local server
+      const endpoints = ['/api/contact', 'http://localhost:5000/api/contact'];
+      let success = false;
+      
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
 
-      const result = await response.json();
+          const result = await response.json();
 
-      if (result.success) {
-        toast({
-          title: "Message Sent Successfully!",
-          description: "Thank you for your message. I'll get back to you soon.",
-        });
+          if (result.success) {
+            toast({
+              title: "Message Sent Successfully!",
+              description: result.emailSent 
+                ? "Thank you for your message. I've received your email and will get back to you soon!"
+                : "Thank you for your message. It has been saved and I'll get back to you soon!",
+            });
 
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-      } else {
-        toast({
-          title: "Failed to Send Message",
-          description: result.message || "Please try again later.",
-          variant: "destructive",
-        });
+            // Reset form
+            setFormData({
+              name: '',
+              email: '',
+              subject: '',
+              message: ''
+            });
+            success = true;
+            break;
+          }
+        } catch (endpointError) {
+          console.log(`Failed to reach ${endpoint}:`, endpointError);
+          continue;
+        }
       }
+
+      if (!success) {
+        throw new Error('All endpoints failed');
+      }
+
     } catch (error) {
       // Fallback for static deployment - open email client
       const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
@@ -71,7 +85,7 @@ export default function Contact() {
       window.open(mailtoUrl, '_blank');
       
       toast({
-        title: "Email client opened!",
+        title: "Email Client Opened!",
         description: "Your default email app should open with the message pre-filled. Please send the email to complete your message.",
       });
 
