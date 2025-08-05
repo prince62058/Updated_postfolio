@@ -9,8 +9,8 @@ export async function connectToMongoDB(): Promise<Db> {
   }
 
   try {
-    // Use environment variable or default to local MongoDB
-    const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+    // Use environment variable or your provided MongoDB URI
+    const mongoUrl = process.env.MONGODB_URI || 'mongodb+srv://Prince:Prince@myportfolio.fs5to7j.mongodb.net/?retryWrites=true&w=majority&appName=MyPortfolio';
     const dbName = process.env.MONGODB_DB_NAME || 'portfolio_db';
 
     console.log('Connecting to MongoDB...');

@@ -186,8 +186,32 @@ export default function DatabaseStatus() {
           )}
         </div>
 
-        {/* Back to Portfolio Link */}
-        <div className="mt-8 text-center">
+        {/* Seed Database Button */}
+        <div className="mt-8 flex justify-center gap-4">
+          <button
+            onClick={async () => {
+              try {
+                const response = await fetch('/api/seed-database', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' }
+                });
+                const result = await response.json();
+                if (result.success) {
+                  alert(`Successfully added ${result.addedCount} sample submissions!`);
+                  refetch(); // Refresh the submissions list
+                } else {
+                  alert(`Failed to seed database: ${result.message}`);
+                }
+              } catch (error) {
+                alert('Error seeding database');
+                console.error(error);
+              }
+            }}
+            className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+          >
+            Add Sample Data
+          </button>
+          
           <a
             href="/"
             className="inline-block px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors"
