@@ -134,6 +134,38 @@ export function initializeScrollAnimations() {
       stagger: 0.1
     }, '-=0.4');
 
+  // Tech Stack Section Animations
+  const techStackTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#tech-stack',
+      start: 'top 80%',
+      end: 'bottom 20%',
+      scrub: false
+    }
+  });
+
+  techStackTimeline
+    .fromTo('.tech-stack-title', {
+      opacity: 0,
+      y: 50,
+      filter: 'blur(10px)'
+    }, {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      duration: 1,
+      ease: 'power2.out'
+    })
+    .fromTo('.tech-stack-content', {
+      opacity: 0,
+      y: 80
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      ease: 'power3.out'
+    }, '-=0.3');
+
   // Projects Section Animations
   const projectsTimeline = gsap.timeline({
     scrollTrigger: {

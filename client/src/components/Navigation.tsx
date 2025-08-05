@@ -33,6 +33,7 @@ export default function Navigation() {
             {[
               { label: 'Home', id: 'home' },
               { label: 'About', id: 'about' },
+              { label: 'Tech Stack', id: 'tech-stack' },
               { label: 'Education', id: 'education' },
               { label: 'Projects', id: 'projects' },
               { label: 'Contact', id: 'contact' }
@@ -65,6 +66,7 @@ export default function Navigation() {
               {[
                 { label: 'Home', id: 'home' },
                 { label: 'About', id: 'about' },
+                { label: 'Tech Stack', id: 'tech-stack' },
                 { label: 'Education', id: 'education' },
                 { label: 'Projects', id: 'projects' },
                 { label: 'Contact', id: 'contact' }

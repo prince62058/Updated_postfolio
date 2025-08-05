@@ -64,8 +64,9 @@ export default function About() {
               ))}
             </div>
 
-            {/* MERN Stack Skills */}
+            {/* MERN Stack Skills Preview */}
             <div className="space-y-4">
+              <h3 className="text-2xl font-light text-accent mb-4">Core Technologies</h3>
               {skills.map((skill, index) => (
                 <div key={index} className="skill-item">
                   <div className="flex justify-between mb-2">

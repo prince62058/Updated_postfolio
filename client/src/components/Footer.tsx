@@ -11,6 +11,7 @@ export default function Footer() {
   const navigationLinks = [
     { label: 'Home', id: 'home' },
     { label: 'About', id: 'about' },
+    { label: 'Tech Stack', id: 'tech-stack' },
     { label: 'Projects', id: 'projects' },
     { label: 'Contact', id: 'contact' }
   ];
