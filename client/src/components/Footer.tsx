@@ -37,39 +37,53 @@ export default function Footer() {
   return (
     <footer className="py-12 relative z-10 border-t border-border">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="text-2xl font-light text-accent mb-6 md:mb-0">Prince Kumar</div>
+        {/* Main Footer Content */}
+        <div className="text-center mb-8">
+          <h2 className="text-4xl font-light text-accent mb-2">Prince Kumar</h2>
+          <p className="text-lg text-muted-foreground font-light mb-6">
+            Computer Science Engineering Student | AI & ML Enthusiast
+          </p>
           
-          <div className="flex space-x-8 mb-6 md:mb-0">
-            {navigationLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="text-muted-foreground hover:text-accent transition-colors font-light"
-              >
-                {link.label}
-              </button>
-            ))}
-          </div>
-          
-          <div className="flex space-x-4">
+          {/* Social Links */}
+          <div className="flex justify-center space-x-6 mb-8">
             {socialLinks.map((social, index) => (
-              <Button
+              <a
                 key={index}
-                variant="outline"
-                size="icon"
-                className="glassmorphic border-0 hover:bg-primary transition-colors"
-                onClick={() => window.open(social.href, '_blank')}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 hover:text-accent transition-colors font-light"
               >
                 <i className={`${social.icon} text-xl`}></i>
-                <span className="sr-only">{social.label}</span>
-              </Button>
+                <span>{social.label}</span>
+              </a>
             ))}
+            <a
+              href="tel:+916205872519"
+              className="flex items-center space-x-2 hover:text-accent transition-colors font-light"
+            >
+              <i className="ph-phone text-xl"></i>
+              <span>Phone</span>
+            </a>
           </div>
         </div>
         
-        <div className="text-center text-muted-foreground mt-8 font-light">
-          © 2024 Prince Kumar. Crafted with passion and code.
+        {/* Navigation Links */}
+        <div className="flex flex-wrap justify-center space-x-8 mb-8">
+          {navigationLinks.map((link) => (
+            <button
+              key={link.id}
+              onClick={() => scrollToSection(link.id)}
+              className="hover:text-accent transition-colors font-light mb-2"
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+        
+        {/* Copyright */}
+        <div className="text-center text-muted-foreground font-light border-t border-border pt-6">
+          <p>© 2025 Prince Kumar. All rights reserved. Built with passion and ❤️</p>
         </div>
       </div>
       
