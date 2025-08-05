@@ -22,6 +22,11 @@ export default function Footer() {
       label: 'GitHub'
     },
     {
+      icon: 'ph-linkedin-logo',
+      href: 'https://www.linkedin.com/in/prince62058/',
+      label: 'LinkedIn'
+    },
+    {
       icon: 'ph-envelope',
       href: 'mailto:princekumar5252@gmail.com',
       label: 'Email'

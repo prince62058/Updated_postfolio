@@ -74,6 +74,12 @@ export default function Contact() {
       label: 'GitHub',
       value: '@prince62058',
       href: 'https://github.com/prince62058'
+    },
+    {
+      icon: 'ph-linkedin-logo',
+      label: 'LinkedIn',
+      value: '@prince62058',
+      href: 'https://www.linkedin.com/in/prince62058/'
     }
   ];
 
