@@ -8,7 +8,7 @@ export default function Education() {
       institution: "Technocrats Institute of Technology",
       duration: "August 2021 - June 2025",
       location: "Bhopal, MP",
-      gpa: "8.56",
+      gpa: "7.30",
       status: "Current"
     },
     {
