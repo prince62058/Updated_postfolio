@@ -1,23 +1,6 @@
-import { useRef, useEffect } from "react";
 import { Calendar, MapPin, Award, GraduationCap, Star } from "lucide-react";
 
 export default function Education() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.gsap) {
-      if (sectionRef.current) {
-        sectionRef.current.style.opacity = '0';
-        sectionRef.current.style.transform = 'translateY(80px)';
-      }
-      if (timelineRef.current) {
-        timelineRef.current.style.opacity = '0';
-        timelineRef.current.style.transform = 'translateY(100px)';
-      }
-    }
-  }, []);
-
   const educationData = [
     {
       level: "Graduate",
@@ -63,7 +46,7 @@ export default function Education() {
   ];
 
   return (
-    <section ref={sectionRef} id="education" className="py-20 relative z-10">
+    <section id="education" className="py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
@@ -74,7 +57,7 @@ export default function Education() {
           </p>
         </div>
 
-        <div ref={timelineRef} className="education-timeline relative max-w-4xl mx-auto">
+        <div className="education-timeline relative max-w-4xl mx-auto">
           {/* Timeline Line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-cyan-500 to-purple-500 opacity-30"></div>
 
