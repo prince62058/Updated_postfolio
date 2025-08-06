@@ -42,7 +42,7 @@ export default function About() {
             <img 
               src={profileImage} 
               alt="Prince Kumar Profile" 
-              className="w-80 h-auto object-contain mx-auto hover:scale-105 transition-all duration-500 rounded-2xl"
+              className="w-80 h-80 object-cover mx-auto hover:scale-105 transition-all duration-500 rounded-2xl shadow-2xl border border-accent/20"
             />
           </div>
           
