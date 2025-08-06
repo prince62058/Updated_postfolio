@@ -83,7 +83,7 @@ export const personalInfo = {
   location: "Bhopal, Madhya Pradesh",
   github: "https://github.com/prince62058",
   linkedin: "https://www.linkedin.com/in/prince62058/",
-  profileImage: "@assets/Prince (1)_1754472524744.jpg",
+  profileImage: "@assets/Adobe Express - file (1)_1754473684966.png",
   gpa: "7.30",
   projectsCompleted: "3+",
   technologies: "5+",
