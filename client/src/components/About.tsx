@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import profileImage from "@assets/Adobe Express - file_1754392722119.png";
+import profileImage from "@assets/Adobe Express - file (1)_1754473684966.png";
 
 export default function About() {
   const imageRef = useRef<HTMLDivElement>(null);
