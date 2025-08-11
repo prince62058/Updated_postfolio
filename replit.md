@@ -49,11 +49,14 @@ The portfolio includes sections for hero/landing, about, projects, and contact, 
 
 **Vercel Deployment Configuration Added (August 11, 2025)**
 - Created comprehensive Vercel deployment configuration with vercel.json
-- Added detailed deployment guides in both English and Hindi languages
+- Fixed Vercel runtime version conflicts and function configuration
+- Added custom build.js script for proper Vite build process
+- Created detailed deployment guides in both English and Hindi languages
 - Set up proper build configuration for Vercel serverless functions
 - Created .gitignore and .env.example files for production deployment
 - Configured environment variables setup for MongoDB and email services
 - Added support for both Gmail SMTP and SendGrid email integration
+- Resolved port conflicts and server startup issues
 - Ready for one-click Vercel deployment with full documentation
 
 **Migration to Replit Environment Re-verified (August 6, 2025)**

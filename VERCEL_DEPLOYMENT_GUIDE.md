@@ -35,8 +35,8 @@ Set these environment variables in Vercel dashboard:
 2. Login with GitHub
 3. Click "New Project"
 4. Import your GitHub repository
-5. Framework Preset: Select "Other"
-6. Build Command: `npm run build`
+5. Framework Preset: Select "Vite" (or "Other")
+6. Build Command: `node build.js` (will auto-detect)
 7. Output Directory: `dist`
 8. Install Command: `npm install`
 9. Configure environment variables in Settings

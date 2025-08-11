@@ -35,8 +35,8 @@ Vercel dashboard में ये environment variables set करें:
 2. GitHub के साथ login करें
 3. "New Project" पर click करें
 4. अपना GitHub repository import करें
-5. Framework Preset: "Other" select करें
-6. Build Command: `npm run build` 
+5. Framework Preset: "Vite" select करें (या "Other")
+6. Build Command: `node build.js` (automatic detect होगा)
 7. Output Directory: `dist`
 8. Install Command: `npm install`
 9. Settings में environment variables configure करें
