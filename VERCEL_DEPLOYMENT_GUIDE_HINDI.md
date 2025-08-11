@@ -129,6 +129,17 @@ project/
 ## Quick Deployment Steps (त्वरित steps)
 1. GitHub पर code push करें
 2. Vercel.com पर जाकर repository import करें
-3. Environment variables add करें
-4. Deploy button दबाएं
-5. Live website का link मिल जाएगा
+3. Framework: "Vite" select करें
+4. Build Command: `vite build` (auto-detect होगा)
+5. Output Directory: `dist/public`
+6. Environment variables add करें:
+   - `MONGODB_URI`
+   - `GMAIL_USER`
+   - `GMAIL_PASS`
+7. Deploy button दबाएं
+8. Live website का link मिल जाएगा
+
+## Common Issues और Solutions:
+- अगर site blank दिखे: Framework "Vite" select करें
+- अगर API काम न करे: Environment variables check करें
+- अगर contact form fail हो: Email credentials verify करें

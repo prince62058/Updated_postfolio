@@ -6,15 +6,26 @@ const path = require('path');
 console.log('Starting Vite build...');
 execSync('vite build', { stdio: 'inherit' });
 
-// Ensure index.html exists in dist
+// Create dist root directory and copy index.html
 const distDir = path.join(__dirname, 'dist');
-const indexPath = path.join(distDir, 'index.html');
+const publicDir = path.join(distDir, 'public');
+const rootIndexPath = path.join(distDir, 'index.html');
+const publicIndexPath = path.join(publicDir, 'index.html');
 
-if (!fs.existsSync(indexPath)) {
-  console.log('Creating index.html in dist directory...');
+// Ensure dist directory exists
+if (!fs.existsSync(distDir)) {
+  fs.mkdirSync(distDir, { recursive: true });
+}
+
+// Copy index.html to root of dist for Vercel
+if (fs.existsSync(publicIndexPath)) {
+  console.log('Copying index.html to dist root...');
+  fs.copyFileSync(publicIndexPath, rootIndexPath);
+} else {
+  console.log('Creating index.html from template...');
   const clientIndexPath = path.join(__dirname, 'client', 'index.html');
   if (fs.existsSync(clientIndexPath)) {
-    fs.copyFileSync(clientIndexPath, indexPath);
+    fs.copyFileSync(clientIndexPath, rootIndexPath);
   }
 }
 

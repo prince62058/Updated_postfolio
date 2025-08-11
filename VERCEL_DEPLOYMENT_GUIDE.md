@@ -119,6 +119,24 @@ project/
 - [ ] All animations load properly
 - [ ] Mobile responsiveness works
 
+## Quick Deployment Steps
+1. Push code to GitHub
+2. Go to Vercel.com and import repository
+3. Framework: Select "Vite"
+4. Build Command: `vite build` (auto-detected)
+5. Output Directory: `dist/public`
+6. Add Environment Variables:
+   - `MONGODB_URI`
+   - `GMAIL_USER`
+   - `GMAIL_PASS`
+7. Click Deploy
+8. Get your live website link
+
+## Common Issues & Solutions:
+- **Blank site**: Make sure Framework is set to "Vite"
+- **API not working**: Check environment variables
+- **Contact form failing**: Verify email credentials
+
 ## Support
 If you encounter issues:
 1. Check Vercel function logs
