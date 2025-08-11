@@ -140,6 +140,7 @@ project/
 8. Live website का link मिल जाएगा
 
 ## Common Issues और Solutions:
+- **"Function Runtimes must have a valid version" error**: Fixed! अब simple function format use कर रहे हैं
 - अगर site blank दिखे: Framework "Vite" select करें
 - अगर API काम न करे: Environment variables check करें
 - अगर contact form fail हो: Email credentials verify करें

@@ -1,17 +1,5 @@
 {
-  "version": 2,
   "buildCommand": "vite build",
   "outputDirectory": "dist/public",
-  "framework": "vite",
-  "functions": {
-    "api/index.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.ts"
-    }
-  ]
+  "framework": "vite"
 }
