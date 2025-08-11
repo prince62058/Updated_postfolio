@@ -142,6 +142,8 @@ project/
 ## Common Issues और Solutions:
 - **"Function Runtimes must have a valid version" error**: ✅ Fixed!
 - **"Two or more files have conflicting paths" error**: ✅ Fixed! Cleanup कर दिए conflicting files
+- **Contact form नहीं भेज रहा**: ✅ Fixed! Multiple API endpoints added
+- **Resume download नहीं हो रहा**: ✅ Fixed! Dedicated resume endpoint added
 - अगर site blank दिखे: Framework "Vite" select करें
 - अगर API काम न करे: Environment variables check करें  
 - अगर contact form fail हो: Email credentials verify करें
