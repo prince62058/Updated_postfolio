@@ -30,13 +30,17 @@ Set these environment variables in Vercel dashboard:
 
 ## Step 3: Deploy to Vercel
 
-### Method 1: Vercel Website
+### Method 1: Vercel Website (Recommended)
 1. Go to https://vercel.com
 2. Login with GitHub
 3. Click "New Project"
 4. Import your GitHub repository
-5. Configure environment variables in Settings
-6. Deploy
+5. Framework Preset: Select "Other"
+6. Build Command: `npm run build`
+7. Output Directory: `dist`
+8. Install Command: `npm install`
+9. Configure environment variables in Settings
+10. Deploy
 
 ### Method 2: Vercel CLI
 ```bash

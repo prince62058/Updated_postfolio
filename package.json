@@ -46,6 +46,7 @@
     "@types/locomotive-scroll": "^4.1.4",
     "@types/mongodb": "^4.0.6",
     "@types/nodemailer": "^6.4.17",
+    "@vercel/node": "^5.3.11",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
