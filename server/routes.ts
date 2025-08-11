@@ -255,15 +255,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       if (Buffer.isBuffer(resume.fileData)) {
         fileBuffer = resume.fileData;
-      } else if (resume.fileData && typeof resume.fileData.value === 'function') {
+      } else if (resume.fileData && typeof (resume.fileData as any).value === 'function') {
         // MongoDB Binary object - call value() to get the Buffer
-        fileBuffer = resume.fileData.value();
-      } else if (resume.fileData && resume.fileData.buffer) {
+        fileBuffer = (resume.fileData as any).value();
+      } else if (resume.fileData && (resume.fileData as any).buffer) {
         // Alternative format - use the buffer property directly
-        fileBuffer = resume.fileData.buffer;
+        fileBuffer = (resume.fileData as any).buffer;
       } else {
         // Fallback
-        fileBuffer = Buffer.from(resume.fileData);
+        fileBuffer = Buffer.from(resume.fileData as ArrayBuffer);
       }
 
       if (!fileBuffer || fileBuffer.length === 0) {
@@ -324,10 +324,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const resumeData = {
         filename: 'Prince_Kumar_Updated_Resume.pdf',
         contentType: 'application/pdf',
-        fileData: fileBuffer
+        fileData: fileBuffer as Buffer
       };
 
-      const result = await storage.createResume(resumeData);
+      const result = await storage.createResume({
+        ...resumeData,
+        fileData: Buffer.from(resumeData.fileData.buffer)
+      });
       
       // Verify the new resume is active
       const newActiveResume = await storage.getActiveResume();
@@ -406,7 +409,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const resume = await storage.createResume({
         filename,
         contentType,
-        fileData: buffer
+        fileData: Buffer.from(buffer.buffer)
       });
 
       res.json({
