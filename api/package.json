@@ -1,8 +1,0 @@
-{
-  "name": "portfolio-api",
-  "version": "1.0.0",
-  "dependencies": {
-    "nodemailer": "^7.0.5",
-    "mongodb": "^6.18.0"
-  }
-}
