@@ -3,13 +3,13 @@ import { MongoClient, Db } from 'mongodb';
 let client: MongoClient | null = null;
 let db: Db | null = null;
 
-export async function connectToMongoDB(): Promise<Db> {
+export async function connectToMongoDB(): Promise<Db | null> {
   if (db) {
     return db;
   }
 
   try {
-    // Use environment variable or your provided MongoDB URI
+    // Use environment variable or fallback URI
     const mongoUrl = process.env.MONGODB_URI || 'mongodb+srv://Prince:prince123@myportfolio.fs5to7j.mongodb.net/?retryWrites=true&w=majority&appName=MyPortfolio';
     const dbName = process.env.MONGODB_DB_NAME || 'portfolio_db';
 
@@ -23,7 +23,8 @@ export async function connectToMongoDB(): Promise<Db> {
     return db;
   } catch (error) {
     console.error('Failed to connect to MongoDB:', error);
-    throw error;
+    console.log('Continuing without database connection - using memory storage');
+    return null;
   }
 }
 
@@ -36,10 +37,7 @@ export async function closeMongoDB(): Promise<void> {
   }
 }
 
-export function getDatabase(): Db {
-  if (!db) {
-    throw new Error('Database not connected. Call connectToMongoDB first.');
-  }
+export function getDatabase(): Db | null {
   return db;
 }
 

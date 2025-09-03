@@ -22,40 +22,54 @@ export interface IMongoStorage {
 }
 
 export class MongoStorage implements IMongoStorage {
-  private get usersCollection(): Collection<User> {
-    return getDatabase().collection<User>('users');
+  private get usersCollection(): Collection<User> | null {
+    const db = getDatabase();
+    return db ? db.collection<User>('users') : null;
   }
 
-  private get contactSubmissionsCollection(): Collection<ContactSubmission> {
-    return getDatabase().collection<ContactSubmission>('contact_submissions');
+  private get contactSubmissionsCollection(): Collection<ContactSubmission> | null {
+    const db = getDatabase();
+    return db ? db.collection<ContactSubmission>('contact_submissions') : null;
   }
 
-  private get resumesCollection(): Collection<Resume> {
-    return getDatabase().collection<Resume>('resumes');
+  private get resumesCollection(): Collection<Resume> | null {
+    const db = getDatabase();
+    return db ? db.collection<Resume>('resumes') : null;
   }
 
   async getUser(id: string): Promise<User | undefined> {
-    const user = await this.usersCollection.findOne({ id });
+    const collection = this.usersCollection;
+    if (!collection) return undefined;
+    const user = await collection.findOne({ id });
     return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const user = await this.usersCollection.findOne({ username });
+    const collection = this.usersCollection;
+    if (!collection) return undefined;
+    const user = await collection.findOne({ username });
     return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
+    const collection = this.usersCollection;
+    if (!collection) {
+      throw new Error('Database not available - cannot create user');
+    }
+    
     const user: User = {
       id: nanoid(),
       username: insertUser.username,
       password: insertUser.password,
     };
 
-    await this.usersCollection.insertOne(user);
+    await collection.insertOne(user);
     return user;
   }
 
   async createContactSubmission(insertSubmission: InsertContactSubmission): Promise<ContactSubmission> {
+    const collection = this.contactSubmissionsCollection;
+    
     const submission: ContactSubmission = {
       id: nanoid(),
       name: insertSubmission.name,
@@ -65,12 +79,17 @@ export class MongoStorage implements IMongoStorage {
       submittedAt: new Date(),
     };
 
-    await this.contactSubmissionsCollection.insertOne(submission);
+    if (collection) {
+      await collection.insertOne(submission);
+    }
     return submission;
   }
 
   async getAllContactSubmissions(): Promise<ContactSubmission[]> {
-    const submissions = await this.contactSubmissionsCollection
+    const collection = this.contactSubmissionsCollection;
+    if (!collection) return [];
+    
+    const submissions = await collection
       .find({})
       .sort({ submittedAt: -1 })
       .toArray();
@@ -79,8 +98,13 @@ export class MongoStorage implements IMongoStorage {
   }
 
   async createResume(insertResume: InsertResume): Promise<Resume> {
+    const collection = this.resumesCollection;
+    if (!collection) {
+      throw new Error('Database not available - cannot create resume');
+    }
+    
     // Deactivate all existing resumes
-    await this.resumesCollection.updateMany({}, { $set: { isActive: false } });
+    await collection.updateMany({}, { $set: { isActive: false } });
 
     const resume: Resume = {
       id: nanoid(),
@@ -91,17 +115,22 @@ export class MongoStorage implements IMongoStorage {
       isActive: true,
     };
 
-    await this.resumesCollection.insertOne(resume);
+    await collection.insertOne(resume);
     return resume;
   }
 
   async getActiveResume(): Promise<Resume | undefined> {
-    const resume = await this.resumesCollection.findOne({ isActive: true });
+    const collection = this.resumesCollection;
+    if (!collection) return undefined;
+    const resume = await collection.findOne({ isActive: true });
     return resume || undefined;
   }
 
   async getAllResumes(): Promise<Resume[]> {
-    const resumes = await this.resumesCollection
+    const collection = this.resumesCollection;
+    if (!collection) return [];
+    
+    const resumes = await collection
       .find({})
       .sort({ uploadedAt: -1 })
       .toArray();
@@ -111,22 +140,34 @@ export class MongoStorage implements IMongoStorage {
 
   // Additional helper methods for MongoDB operations
   async createIndexes(): Promise<void> {
+    const usersCol = this.usersCollection;
+    const contactCol = this.contactSubmissionsCollection;
+    
+    if (!usersCol || !contactCol) {
+      console.log('Database not available - skipping index creation');
+      return;
+    }
+    
     // Create indexes for better performance
-    await this.usersCollection.createIndex({ username: 1 }, { unique: true });
-    await this.usersCollection.createIndex({ id: 1 }, { unique: true });
-    await this.contactSubmissionsCollection.createIndex({ submittedAt: -1 });
-    await this.contactSubmissionsCollection.createIndex({ id: 1 }, { unique: true });
+    await usersCol.createIndex({ username: 1 }, { unique: true });
+    await usersCol.createIndex({ id: 1 }, { unique: true });
+    await contactCol.createIndex({ submittedAt: -1 });
+    await contactCol.createIndex({ id: 1 }, { unique: true });
     
     console.log('MongoDB indexes created successfully');
   }
 
   async getContactSubmissionById(id: string): Promise<ContactSubmission | undefined> {
-    const submission = await this.contactSubmissionsCollection.findOne({ id });
+    const collection = this.contactSubmissionsCollection;
+    if (!collection) return undefined;
+    const submission = await collection.findOne({ id });
     return submission || undefined;
   }
 
   async deleteContactSubmission(id: string): Promise<boolean> {
-    const result = await this.contactSubmissionsCollection.deleteOne({ id });
+    const collection = this.contactSubmissionsCollection;
+    if (!collection) return false;
+    const result = await collection.deleteOne({ id });
     return result.deletedCount > 0;
   }
 
@@ -136,16 +177,26 @@ export class MongoStorage implements IMongoStorage {
     page: number;
     totalPages: number;
   }> {
+    const collection = this.contactSubmissionsCollection;
+    if (!collection) {
+      return {
+        submissions: [],
+        total: 0,
+        page,
+        totalPages: 0
+      };
+    }
+    
     const skip = (page - 1) * limit;
     
     const [submissions, total] = await Promise.all([
-      this.contactSubmissionsCollection
+      collection
         .find({})
         .sort({ submittedAt: -1 })
         .skip(skip)
         .limit(limit)
         .toArray(),
-      this.contactSubmissionsCollection.countDocuments({})
+      collection.countDocuments({})
     ]);
 
     return {
