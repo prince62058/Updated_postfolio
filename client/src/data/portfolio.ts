@@ -28,6 +28,20 @@ export const projects = [
     downloadLink: "https://github.com/prince62058/FrienchTechSiteBuild/archive/refs/heads/main.zip"
   },
   {
+    title: "OWNAI Search Platform",
+    description: "AI-powered search and discovery platform similar to Perplexity, featuring intelligent search with OpenAI GPT-5, trending topics, categorized content, user spaces, and personalized search history with cited sources.",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
+    technologies: [
+      { name: "React", color: "bg-cyan-500/20 text-cyan-300" },
+      { name: "TypeScript", color: "bg-blue-500/20 text-blue-300" },
+      { name: "OpenAI GPT-5", color: "bg-purple-500/20 text-purple-300" },
+      { name: "PostgreSQL", color: "bg-green-500/20 text-green-300" },
+      { name: "Replit Auth", color: "bg-orange-500/20 text-orange-300" }
+    ],
+    liveDemo: "https://ownai-t9uc.onrender.com/",
+    downloadLink: "https://github.com/prince62058/OWNAI/archive/refs/heads/main.zip"
+  },
+  {
     title: "Online Reservation System",
     description: "Comprehensive booking system with Java backend and JDBC database connectivity for seamless reservation management.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
