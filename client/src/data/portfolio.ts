@@ -1,5 +1,19 @@
 export const projects = [
   {
+    title: "AI-Powered Communication Assistant",
+    description: "Intelligent email management system that automatically processes, analyzes, and generates responses for customer support emails using AI. Features Gmail integration, sentiment analysis, and OpenAI GPT-4 powered response generation.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
+    technologies: [
+      { name: "React", color: "bg-cyan-500/20 text-cyan-300" },
+      { name: "Node.js", color: "bg-green-500/20 text-green-300" },
+      { name: "OpenAI", color: "bg-purple-500/20 text-purple-300" },
+      { name: "PostgreSQL", color: "bg-blue-500/20 text-blue-300" },
+      { name: "Gmail API", color: "bg-red-500/20 text-red-300" }
+    ],
+    liveDemo: "https://unstop-challange.onrender.com/",
+    downloadLink: "https://github.com/prince62058/Unstop-Challange/archive/refs/heads/main.zip"
+  },
+  {
     title: "Online Reservation System",
     description: "Comprehensive booking system with Java backend and JDBC database connectivity for seamless reservation management.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
@@ -85,7 +99,7 @@ export const personalInfo = {
   linkedin: "https://www.linkedin.com/in/prince62058/",
   profileImage: "@assets/Adobe Express - file (1)_1754473684966.png",
   gpa: "7.30",
-  projectsCompleted: "3+",
+  projectsCompleted: "6+",
   technologies: "5+",
   certifications: "4+"
 };
