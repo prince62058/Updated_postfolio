@@ -14,6 +14,20 @@ export const projects = [
     downloadLink: "https://github.com/prince62058/Unstop-Challange/archive/refs/heads/main.zip"
   },
   {
+    title: "FrienchTech IT Solutions",
+    description: "Modern corporate website for FrienchTech IT Solution Pvt Ltd featuring interactive services showcase, Three.js animations, pricing plans with Indian Rupee, and comprehensive contact management system.",
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
+    technologies: [
+      { name: "React", color: "bg-cyan-500/20 text-cyan-300" },
+      { name: "Three.js", color: "bg-purple-500/20 text-purple-300" },
+      { name: "MongoDB", color: "bg-green-500/20 text-green-300" },
+      { name: "GSAP", color: "bg-orange-500/20 text-orange-300" },
+      { name: "TailwindCSS", color: "bg-blue-500/20 text-blue-300" }
+    ],
+    liveDemo: "https://frienchtech.onrender.com/",
+    downloadLink: "https://github.com/prince62058/FrienchTechSiteBuild/archive/refs/heads/main.zip"
+  },
+  {
     title: "Online Reservation System",
     description: "Comprehensive booking system with Java backend and JDBC database connectivity for seamless reservation management.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
