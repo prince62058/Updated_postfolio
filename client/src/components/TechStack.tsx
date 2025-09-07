@@ -79,16 +79,16 @@ export default function TechStack() {
   ];
 
   return (
-    <section id="tech-stack" className="py-20 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+    <section id="tech-stack" className="py-12 sm:py-16 lg:py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 
             ref={titleRef}
-            className="tech-stack-title text-5xl font-light mb-6 text-accent"
+            className="tech-stack-title text-3xl sm:text-4xl lg:text-5xl font-light mb-4 sm:mb-6 text-accent"
           >
             MERN Stack Expertise
           </h2>
-          <p className="text-xl text-muted-foreground font-light max-w-4xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground font-light max-w-4xl mx-auto">
             Full-stack development using MongoDB, Express.js, React.js, and Node.js - building scalable, 
             modern web applications from database to deployment.
           </p>
@@ -96,12 +96,12 @@ export default function TechStack() {
 
         <div ref={contentRef} className="tech-stack-content">
           {/* MERN Stack Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
             {mernStack.map((tech, index) => (
-              <div key={index} className="glassmorphic p-6 rounded-2xl hover:scale-105 transition-all duration-500">
-                <h3 className="text-2xl font-light text-accent mb-2">{tech.name}</h3>
+              <div key={index} className="glassmorphic p-4 sm:p-6 rounded-2xl hover:scale-105 transition-all duration-500">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-light text-accent mb-2">{tech.name}</h3>
                 <p className="text-sm text-primary mb-3">{tech.category}</p>
-                <p className="text-muted-foreground mb-4 font-light text-sm">{tech.description}</p>
+                <p className="text-muted-foreground mb-3 sm:mb-4 font-light text-xs sm:text-sm">{tech.description}</p>
                 
                 <div className="mb-4">
                   <div className="flex justify-between mb-2">
@@ -120,13 +120,13 @@ export default function TechStack() {
           </div>
 
           {/* Supporting Technologies */}
-          <div className="glassmorphic p-8 rounded-2xl mb-16">
-            <h3 className="text-3xl font-light text-accent mb-8 text-center">Supporting Technologies</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="glassmorphic p-4 sm:p-6 lg:p-8 rounded-2xl mb-8 sm:mb-12 lg:mb-16">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-light text-accent mb-4 sm:mb-6 lg:mb-8 text-center">Supporting Technologies</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
               {supportingTech.map((tech, index) => (
-                <div key={index} className="flex items-center space-x-3 p-3 hover:bg-muted/30 rounded-lg transition-all">
+                <div key={index} className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 hover:bg-muted/30 rounded-lg transition-all">
                   <span className="text-2xl">{tech.icon}</span>
-                  <span className="font-light">{tech.name}</span>
+                  <span className="font-light text-sm sm:text-base">{tech.name}</span>
                 </div>
               ))}
             </div>

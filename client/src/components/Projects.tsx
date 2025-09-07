@@ -14,33 +14,33 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="py-20 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="projects" className="py-12 sm:py-16 lg:py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <h2 
           ref={titleRef}
-          className="projects-title text-5xl font-light text-center mb-16 text-accent"
+          className="projects-title text-3xl sm:text-4xl lg:text-5xl font-light text-center mb-8 sm:mb-12 lg:mb-16 text-accent"
         >
           Featured Projects
         </h2>
         
         {/* Horizontal Scrollable Projects */}
-        <div className="overflow-x-auto pb-6">
+        <div className="overflow-x-auto pb-6 -mx-4 sm:mx-0">
           <div 
             ref={containerRef}
-            className="projects-container flex space-x-8 min-w-max"
+            className="projects-container flex space-x-4 sm:space-x-6 lg:space-x-8 min-w-max px-4 sm:px-0"
           >
             {projects.map((project, index) => (
               <div 
                 key={index}
-                className="project-card glassmorphic rounded-2xl p-8 w-80 flex-shrink-0 hover:scale-105 transition-transform duration-500"
+                className="project-card glassmorphic rounded-2xl p-4 sm:p-6 lg:p-8 w-72 sm:w-80 flex-shrink-0 hover:scale-105 transition-transform duration-500"
               >
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-48 object-cover rounded-xl mb-6"
+                  className="w-full h-40 sm:h-48 object-cover rounded-xl mb-4 sm:mb-6"
                 />
-                <h3 className="text-2xl font-light mb-4 text-accent">{project.title}</h3>
-                <p className="text-muted-foreground mb-6 font-light">{project.description}</p>
+                <h3 className="text-xl sm:text-2xl font-light mb-3 sm:mb-4 text-accent">{project.title}</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 font-light">{project.description}</p>
                 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies.map((tech, techIndex) => (
@@ -53,21 +53,23 @@ export default function Projects() {
                   ))}
                 </div>
                 
-                <div className="flex gap-4">
+                <div className="flex gap-2 sm:gap-4">
                   <Button
                     variant="outline"
-                    className="px-4 py-2 glassmorphic rounded-lg hover:bg-primary transition-colors font-light border-0"
+                    className="px-3 sm:px-4 py-2 glassmorphic rounded-lg hover:bg-primary transition-colors font-light border-0 text-xs sm:text-sm flex-1"
                     onClick={() => window.open(project.downloadLink, '_blank')}
                   >
-                    <i className="ph-download-simple mr-2"></i>
-                    Download
+                    <i className="ph-download-simple mr-1 sm:mr-2"></i>
+                    <span className="hidden sm:inline">Download</span>
+                    <span className="sm:hidden">Get</span>
                   </Button>
                   <Button
-                    className="px-4 py-2 bg-primary rounded-lg hover:bg-secondary transition-colors font-light"
+                    className="px-3 sm:px-4 py-2 bg-primary rounded-lg hover:bg-secondary transition-colors font-light text-xs sm:text-sm flex-1"
                     onClick={() => window.open(project.liveDemo, '_blank')}
                   >
-                    <i className="ph-eye mr-2"></i>
-                    Live Demo
+                    <i className="ph-eye mr-1 sm:mr-2"></i>
+                    <span className="hidden sm:inline">Live Demo</span>
+                    <span className="sm:hidden">Demo</span>
                   </Button>
                 </div>
               </div>

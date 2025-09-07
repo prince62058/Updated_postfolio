@@ -66,37 +66,37 @@ export default function Hero() {
         />
       </div>
       
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
         <h1 
           ref={titleRef}
-          className="hero-title text-7xl md:text-9xl font-light mb-6 text-glow"
+          className="hero-title text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-light mb-4 sm:mb-6 text-glow leading-tight"
         >
           Hi, I'm <span className="text-accent">Prince Kumar</span>
         </h1>
         <p 
           ref={subtitleRef}
-          className="hero-subtitle text-xl md:text-2xl font-light mb-8 text-muted-foreground"
+          className="hero-subtitle text-lg sm:text-xl md:text-2xl font-light mb-6 sm:mb-8 text-muted-foreground text-center max-w-3xl mx-auto"
         >
           MERN Stack Developer & AI/ML Enthusiast
         </p>
         <div 
           ref={buttonsRef}
-          className="hero-buttons flex flex-col md:flex-row gap-6 justify-center"
+          className="hero-buttons flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
         >
           <Button
             onClick={downloadResume}
-            className="glassmorphic px-8 py-4 rounded-full font-light hover:bg-primary transition-all duration-300 btn-glow border-0 text-foreground"
+            className="glassmorphic px-6 sm:px-8 py-3 sm:py-4 rounded-full font-light hover:bg-primary transition-all duration-300 btn-glow border-0 text-foreground w-full sm:w-auto min-h-[48px]"
             variant="outline"
           >
             <i className="ph-download-simple mr-2"></i>
-            Download Resume
+            <span className="text-sm sm:text-base">Download Resume</span>
           </Button>
           <Button
             onClick={scrollToContact}
-            className="bg-primary px-8 py-4 rounded-full font-light hover:bg-secondary transition-all duration-300 btn-glow"
+            className="bg-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full font-light hover:bg-secondary transition-all duration-300 btn-glow w-full sm:w-auto min-h-[48px]"
           >
             <i className="ph-briefcase mr-2"></i>
-            Hire Me
+            <span className="text-sm sm:text-base">Hire Me</span>
           </Button>
         </div>
       </div>

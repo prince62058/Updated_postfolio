@@ -35,38 +35,38 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="py-20 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+    <section id="about" className="py-12 sm:py-16 lg:py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
           <div ref={imageRef} className="about-image">
             <img 
               src={profileImage} 
               alt="Prince Kumar Profile" 
-              className="w-80 h-80 object-contain mx-auto hover:scale-105 transition-all duration-500 rounded-2xl shadow-2xl border border-accent/20"
+              className="w-64 sm:w-72 md:w-80 h-64 sm:h-72 md:h-80 object-contain mx-auto hover:scale-105 transition-all duration-500 rounded-2xl shadow-2xl border border-accent/20"
             />
           </div>
           
           <div ref={contentRef} className="about-content">
-            <h2 className="text-5xl font-light mb-6 text-accent">About Me</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8 font-light">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4 sm:mb-6 text-accent text-center md:text-left">About Me</h2>
+            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 font-light text-center md:text-left">
               I'm a MERN Stack Developer and Computer Science Engineering student at Technocrats Institute of Technology, 
               specializing in Artificial Intelligence and Machine Learning. With expertise in MongoDB, Express.js, React.js, 
               and Node.js, I build comprehensive full-stack web applications that deliver seamless user experiences.
             </p>
             
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
               {stats.map((stat, index) => (
-                <div key={index} className="glassmorphic p-4 rounded-xl text-center">
-                  <div className="text-3xl font-light text-accent">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div key={index} className="glassmorphic p-3 sm:p-4 rounded-xl text-center">
+                  <div className="text-2xl sm:text-3xl font-light text-accent">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
             </div>
 
             {/* MERN Stack Skills Preview */}
             <div className="space-y-4">
-              <h3 className="text-2xl font-light text-accent mb-4">Core Technologies</h3>
+              <h3 className="text-xl sm:text-2xl font-light text-accent mb-4 text-center md:text-left">Core Technologies</h3>
               {skills.map((skill, index) => (
                 <div key={index} className="skill-item">
                   <div className="flex justify-between mb-2">

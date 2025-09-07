@@ -23,13 +23,13 @@ export default function Navigation() {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 p-6 transition-all duration-300 ${isScrolled ? 'backdrop-blur-md' : ''}`}>
-      <div className="glassmorphic max-w-6xl mx-auto rounded-2xl px-8 py-4">
+    <nav className={`fixed top-0 w-full z-50 p-3 sm:p-6 transition-all duration-300 ${isScrolled ? 'backdrop-blur-md' : ''}`}>
+      <div className="glassmorphic max-w-6xl mx-auto rounded-2xl px-4 sm:px-8 py-3 sm:py-4">
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-light text-accent cursor-pointer text-left" onClick={() => scrollToSection('home')}>PRINCE</div>
+          <div className="text-xl sm:text-2xl font-light text-accent cursor-pointer text-left" onClick={() => scrollToSection('home')}>PRINCE</div>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-6 lg:space-x-8">
             {[
               { label: 'Home', id: 'home' },
               { label: 'About', id: 'about' },
@@ -41,7 +41,7 @@ export default function Navigation() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="hover:text-accent transition-colors font-light text-foreground"
+                className="hover:text-accent transition-colors font-light text-foreground text-sm lg:text-base whitespace-nowrap"
               >
                 {item.label}
               </button>
@@ -52,17 +52,17 @@ export default function Navigation() {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-foreground"
+            className="md:hidden text-foreground min-h-[44px] min-w-[44px]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <i className={`ph-${isMenuOpen ? 'x' : 'list'} text-2xl`}></i>
+            <i className={`ph-${isMenuOpen ? 'x' : 'list'} text-xl sm:text-2xl`}></i>
           </Button>
         </div>
         
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 pt-4 border-t border-glass-border">
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-3">
               {[
                 { label: 'Home', id: 'home' },
                 { label: 'About', id: 'about' },
@@ -74,7 +74,7 @@ export default function Navigation() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left hover:text-accent transition-colors font-light text-foreground"
+                  className="text-left hover:text-accent transition-colors font-light text-foreground py-2 px-1 min-h-[44px] flex items-center"
                 >
                   {item.label}
                 </button>

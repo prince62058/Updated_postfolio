@@ -153,23 +153,23 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Info */}
           <div ref={infoRef} className="contact-info">
-            <h3 className="text-xl sm:text-2xl font-light mb-6 sm:mb-8 text-accent">Let's Connect</h3>
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-light mb-4 sm:mb-6 lg:mb-8 text-accent">Let's Connect</h3>
             <p className="text-muted-foreground mb-6 sm:mb-8 font-light text-sm sm:text-base">
               Whether you're looking for a developer, have a question about my projects, or just want to say hello, I'd love to hear from you.
             </p>
             
             <div className="space-y-6">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-center space-x-4">
-                  <div className="glassmorphic p-3 rounded-full">
-                    <i className={`${item.icon} text-accent text-xl`}></i>
+                <div key={index} className="flex items-center space-x-3 sm:space-x-4">
+                  <div className="glassmorphic p-2 sm:p-3 rounded-full flex-shrink-0">
+                    <i className={`${item.icon} text-accent text-lg sm:text-xl`}></i>
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground">{item.label}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">{item.label}</div>
                     {item.href ? (
                       <a 
                         href={item.href} 
-                        className="text-foreground hover:text-accent transition-colors"
+                        className="text-foreground hover:text-accent transition-colors text-sm sm:text-base break-all"
                         target={item.href.startsWith('http') ? '_blank' : undefined}
                         rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       >
@@ -225,7 +225,8 @@ export default function Contact() {
               />
               <Button
                 type="submit"
-                className="w-full bg-primary py-4 rounded-xl font-light hover:bg-secondary transition-all duration-300 btn-glow"
+                className="w-full bg-primary py-3 sm:py-4 rounded-xl font-light hover:bg-secondary transition-all duration-300 btn-glow min-h-[48px]"
+                disabled={isSubmitting}
               >
                 <i className="ph-paper-plane-tilt mr-2"></i>
                 Send Message
