@@ -79,55 +79,51 @@ export function initializeHeroAnimations() {
   if (typeof window === 'undefined' || !window.gsap) return;
 
   const { gsap } = window;
+  const isMobile = window.innerWidth <= 768;
 
-  // Ensure hero elements are visible first
-  gsap.set('.hero-title, .hero-subtitle, .hero-buttons', { opacity: 1 });
+  // Force immediate visibility on mobile
+  if (isMobile) {
+    gsap.set('.hero-title, .hero-subtitle, .hero-buttons', { 
+      opacity: 1, 
+      y: 0, 
+      filter: 'blur(0px)' 
+    });
+    return; // Skip complex animations on mobile
+  }
 
-  // Hero Section Animations with mobile optimization
+  // Desktop animations only
   const timeline = gsap.timeline({ delay: 0.2 });
   
   timeline
     .fromTo('.hero-title', {
       opacity: 0,
-      y: window.innerWidth <= 768 ? 20 : 30,
+      y: 30,
       filter: 'blur(3px)'
     }, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: window.innerWidth <= 768 ? 0.4 : 0.6,
+      duration: 0.6,
       ease: 'power2.out'
     })
     .fromTo('.hero-subtitle', {
       opacity: 0,
-      y: window.innerWidth <= 768 ? 15 : 20
+      y: 20
     }, {
       opacity: 1,
       y: 0,
-      duration: window.innerWidth <= 768 ? 0.3 : 0.4,
+      duration: 0.4,
       ease: 'power2.out'
     }, '-=0.2')
     .fromTo('.hero-buttons', {
       opacity: 0,
-      y: window.innerWidth <= 768 ? 10 : 15
+      y: 15
     }, {
       opacity: 1,
       y: 0,
-      duration: window.innerWidth <= 768 ? 0.25 : 0.3,
+      duration: 0.3,
       ease: 'power2.out'
     }, '-=0.15');
-
-  // Add immediate fallback for mobile if animations don't trigger
-  if (window.innerWidth <= 768) {
-    setTimeout(() => {
-      const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-buttons');
-      heroElements.forEach(el => {
-        if (getComputedStyle(el as Element).opacity === '0') {
-          gsap.set(el, { opacity: 1, y: 0, filter: 'blur(0px)' });
-        }
-      });
-    }, 1000);
-  }
 }
 
 export function initializeScrollAnimations() {
@@ -141,13 +137,28 @@ export function initializeScrollAnimations() {
     refreshPriority: -1
   });
   
-  // Reduce scroll trigger refresh rate on mobile
-  if (window.innerWidth <= 768) {
+  // Simplified approach for mobile
+  const isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    // Disable most animations on mobile for better performance
     ScrollTrigger.defaults({
       scroller: window,
-      immediateRender: false,
+      immediateRender: true,
       fastScrollEnd: true
     });
+    
+    // Force all elements to be visible immediately on mobile
+    setTimeout(() => {
+      const allAnimatedElements = document.querySelectorAll(
+        '.hero-title, .hero-subtitle, .hero-buttons, .about-image, .about-content, .tech-stack-content, .projects-container, .contact-info, .contact-form'
+      );
+      
+      allAnimatedElements.forEach(el => {
+        gsap.set(el, { opacity: 1, y: 0, x: 0, scale: 1, filter: 'blur(0px)' });
+      });
+    }, 100);
+    
+    return; // Skip complex scroll animations on mobile
   }
 
   // Navigation Animation on Scroll - optimized for mobile

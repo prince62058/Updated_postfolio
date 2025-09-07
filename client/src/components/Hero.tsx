@@ -7,8 +7,24 @@ export default function Hero() {
   const buttonsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.gsap) {
-      // Set initial state for animations, with mobile fallback
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // Mobile: Show immediately without animations
+      if (titleRef.current) {
+        titleRef.current.style.opacity = '1';
+        titleRef.current.style.transform = 'translateY(0px)';
+      }
+      if (subtitleRef.current) {
+        subtitleRef.current.style.opacity = '1';
+        subtitleRef.current.style.transform = 'translateY(0px)';
+      }
+      if (buttonsRef.current) {
+        buttonsRef.current.style.opacity = '1';
+        buttonsRef.current.style.transform = 'translateY(0px)';
+      }
+    } else if (typeof window !== 'undefined' && window.gsap) {
+      // Desktop: Set up for animations
       if (titleRef.current) {
         titleRef.current.style.opacity = '0';
         titleRef.current.style.transform = 'translateY(20px)';
@@ -20,20 +36,6 @@ export default function Hero() {
       if (buttonsRef.current) {
         buttonsRef.current.style.opacity = '0';
         buttonsRef.current.style.transform = 'translateY(10px)';
-      }
-      
-      // Mobile safety fallback - ensure elements show after 2 seconds if animations fail
-      if (window.innerWidth <= 768) {
-        setTimeout(() => {
-          const elements = [titleRef.current, subtitleRef.current, buttonsRef.current];
-          elements.forEach(el => {
-            if (el && getComputedStyle(el).opacity === '0') {
-              el.style.opacity = '1';
-              el.style.transform = 'translateY(0px)';
-              el.style.transition = 'all 0.3s ease-out';
-            }
-          });
-        }, 2000);
       }
     } else {
       // Fallback for when GSAP is not available
