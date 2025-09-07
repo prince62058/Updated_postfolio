@@ -30,6 +30,7 @@
   --neon-purple: hsl(263, 70%, 50%);
   --glass-bg: hsla(0, 0%, 100%, 0.05);
   --glass-border: hsla(0, 0%, 100%, 0.1);
+  --gate-theme: 180 100% 70%; /* Cyan-teal color matching gate theme */
 }
 
 .dark {
@@ -503,5 +504,30 @@
   .project-card {
     width: 260px;
     min-width: 260px;
+  }
+}
+
+/* Gate theme styling for Prince Kumar name */
+.text-gate-theme {
+  color: hsl(var(--gate-theme));
+  text-shadow: 0 0 20px hsla(var(--gate-theme), 0.5);
+  background: linear-gradient(45deg, 
+    hsl(180, 100%, 70%), 
+    hsl(200, 100%, 60%), 
+    hsl(220, 100%, 70%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gateGlow 3s ease-in-out infinite;
+}
+
+@keyframes gateGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }

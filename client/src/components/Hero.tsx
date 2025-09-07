@@ -101,7 +101,7 @@ export default function Hero() {
       {/* Spline 3D Background - Show on all devices */}
       <div className="absolute inset-0 z-0">
         <iframe 
-          src='https://my.spline.design/orb-9auMpnTWSKl924IM8jEPQIqQ/' 
+          src='https://my.spline.design/tvatimedoor-Ma5V5HRHuD3vpNuao3Dznnfy/' 
           frameBorder='0' 
           width='100%' 
           height='100%'
@@ -110,7 +110,7 @@ export default function Hero() {
             border: 'none',
             outline: 'none'
           }}
-          title="3D Orb Animation"
+          title="3D Gate Animation"
           loading="eager"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         />
@@ -122,7 +122,7 @@ export default function Hero() {
           className="hero-title text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-light mb-4 sm:mb-6 text-glow leading-tight"
           style={{ opacity: 1, transform: 'translateY(0px)' }}
         >
-          Hi, I'm <span className="text-accent">Prince Kumar</span>
+          Hi, I'm <span className="text-gate-theme">Prince Kumar</span>
         </h1>
         <p 
           ref={subtitleRef}
