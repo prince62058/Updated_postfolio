@@ -9,20 +9,34 @@ export default function Hero() {
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
     
+    // Force visibility on mobile immediately
     if (isMobile) {
-      // Mobile: Show immediately without animations
-      if (titleRef.current) {
-        titleRef.current.style.opacity = '1';
-        titleRef.current.style.transform = 'translateY(0px)';
-      }
-      if (subtitleRef.current) {
-        subtitleRef.current.style.opacity = '1';
-        subtitleRef.current.style.transform = 'translateY(0px)';
-      }
-      if (buttonsRef.current) {
-        buttonsRef.current.style.opacity = '1';
-        buttonsRef.current.style.transform = 'translateY(0px)';
-      }
+      const forceShow = () => {
+        if (titleRef.current) {
+          titleRef.current.style.opacity = '1';
+          titleRef.current.style.transform = 'translateY(0px)';
+          titleRef.current.style.visibility = 'visible';
+          titleRef.current.style.display = 'block';
+        }
+        if (subtitleRef.current) {
+          subtitleRef.current.style.opacity = '1';
+          subtitleRef.current.style.transform = 'translateY(0px)';
+          subtitleRef.current.style.visibility = 'visible';
+          subtitleRef.current.style.display = 'block';
+        }
+        if (buttonsRef.current) {
+          buttonsRef.current.style.opacity = '1';
+          buttonsRef.current.style.transform = 'translateY(0px)';
+          buttonsRef.current.style.visibility = 'visible';
+          buttonsRef.current.style.display = 'flex';
+        }
+      };
+      
+      // Force show immediately and again after small delay
+      forceShow();
+      setTimeout(forceShow, 100);
+      setTimeout(forceShow, 500);
+      
     } else if (typeof window !== 'undefined' && window.gsap) {
       // Desktop: Set up for animations
       if (titleRef.current) {
@@ -84,15 +98,21 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center">
-      {/* Spline 3D Background */}
+      {/* Spline 3D Background - Show on all devices */}
       <div className="absolute inset-0 z-0">
         <iframe 
           src='https://my.spline.design/orb-9auMpnTWSKl924IM8jEPQIqQ/' 
           frameBorder='0' 
           width='100%' 
           height='100%'
-          style={{ background: 'transparent' }}
+          style={{ 
+            background: 'transparent',
+            border: 'none',
+            outline: 'none'
+          }}
           title="3D Orb Animation"
+          loading="eager"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         />
       </div>
       
@@ -100,18 +120,21 @@ export default function Hero() {
         <h1 
           ref={titleRef}
           className="hero-title text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-light mb-4 sm:mb-6 text-glow leading-tight"
+          style={{ opacity: 1, transform: 'translateY(0px)' }}
         >
           Hi, I'm <span className="text-accent">Prince Kumar</span>
         </h1>
         <p 
           ref={subtitleRef}
           className="hero-subtitle text-lg sm:text-xl md:text-2xl font-light mb-6 sm:mb-8 text-muted-foreground text-center max-w-3xl mx-auto"
+          style={{ opacity: 1, transform: 'translateY(0px)' }}
         >
           MERN Stack Developer & AI/ML Enthusiast
         </p>
         <div 
           ref={buttonsRef}
           className="hero-buttons flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
+          style={{ opacity: 1, transform: 'translateY(0px)' }}
         >
           <Button
             onClick={downloadResume}
