@@ -30,7 +30,7 @@
   --neon-purple: hsl(263, 70%, 50%);
   --glass-bg: hsla(0, 0%, 100%, 0.05);
   --glass-border: hsla(0, 0%, 100%, 0.1);
-  --gate-theme: 180 100% 70%; /* Cyan-teal color matching gate theme */
+  --gate-theme: 45 100% 65%; /* Golden-yellow color matching spline gate */
 }
 
 .dark {
@@ -507,14 +507,15 @@
   }
 }
 
-/* Gate theme styling for Prince Kumar name */
+/* Gate theme styling for Prince Kumar name - Golden yellowish to match Spline gate */
 .text-gate-theme {
   color: hsl(var(--gate-theme));
-  text-shadow: 0 0 20px hsla(var(--gate-theme), 0.5);
+  text-shadow: 0 0 20px hsla(var(--gate-theme), 0.6);
   background: linear-gradient(45deg, 
-    hsl(180, 100%, 70%), 
-    hsl(200, 100%, 60%), 
-    hsl(220, 100%, 70%)
+    hsl(45, 100%, 65%), 
+    hsl(55, 100%, 70%), 
+    hsl(35, 100%, 60%),
+    hsl(50, 100%, 75%)
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -526,8 +527,10 @@
 @keyframes gateGlow {
   0%, 100% {
     background-position: 0% 50%;
+    filter: brightness(1) saturate(1);
   }
   50% {
     background-position: 100% 50%;
+    filter: brightness(1.2) saturate(1.3);
   }
 }
