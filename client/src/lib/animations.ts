@@ -103,7 +103,7 @@ export function initializeScrollAnimations() {
   const aboutTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: '#about',
-      start: 'top 90%',
+      start: 'top 85%',
       end: 'bottom 20%',
       scrub: false
     }
@@ -112,34 +112,34 @@ export function initializeScrollAnimations() {
   aboutTimeline
     .fromTo('.about-image', {
       opacity: 0,
-      y: 60,
-      scale: 0.9,
-      filter: 'blur(5px)'
+      y: 40,
+      scale: 0.95,
+      filter: 'blur(3px)'
     }, {
       opacity: 1,
       y: 0,
       scale: 1,
       filter: 'blur(0px)',
-      duration: 0.6,
-      ease: 'back.out(1.2)'
+      duration: 0.3,
+      ease: 'power2.out'
     })
     .fromTo('.about-content', {
       opacity: 0,
-      y: 40,
-      filter: 'blur(3px)'
+      y: 30,
+      filter: 'blur(2px)'
     }, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.4,
-      ease: 'power3.out'
-    }, '-=0.2');
+      duration: 0.25,
+      ease: 'power2.out'
+    }, '-=0.15');
 
   // Education Section Animation
   const educationTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: '#education',
-      start: 'top 90%',
+      start: 'top 85%',
       end: 'bottom 20%',
       toggleActions: 'play none none reverse',
       scrub: false
@@ -149,44 +149,44 @@ export function initializeScrollAnimations() {
   educationTimeline
     .fromTo('.education-title', {
       opacity: 0,
-      y: 30,
-      filter: 'blur(3px)'
+      y: 20,
+      filter: 'blur(2px)'
     }, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.4,
+      duration: 0.25,
       ease: 'power2.out'
     })
     .fromTo('.education-timeline', {
       opacity: 0,
-      y: 40,
-      filter: 'blur(3px)'
+      y: 30,
+      filter: 'blur(2px)'
     }, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.5,
-      ease: 'power3.out'
-    }, '-=0.2')
+      duration: 0.3,
+      ease: 'power2.out'
+    }, '-=0.15')
     .fromTo('.education-item', {
       opacity: 0,
-      y: 30,
-      scale: 0.95
+      y: 20,
+      scale: 0.98
     }, {
       opacity: 1,
       y: 0,
       scale: 1,
-      duration: 0.4,
-      ease: 'back.out(1.2)',
-      stagger: 0.1
-    }, '-=0.3');
+      duration: 0.25,
+      ease: 'power2.out',
+      stagger: 0.05
+    }, '-=0.2');
 
   // Tech Stack Section Animations
   const techStackTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: '#tech-stack',
-      start: 'top 90%',
+      start: 'top 85%',
       end: 'bottom 20%',
       scrub: false
     }
@@ -195,42 +195,40 @@ export function initializeScrollAnimations() {
   techStackTimeline
     .fromTo('.tech-stack-title', {
       opacity: 0,
-      y: 30,
-      filter: 'blur(3px)'
+      y: 20,
+      filter: 'blur(2px)'
     }, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.4,
+      duration: 0.25,
       ease: 'power2.out'
     })
     .fromTo('.tech-stack-content', {
       opacity: 0,
-      y: 40
+      y: 30
     }, {
       opacity: 1,
       y: 0,
-      duration: 0.5,
-      ease: 'power3.out'
-    }, '-=0.2');
+      duration: 0.3,
+      ease: 'power2.out'
+    }, '-=0.15');
 
   // MERN Stack Cards Individual Animation
   gsap.fromTo('.tech-stack-content .glassmorphic', {
     opacity: 0,
-    y: 30,
-    scale: 0.95,
-    rotateY: 5
+    y: 20,
+    scale: 0.98
   }, {
     opacity: 1,
     y: 0,
     scale: 1,
-    rotateY: 0,
-    duration: 0.4,
-    stagger: 0.08,
-    ease: 'back.out(1.1)',
+    duration: 0.25,
+    stagger: 0.04,
+    ease: 'power2.out',
     scrollTrigger: {
       trigger: '.tech-stack-content',
-      start: 'top 85%'
+      start: 'top 80%'
     }
   });
 
@@ -238,7 +236,7 @@ export function initializeScrollAnimations() {
   const projectsTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: '#projects',
-      start: 'top 90%',
+      start: 'top 85%',
       end: 'bottom 20%',
       scrub: false
     }
@@ -247,40 +245,40 @@ export function initializeScrollAnimations() {
   projectsTimeline
     .fromTo('.projects-title', {
       opacity: 0,
-      y: 30,
-      filter: 'blur(3px)'
+      y: 20,
+      filter: 'blur(2px)'
     }, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.4,
+      duration: 0.25,
       ease: 'power2.out'
     })
     .fromTo('.projects-container', {
       opacity: 0,
-      y: 40
+      y: 30
     }, {
       opacity: 1,
       y: 0,
-      duration: 0.5,
+      duration: 0.3,
       ease: 'power2.out'
-    }, '-=0.2');
+    }, '-=0.15');
 
   // Individual project cards stagger animation
   gsap.fromTo('.project-card', {
     opacity: 0,
-    y: 30,
-    scale: 0.95
+    y: 20,
+    scale: 0.98
   }, {
     opacity: 1,
     y: 0,
     scale: 1,
-    duration: 0.4,
-    stagger: 0.08,
+    duration: 0.25,
+    stagger: 0.04,
     ease: 'power2.out',
     scrollTrigger: {
       trigger: '.projects-container',
-      start: 'top 85%'
+      start: 'top 80%'
     }
   });
 
@@ -288,7 +286,7 @@ export function initializeScrollAnimations() {
   const contactTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: '#contact',
-      start: 'top 90%',
+      start: 'top 85%',
       end: 'bottom 20%',
       scrub: false
     }
@@ -297,46 +295,46 @@ export function initializeScrollAnimations() {
   contactTimeline
     .fromTo('.contact-title', {
       opacity: 0,
-      y: 30,
-      filter: 'blur(3px)'
+      y: 20,
+      filter: 'blur(2px)'
     }, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.4,
+      duration: 0.25,
       ease: 'power2.out'
     })
     .fromTo('.contact-info', {
       opacity: 0,
-      x: -30
+      x: -20
     }, {
       opacity: 1,
       x: 0,
-      duration: 0.4,
+      duration: 0.25,
       ease: 'power2.out'
-    }, '-=0.2')
+    }, '-=0.15')
     .fromTo('.contact-form', {
       opacity: 0,
-      x: 30
+      x: 20
     }, {
       opacity: 1,
       x: 0,
-      duration: 0.4,
+      duration: 0.25,
       ease: 'power2.out'
-    }, '-=0.3');
+    }, '-=0.2');
 
   // Footer Animation
   gsap.fromTo('footer', {
     opacity: 0,
-    y: 30
+    y: 20
   }, {
     opacity: 1,
     y: 0,
-    duration: 0.4,
+    duration: 0.25,
     ease: 'power2.out',
     scrollTrigger: {
       trigger: 'footer',
-      start: 'top 95%'
+      start: 'top 90%'
     }
   });
 
@@ -347,12 +345,12 @@ export function initializeScrollAnimations() {
   }, {
     width: (i: number, target: any) => (target as HTMLElement).style.width,
     opacity: 1,
-    duration: 0.8,
+    duration: 0.5,
     ease: 'power2.out',
-    stagger: 0.1,
+    stagger: 0.05,
     scrollTrigger: {
       trigger: '.about-content',
-      start: 'top 80%'
+      start: 'top 75%'
     }
   });
 
@@ -392,17 +390,17 @@ export function initializeScrollAnimations() {
   document.querySelectorAll('h1, h2, h3').forEach((heading: Element) => {
     gsap.fromTo(heading, {
       opacity: 0,
-      y: 20,
-      filter: 'blur(2px)'
+      y: 15,
+      filter: 'blur(1px)'
     }, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.3,
+      duration: 0.2,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: heading,
-        start: 'top 90%',
+        start: 'top 85%',
         toggleActions: 'play none none reverse'
       }
     });
@@ -412,18 +410,18 @@ export function initializeScrollAnimations() {
   document.querySelectorAll('.grid > *, .space-y-4 > *, .flex.space-x-4 > *').forEach((item: Element, index: number) => {
     gsap.fromTo(item, {
       opacity: 0,
-      y: 15,
-      scale: 0.98
+      y: 10,
+      scale: 0.99
     }, {
       opacity: 1,
       y: 0,
       scale: 1,
-      duration: 0.3,
-      delay: index * 0.05,
+      duration: 0.2,
+      delay: index * 0.03,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: item,
-        start: 'top 90%',
+        start: 'top 85%',
         toggleActions: 'play none none reverse'
       }
     });
