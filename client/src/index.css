@@ -13,23 +13,23 @@
   --card-foreground: hsl(0, 0%, 98%);
   --border: hsl(240, 3.7%, 15.9%);
   --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(210, 100%, 50%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --secondary: hsl(263, 70%, 50%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --accent: hsl(189, 100%, 50%);
+  --primary: hsl(45, 100%, 65%);
+  --primary-foreground: hsl(240, 10%, 3.9%);
+  --secondary: hsl(35, 100%, 60%);
+  --secondary-foreground: hsl(240, 10%, 3.9%);
+  --accent: hsl(50, 100%, 70%);
   --accent-foreground: hsl(240, 10%, 3.9%);
   --destructive: hsl(0, 62.8%, 30.6%);
   --destructive-foreground: hsl(0, 0%, 98%);
   --ring: hsl(240, 4.9%, 83.9%);
   --radius: 0.5rem;
   
-  /* Custom futuristic colors */
-  --neon-blue: hsl(210, 100%, 50%);
-  --neon-cyan: hsl(189, 100%, 50%);
-  --neon-purple: hsl(263, 70%, 50%);
-  --glass-bg: hsla(0, 0%, 100%, 0.05);
-  --glass-border: hsla(0, 0%, 100%, 0.1);
+  /* Custom futuristic colors - Golden Gate Theme */
+  --neon-blue: hsl(45, 100%, 65%);
+  --neon-cyan: hsl(50, 100%, 70%);
+  --neon-purple: hsl(35, 100%, 60%);
+  --glass-bg: hsla(45, 50%, 10%, 0.1);
+  --glass-border: hsla(45, 100%, 65%, 0.2);
   --gate-theme: 45 100% 65%; /* Golden-yellow color matching spline gate */
 }
 
@@ -44,11 +44,11 @@
   --card-foreground: hsl(0, 0%, 98%);
   --border: hsl(240, 3.7%, 15.9%);
   --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(210, 100%, 50%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --secondary: hsl(240, 3.7%, 15.9%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --accent: hsl(189, 100%, 50%);
+  --primary: hsl(45, 100%, 65%);
+  --primary-foreground: hsl(240, 10%, 3.9%);
+  --secondary: hsl(35, 100%, 60%);
+  --secondary-foreground: hsl(240, 10%, 3.9%);
+  --accent: hsl(50, 100%, 70%);
   --accent-foreground: hsl(240, 10%, 3.9%);
   --destructive: hsl(0, 62.8%, 30.6%);
   --destructive-foreground: hsl(0, 0%, 98%);
@@ -97,10 +97,11 @@
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 0 20px hsla(45, 100%, 65%, 0.1), inset 0 0 20px hsla(45, 100%, 65%, 0.05);
   }
 
   .text-glow {
-    text-shadow: 0 0 20px currentColor;
+    text-shadow: 0 0 20px currentColor, 0 0 40px hsla(45, 100%, 65%, 0.3);
   }
 
   .btn-glow {
@@ -108,7 +109,7 @@
   }
 
   .btn-glow:hover {
-    box-shadow: 0 0 30px var(--neon-blue);
+    box-shadow: 0 0 30px var(--neon-blue), 0 0 60px hsla(45, 100%, 65%, 0.3);
     transform: scale(1.05);
   }
   
@@ -116,7 +117,7 @@
   @media (max-width: 768px) {
     .btn-glow:active {
       transform: scale(0.98);
-      box-shadow: 0 0 20px var(--neon-blue);
+      box-shadow: 0 0 20px var(--neon-blue), 0 0 40px hsla(45, 100%, 65%, 0.4);
       transition: transform 0.1s ease-out;
     }
     
