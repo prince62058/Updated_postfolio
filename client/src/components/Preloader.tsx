@@ -54,17 +54,17 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
   return (
     <div ref={preloaderRef} className="preloader">
-      <div className="text-center">
-        <h1 className="text-6xl font-light text-accent mb-8 animate-pulse text-glow">
+      <div className="text-center w-full flex flex-col items-center justify-center">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-accent mb-6 sm:mb-8 animate-pulse text-glow px-4">
           Prince Kumar
         </h1>
-        <div className="w-80 h-1 bg-muted rounded-full overflow-hidden">
+        <div className="w-64 sm:w-80 h-1 bg-muted rounded-full overflow-hidden mx-auto">
           <div 
             ref={progressBarRef}
             className="progress-bar h-full w-0 rounded-full transition-all duration-300"
           />
         </div>
-        <p className="text-muted-foreground mt-4 font-light">Loading Experience...</p>
+        <p className="text-muted-foreground mt-3 sm:mt-4 font-light text-sm sm:text-base px-4">Loading Experience...</p>
       </div>
     </div>
   );
