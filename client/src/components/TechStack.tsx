@@ -40,28 +40,28 @@ export default function TechStack() {
       category: 'Database',
       description: 'NoSQL database for flexible, scalable data storage',
       percentage: 85,
-      color: 'bg-gradient-to-r from-yellow-400 to-amber-500'
+      color: 'bg-gradient-to-r from-green-500 to-emerald-600'
     },
     {
       name: 'Express.js',
       category: 'Backend Framework',
       description: 'Fast, minimalist web framework for Node.js',
       percentage: 90,
-      color: 'bg-gradient-to-r from-amber-400 to-yellow-500'
+      color: 'bg-gradient-to-r from-slate-600 to-gray-700'
     },
     {
       name: 'React.js',
       category: 'Frontend Library',
       description: 'Component-based UI library for building interactive interfaces',
       percentage: 95,
-      color: 'bg-gradient-to-r from-yellow-500 to-amber-400'
+      color: 'bg-gradient-to-r from-blue-500 to-cyan-600'
     },
     {
       name: 'Node.js',
       category: 'Runtime Environment',
       description: 'JavaScript runtime for building scalable server applications',
       percentage: 88,
-      color: 'bg-gradient-to-r from-amber-500 to-yellow-600'
+      color: 'bg-gradient-to-r from-lime-500 to-green-600'
     }
   ];
 
