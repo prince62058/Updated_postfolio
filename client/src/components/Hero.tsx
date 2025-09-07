@@ -138,7 +138,7 @@ export default function Hero() {
         >
           <Button
             onClick={downloadResume}
-            className="glassmorphic px-6 sm:px-8 py-3 sm:py-4 rounded-full font-light hover:bg-primary transition-all duration-300 btn-glow border-0 text-foreground w-full sm:w-auto min-h-[48px]"
+            className="glassmorphic px-6 sm:px-8 py-3 sm:py-4 rounded-full font-light hover:bg-primary transition-all duration-150 btn-glow border-0 text-foreground w-full sm:w-auto min-h-[48px]"
             variant="outline"
           >
             <i className="ph-download-simple mr-2"></i>
@@ -146,7 +146,7 @@ export default function Hero() {
           </Button>
           <Button
             onClick={scrollToContact}
-            className="bg-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full font-light hover:bg-secondary transition-all duration-300 btn-glow w-full sm:w-auto min-h-[48px]"
+            className="bg-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full font-light hover:bg-secondary transition-all duration-150 btn-glow w-full sm:w-auto min-h-[48px]"
           >
             <i className="ph-briefcase mr-2"></i>
             <span className="text-sm sm:text-base">Hire Me</span>

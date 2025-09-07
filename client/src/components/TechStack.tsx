@@ -121,7 +121,7 @@ export default function TechStack() {
           {/* MERN Stack Cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
             {mernStack.map((tech, index) => (
-              <div key={index} className="glassmorphic p-4 sm:p-6 rounded-2xl hover:scale-105 transition-all duration-500">
+              <div key={index} className="glassmorphic p-4 sm:p-6 rounded-2xl hover:scale-105 transition-all duration-200">
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-light text-accent mb-2">{tech.name}</h3>
                 <p className="text-sm text-primary mb-3">{tech.category}</p>
                 <p className="text-muted-foreground mb-3 sm:mb-4 font-light text-xs sm:text-sm">{tech.description}</p>
@@ -133,7 +133,7 @@ export default function TechStack() {
                   </div>
                   <div className="w-full bg-muted/50 rounded-full h-3 overflow-hidden relative">
                     <div 
-                      className={`${tech.color} h-3 rounded-full transition-all duration-2000 ease-out relative overflow-hidden shadow-lg`}
+                      className={`${tech.color} h-3 rounded-full transition-all duration-800 ease-out relative overflow-hidden shadow-lg`}
                       style={{ 
                         width: animatedBars[index] ? `${tech.percentage}%` : '0%',
                         boxShadow: animatedBars[index] ? '0 0 20px hsla(45, 100%, 65%, 0.6)' : 'none'

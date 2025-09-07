@@ -17,7 +17,7 @@ export function initializeSmoothScroll() {
     const element = document.getElementById(target);
     if (element && window.gsap) {
       window.gsap.to(window, {
-        duration: 0.8,
+        duration: 0.3,
         scrollTo: {
           y: element,
           offsetY: 80
@@ -103,7 +103,7 @@ export function initializeHeroAnimations() {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.6,
+      duration: 0.25,
       ease: 'power2.out'
     })
     .fromTo('.hero-subtitle', {
@@ -112,7 +112,7 @@ export function initializeHeroAnimations() {
     }, {
       opacity: 1,
       y: 0,
-      duration: 0.4,
+      duration: 0.15,
       ease: 'power2.out'
     }, '-=0.2')
     .fromTo('.hero-buttons', {
@@ -265,7 +265,7 @@ export function initializeScrollAnimations() {
       opacity: 1,
       y: 0,
       scale: 1,
-      duration: 0.25,
+      duration: 0.1,
       ease: 'power2.out',
       stagger: 0.05
     }, '-=0.2');
@@ -433,7 +433,7 @@ export function initializeScrollAnimations() {
   }, {
     width: (i: number, target: any) => (target as HTMLElement).style.width,
     opacity: 1,
-    duration: 0.5,
+    duration: 0.2,
     ease: 'power2.out',
     stagger: 0.05,
     scrollTrigger: {
@@ -529,7 +529,7 @@ export function initializeFloatingAnimations() {
   // Floating animations for background orbs
   gsap.to(".orb", {
     y: -15,
-    duration: 2,
+    duration: 0.8,
     repeat: -1,
     yoyo: true,
     ease: "power1.inOut",
@@ -560,7 +560,7 @@ export function initializeFloatingAnimations() {
   // Continuous floating animation for cards
   gsap.to('.project-card, .education-item', {
     y: -8,
-    duration: 1.5,
+    duration: 0.6,
     repeat: -1,
     yoyo: true,
     ease: 'power1.inOut',

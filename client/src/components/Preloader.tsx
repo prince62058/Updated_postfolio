@@ -11,9 +11,9 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   useEffect(() => {
     // Optimize preloader timing for mobile
     const isMobile = window.innerWidth <= 768;
-    const progressDuration = isMobile ? 1.5 : 2;
-    const hideDuration = isMobile ? 0.6 : 1;
-    const initialDelay = isMobile ? 300 : 500;
+    const progressDuration = isMobile ? 0.8 : 1;
+    const hideDuration = isMobile ? 0.3 : 0.5;
+    const initialDelay = isMobile ? 150 : 250;
     
     const timer = setTimeout(() => {
       if (typeof window !== 'undefined' && window.gsap && progressBarRef.current && preloaderRef.current) {
@@ -45,7 +45,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             preloaderRef.current.style.display = "none";
           }
           onComplete();
-        }, isMobile ? 2000 : 3000);
+        }, isMobile ? 1000 : 1500);
       }
     }, initialDelay);
 

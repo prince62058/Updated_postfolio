@@ -44,7 +44,7 @@ export default function Education() {
             <div key={index} className={`education-item flex items-center mb-8 sm:mb-12 lg:mb-16 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col md:flex-row`}>
               {/* Content Card */}
               <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'} mb-4 md:mb-0`}>
-                <div className="glassmorphic p-4 sm:p-6 lg:p-8 rounded-2xl border border-blue-500/20 hover:border-cyan-400/40 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-400/20">
+                <div className="glassmorphic p-4 sm:p-6 lg:p-8 rounded-2xl border border-blue-500/20 hover:border-cyan-400/40 transition-all duration-200 hover:shadow-2xl hover:shadow-cyan-400/20">
                   <div className="flex items-center justify-between mb-4">
                     <span className={`px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold ${
                       item.status === 'Current' 

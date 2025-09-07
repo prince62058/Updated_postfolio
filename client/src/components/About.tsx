@@ -42,7 +42,7 @@ export default function About() {
             <img 
               src={profileImage} 
               alt="Prince Kumar Profile" 
-              className="w-64 sm:w-72 md:w-80 h-64 sm:h-72 md:h-80 object-contain mx-auto hover:scale-105 transition-all duration-500 rounded-2xl shadow-2xl border border-accent/20"
+              className="w-64 sm:w-72 md:w-80 h-64 sm:h-72 md:h-80 object-contain mx-auto hover:scale-105 transition-all duration-200 rounded-2xl shadow-2xl border border-accent/20"
             />
           </div>
           
@@ -75,7 +75,7 @@ export default function About() {
                   </div>
                   <div className="w-full bg-muted rounded-full h-2">
                     <div 
-                      className="skill-bar h-2 rounded-full transition-all duration-1000 ease-out" 
+                      className="skill-bar h-2 rounded-full transition-all duration-400 ease-out" 
                       style={{ width: `${skill.percentage}%` }}
                     />
                   </div>

@@ -105,7 +105,7 @@
   }
 
   .btn-glow {
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
   }
 
   .btn-glow:hover {
@@ -138,7 +138,7 @@
   }
 
   .project-card {
-    transition: all 0.5s ease;
+    transition: all 0.2s ease;
   }
 
   .project-card:hover {
@@ -151,25 +151,25 @@
   }
 
   .floating-animation {
-    animation: float 6s ease-in-out infinite;
+    animation: float 3s ease-in-out infinite;
   }
 
   .glow-animation {
-    animation: glow 2s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
   }
 
   .pulse-glow {
-    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: pulse-glow 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
   .slide-up-animation {
-    animation: slideUp 1.2s ease-out forwards;
+    animation: slideUp 0.6s ease-out forwards;
     transform: translateY(100px);
     opacity: 0;
   }
 
   .sharp-slide-up {
-    animation: sharpSlideUp 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    animation: sharpSlideUp 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
     transform: translateY(150px) scale(0.8);
     opacity: 0;
     filter: blur(15px);
@@ -181,7 +181,7 @@
 
   .education-item {
     position: relative;
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
   }
 
   .education-item:hover {
@@ -189,7 +189,7 @@
   }
 
   .certification-card {
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
     background: rgba(20, 20, 30, 0.6);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(79, 70, 229, 0.2);
@@ -579,7 +579,7 @@ iframe[src*="my.spline.design"] ~ div[style*="position: absolute"] {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 200%;
-  animation: gateGlow 3s ease-in-out infinite;
+  animation: gateGlow 1.5s ease-in-out infinite;
 }
 
 @keyframes gateGlow {
