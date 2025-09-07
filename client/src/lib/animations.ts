@@ -80,39 +80,54 @@ export function initializeHeroAnimations() {
 
   const { gsap } = window;
 
-  // Hero Section Animations
-  const timeline = gsap.timeline({ delay: 0.1 });
+  // Ensure hero elements are visible first
+  gsap.set('.hero-title, .hero-subtitle, .hero-buttons', { opacity: 1 });
+
+  // Hero Section Animations with mobile optimization
+  const timeline = gsap.timeline({ delay: 0.2 });
   
   timeline
     .fromTo('.hero-title', {
       opacity: 0,
-      y: 30,
-      filter: 'blur(5px)'
+      y: window.innerWidth <= 768 ? 20 : 30,
+      filter: 'blur(3px)'
     }, {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.6,
-      ease: 'power3.out'
+      duration: window.innerWidth <= 768 ? 0.4 : 0.6,
+      ease: 'power2.out'
     })
     .fromTo('.hero-subtitle', {
       opacity: 0,
-      y: 20
+      y: window.innerWidth <= 768 ? 15 : 20
     }, {
       opacity: 1,
       y: 0,
-      duration: 0.4,
+      duration: window.innerWidth <= 768 ? 0.3 : 0.4,
       ease: 'power2.out'
-    }, '-=0.3')
+    }, '-=0.2')
     .fromTo('.hero-buttons', {
       opacity: 0,
-      y: 15
+      y: window.innerWidth <= 768 ? 10 : 15
     }, {
       opacity: 1,
       y: 0,
-      duration: 0.3,
+      duration: window.innerWidth <= 768 ? 0.25 : 0.3,
       ease: 'power2.out'
-    }, '-=0.2');
+    }, '-=0.15');
+
+  // Add immediate fallback for mobile if animations don't trigger
+  if (window.innerWidth <= 768) {
+    setTimeout(() => {
+      const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-buttons');
+      heroElements.forEach(el => {
+        if (getComputedStyle(el as Element).opacity === '0') {
+          gsap.set(el, { opacity: 1, y: 0, filter: 'blur(0px)' });
+        }
+      });
+    }, 1000);
+  }
 }
 
 export function initializeScrollAnimations() {
@@ -135,17 +150,31 @@ export function initializeScrollAnimations() {
     });
   }
 
-  // Navigation Animation on Scroll
-  gsap.to('nav', {
-    backdropFilter: 'blur(20px)',
-    backgroundColor: 'rgba(0, 20, 40, 0.8)',
-    scrollTrigger: {
-      trigger: 'body',
-      start: 'top -50px',
-      end: 'bottom bottom',
-      scrub: true
-    }
-  });
+  // Navigation Animation on Scroll - optimized for mobile
+  if (window.innerWidth > 768) {
+    gsap.to('nav', {
+      backdropFilter: 'blur(20px)',
+      backgroundColor: 'rgba(0, 20, 40, 0.8)',
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top -50px',
+        end: 'bottom bottom',
+        scrub: true
+      }
+    });
+  } else {
+    // Simpler mobile navigation animation
+    gsap.to('nav', {
+      backdropFilter: 'blur(10px)',
+      backgroundColor: 'rgba(0, 20, 40, 0.9)',
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top -30px',
+        end: 'bottom bottom',
+        scrub: 0.5
+      }
+    });
+  }
 
   // About Section Animations
   const aboutTimeline = gsap.timeline({

@@ -8,10 +8,38 @@ export default function Hero() {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.gsap) {
-      // Hero animations will be triggered from the main animation system
-      if (titleRef.current) titleRef.current.style.opacity = '0';
-      if (subtitleRef.current) subtitleRef.current.style.opacity = '0';
-      if (buttonsRef.current) buttonsRef.current.style.opacity = '0';
+      // Set initial state for animations, with mobile fallback
+      if (titleRef.current) {
+        titleRef.current.style.opacity = '0';
+        titleRef.current.style.transform = 'translateY(20px)';
+      }
+      if (subtitleRef.current) {
+        subtitleRef.current.style.opacity = '0';
+        subtitleRef.current.style.transform = 'translateY(15px)';
+      }
+      if (buttonsRef.current) {
+        buttonsRef.current.style.opacity = '0';
+        buttonsRef.current.style.transform = 'translateY(10px)';
+      }
+      
+      // Mobile safety fallback - ensure elements show after 2 seconds if animations fail
+      if (window.innerWidth <= 768) {
+        setTimeout(() => {
+          const elements = [titleRef.current, subtitleRef.current, buttonsRef.current];
+          elements.forEach(el => {
+            if (el && getComputedStyle(el).opacity === '0') {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0px)';
+              el.style.transition = 'all 0.3s ease-out';
+            }
+          });
+        }, 2000);
+      }
+    } else {
+      // Fallback for when GSAP is not available
+      if (titleRef.current) titleRef.current.style.opacity = '1';
+      if (subtitleRef.current) subtitleRef.current.style.opacity = '1';
+      if (buttonsRef.current) buttonsRef.current.style.opacity = '1';
     }
   }, []);
 
