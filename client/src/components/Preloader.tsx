@@ -58,10 +58,13 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-accent mb-6 sm:mb-8 animate-pulse text-glow px-4">
           Prince Kumar
         </h1>
-        <div className="w-64 sm:w-80 h-1 bg-muted rounded-full overflow-hidden mx-auto">
+        <div className="w-64 sm:w-80 h-1 bg-gray-700 rounded-full overflow-hidden mx-auto">
           <div 
             ref={progressBarRef}
-            className="progress-bar h-full w-0 rounded-full transition-all duration-300"
+            className="h-full w-0 rounded-full transition-all duration-300"
+            style={{
+              background: 'linear-gradient(90deg, hsl(0, 100%, 60%), hsl(60, 100%, 60%), hsl(120, 100%, 60%), hsl(180, 100%, 60%), hsl(240, 100%, 60%), hsl(300, 100%, 60%))'
+            }}
           />
         </div>
         <p className="text-muted-foreground mt-3 sm:mt-4 font-light text-sm sm:text-base px-4">Loading Experience...</p>
