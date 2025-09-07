@@ -1,10 +1,32 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
+  
+  // Animated rotating text
+  const roles = [
+    "MERN Stack Developer",
+    "AI/ML Enthusiast", 
+    "n8n Agentic Workflow Expert"
+  ];
+  const [currentRole, setCurrentRole] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Text cycling animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentRole((prev) => (prev + 1) % roles.length);
+        setIsAnimating(false);
+      }, 500);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [roles.length]);
 
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
@@ -126,10 +148,10 @@ export default function Hero() {
         </h1>
         <p 
           ref={subtitleRef}
-          className="hero-subtitle text-lg sm:text-xl md:text-2xl font-light mb-6 sm:mb-8 text-muted-foreground text-center max-w-3xl mx-auto"
+          className={`hero-subtitle text-lg sm:text-xl md:text-2xl font-light mb-6 sm:mb-8 text-muted-foreground text-center max-w-3xl mx-auto transition-all duration-500 ${isAnimating ? 'opacity-20 scale-95' : 'opacity-100 scale-100'}`}
           style={{ opacity: 1, transform: 'translateY(0px)' }}
         >
-          MERN Stack Developer & AI/ML Enthusiast
+          <span className="text-gate-theme font-semibold">{roles[currentRole]}</span>
         </p>
         <div 
           ref={buttonsRef}
