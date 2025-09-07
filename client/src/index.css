@@ -63,18 +63,31 @@
     @apply antialiased bg-background text-foreground;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
-    /* Improve touch scrolling on mobile */
+    /* Optimize touch scrolling for mobile */
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+    scroll-behavior: smooth;
     /* Prevent text size adjustment on orientation change */
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+    /* Improve scroll performance */
+    will-change: scroll-position;
+    /* Prevent momentum scroll bounce */
+    overscroll-behavior-y: contain;
   }
 
   html {
     scroll-behavior: smooth;
+    scroll-snap-type: none;
     /* Ensure full height on mobile */
     height: 100%;
     height: -webkit-fill-available;
+    /* Optimize scroll performance */
+    will-change: scroll-position;
+    /* Prevent overscroll bounce */
+    overscroll-behavior: none;
+    /* Enable hardware acceleration */
+    transform: translateZ(0);
   }
 }
 
@@ -98,11 +111,19 @@
     transform: scale(1.05);
   }
   
-  /* Touch-friendly button states */
+  /* Touch-friendly button states with optimized performance */
   @media (max-width: 768px) {
     .btn-glow:active {
       transform: scale(0.98);
       box-shadow: 0 0 20px var(--neon-blue);
+      transition: transform 0.1s ease-out;
+    }
+    
+    /* Optimize button touch response */
+    button, .btn {
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
   }
 
@@ -340,10 +361,14 @@
     min-height: -webkit-fill-available;
   }
   
-  /* Horizontal scroll improvements */
+  /* Optimized horizontal scroll for mobile */
   .overflow-x-auto {
     scrollbar-width: none;
     -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    transform: translateZ(0);
   }
   
   .overflow-x-auto::-webkit-scrollbar {
@@ -353,6 +378,45 @@
   /* Better spacing for mobile */
   .section-padding {
     padding: 3rem 1rem;
+  }
+  
+  /* Optimize touch scrolling performance */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: pan-y;
+    /* Force hardware acceleration for smooth scrolling */
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  /* Allow text selection for inputs and content */
+  input, textarea, p, span, div[contenteditable] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  
+  /* Prevent scroll lag on mobile */
+  body {
+    position: relative;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+    scroll-behavior: auto; /* Disable browser smooth scroll for better performance */
+    /* Force GPU acceleration */
+    transform: translate3d(0, 0, 0);
+    will-change: scroll-position;
+  }
+  
+  /* Optimize all sections for smooth scrolling */
+  section {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
   }
 }
 

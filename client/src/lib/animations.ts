@@ -5,26 +5,59 @@ declare global {
   }
 }
 
-// Initialize smooth scroll for the entire site
+// Initialize optimized smooth scroll for the entire site
 export function initializeSmoothScroll() {
   if (typeof window === 'undefined') return;
 
-  // Smooth scroll behavior for all internal links
+  // Disable default scroll behavior to prevent conflicts
+  document.documentElement.style.scrollBehavior = 'auto';
+
+  // Optimized smooth scroll for internal links
   const smoothScrollTo = (target: string) => {
     const element = document.getElementById(target);
     if (element && window.gsap) {
       window.gsap.to(window, {
-        duration: 1.5,
+        duration: 0.8,
         scrollTo: {
           y: element,
           offsetY: 80
         },
-        ease: 'power2.inOut'
+        ease: 'power1.inOut'
       });
     } else if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
+
+  // Optimize scroll performance on mobile
+  if (window.innerWidth <= 768) {
+    // Debounce scroll events to prevent lag
+    let scrollTimeout: number;
+    const handleScroll = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = window.setTimeout(() => {
+        // Force hardware acceleration
+        document.body.style.transform = 'translateZ(0)';
+      }, 16);
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Optimize touch events
+    document.addEventListener('touchstart', () => {
+      // Enable momentum scrolling
+      (document.body.style as any).webkitOverflowScrolling = 'touch';
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', (e) => {
+      // Allow natural scrolling behavior
+      const target = e.target as Element;
+      if (!target.closest('.overflow-x-auto, input, textarea')) {
+        // Don't prevent default for main page scrolling
+        return;
+      }
+    }, { passive: true });
+  }
 
   // Add smooth scroll to navigation links
   document.addEventListener('click', (e) => {
@@ -86,6 +119,21 @@ export function initializeScrollAnimations() {
   if (typeof window === 'undefined' || !window.gsap || !window.ScrollTrigger) return;
 
   const { gsap, ScrollTrigger } = window;
+  
+  // Optimize ScrollTrigger for mobile performance
+  ScrollTrigger.config({
+    autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+    refreshPriority: -1
+  });
+  
+  // Reduce scroll trigger refresh rate on mobile
+  if (window.innerWidth <= 768) {
+    ScrollTrigger.defaults({
+      scroller: window,
+      immediateRender: false,
+      fastScrollEnd: true
+    });
+  }
 
   // Navigation Animation on Scroll
   gsap.to('nav', {
@@ -354,37 +402,42 @@ export function initializeScrollAnimations() {
     }
   });
 
-  // Glassmorphic Elements Hover Enhancement
-  document.querySelectorAll('.glassmorphic').forEach((element: Element) => {
-    element.addEventListener('mouseenter', function(this: Element) {
-      gsap.to(this, {
-        scale: 1.02,
-        backgroundColor: 'rgba(255, 255, 255, 0.08)',
-        duration: 0.3,
-        ease: 'power2.out'
+  // Glassmorphic Elements Hover Enhancement (Desktop only)
+  if (window.innerWidth > 768) {
+    document.querySelectorAll('.glassmorphic').forEach((element: Element) => {
+      element.addEventListener('mouseenter', function(this: Element) {
+        gsap.to(this, {
+          scale: 1.02,
+          backgroundColor: 'rgba(255, 255, 255, 0.08)',
+          duration: 0.2,
+          ease: 'power2.out'
+        });
+      });
+      
+      element.addEventListener('mouseleave', function(this: Element) {
+        gsap.to(this, {
+          scale: 1,
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          duration: 0.2,
+          ease: 'power2.out'
+        });
       });
     });
-    
-    element.addEventListener('mouseleave', function(this: Element) {
-      gsap.to(this, {
-        scale: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    });
-  });
+  }
 
-  // Parallax Effects for Background Elements
-  gsap.to('.orb', {
-    y: (i: number, target: any) => -100 * (i + 1),
-    scrollTrigger: {
-      trigger: 'body',
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 1
-    }
-  });
+  // Optimized Parallax Effects for Background Elements
+  if (window.innerWidth > 768) {
+    // Only enable parallax on desktop to prevent mobile lag
+    gsap.to('.orb', {
+      y: (i: number, target: any) => -50 * (i + 1),
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 0.5
+      }
+    });
+  }
 
   // Text Reveal Animation for Headings
   document.querySelectorAll('h1, h2, h3').forEach((heading: Element) => {
