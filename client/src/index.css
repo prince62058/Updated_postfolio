@@ -392,11 +392,23 @@
   .projects-container {
     gap: 1rem;
     padding-bottom: 1rem;
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    overflow-y: visible;
+    /* Ensure smooth scrolling on mobile */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
   }
   
   .project-card {
     width: 280px;
     min-width: 280px;
+    scroll-snap-align: start;
+    /* Ensure cards are touchable and scrollable */
+    touch-action: manipulation;
+    user-select: none;
+    flex-shrink: 0;
   }
   
   /* Better touch targets */
@@ -425,10 +437,26 @@
     scroll-behavior: smooth;
     overscroll-behavior-x: contain;
     transform: translateZ(0);
+    touch-action: pan-x pan-y; /* Allow both horizontal and vertical scrolling */
+    /* Additional mobile optimization */
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    width: 100%;
   }
   
   .overflow-x-auto::-webkit-scrollbar {
     display: none;
+  }
+  
+  /* Projects section specific mobile fixes */
+  #projects .overflow-x-auto {
+    /* Force horizontal scrolling to work */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scroll-behavior: auto; /* Better performance on mobile */
+    will-change: scroll-position;
+    transform: translate3d(0, 0, 0);
   }
   
   /* Better spacing for mobile */
@@ -442,7 +470,7 @@
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
-    touch-action: pan-y;
+    touch-action: manipulation;
     /* Force hardware acceleration for smooth scrolling */
     will-change: auto;
     backface-visibility: hidden;
