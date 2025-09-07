@@ -508,6 +508,35 @@
   }
 }
 
+/* Hide Spline watermark/branding */
+iframe[src*="spline.design"]::after,
+iframe[src*="spline.design"] + div,
+iframe[src*="my.spline.design"]::after,
+iframe[src*="my.spline.design"] + div {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Additional CSS to hide Spline watermark that might appear as overlay */
+.spline-watermark,
+div[data-spline],
+div[class*="spline"],
+div[class*="watermark"],
+a[href*="spline.design"],
+[class*="built-with"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide any absolute positioned elements that might be the watermark */
+iframe[src*="spline.design"] ~ div[style*="position: absolute"],
+iframe[src*="my.spline.design"] ~ div[style*="position: absolute"] {
+  display: none !important;
+}
+
 /* Gate theme styling for Prince Kumar name - Golden yellowish to match Spline gate */
 .text-gate-theme {
   color: hsl(var(--gate-theme));
