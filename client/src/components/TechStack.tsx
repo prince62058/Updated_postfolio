@@ -1,14 +1,37 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export default function TechStack() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [animatedBars, setAnimatedBars] = useState<boolean[]>([false, false, false, false]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.gsap) {
       if (titleRef.current) titleRef.current.style.opacity = '0';
       if (contentRef.current) contentRef.current.style.opacity = '0';
     }
+    
+    // Animate progress bars on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Trigger animation for all bars with staggered delay
+            setTimeout(() => setAnimatedBars([true, false, false, false]), 200);
+            setTimeout(() => setAnimatedBars([true, true, false, false]), 600);
+            setTimeout(() => setAnimatedBars([true, true, true, false]), 1000);
+            setTimeout(() => setAnimatedBars([true, true, true, true]), 1400);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const mernStack = [
@@ -17,28 +40,28 @@ export default function TechStack() {
       category: 'Database',
       description: 'NoSQL database for flexible, scalable data storage',
       percentage: 85,
-      color: 'bg-green-500'
+      color: 'bg-gradient-to-r from-yellow-400 to-amber-500'
     },
     {
       name: 'Express.js',
       category: 'Backend Framework',
       description: 'Fast, minimalist web framework for Node.js',
       percentage: 90,
-      color: 'bg-gray-500'
+      color: 'bg-gradient-to-r from-amber-400 to-yellow-500'
     },
     {
       name: 'React.js',
       category: 'Frontend Library',
       description: 'Component-based UI library for building interactive interfaces',
       percentage: 95,
-      color: 'bg-blue-500'
+      color: 'bg-gradient-to-r from-yellow-500 to-amber-400'
     },
     {
       name: 'Node.js',
       category: 'Runtime Environment',
       description: 'JavaScript runtime for building scalable server applications',
       percentage: 88,
-      color: 'bg-green-600'
+      color: 'bg-gradient-to-r from-amber-500 to-yellow-600'
     }
   ];
 
@@ -105,14 +128,28 @@ export default function TechStack() {
                 
                 <div className="mb-4">
                   <div className="flex justify-between mb-2">
-                    <span className="text-sm">Proficiency</span>
-                    <span className="text-accent text-sm">{tech.percentage}%</span>
+                    <span className="text-sm font-medium">Proficiency</span>
+                    <span className="text-gate-theme text-sm font-bold">{tech.percentage}%</span>
                   </div>
-                  <div className="w-full bg-muted rounded-full h-2">
+                  <div className="w-full bg-muted/50 rounded-full h-3 overflow-hidden relative">
                     <div 
-                      className={`${tech.color} h-2 rounded-full transition-all duration-1000 ease-out`}
-                      style={{ width: `${tech.percentage}%` }}
-                    />
+                      className={`${tech.color} h-3 rounded-full transition-all duration-2000 ease-out relative overflow-hidden shadow-lg`}
+                      style={{ 
+                        width: animatedBars[index] ? `${tech.percentage}%` : '0%',
+                        boxShadow: animatedBars[index] ? '0 0 20px hsla(45, 100%, 65%, 0.6)' : 'none'
+                      }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-300/40 to-transparent transform -skew-x-12 animate-pulse"></div>
+                    </div>
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1 text-center">
+                    <span className="inline-block w-2 h-2 rounded-full bg-gate-theme mr-1" 
+                          style={{ 
+                            animation: animatedBars[index] ? 'pulse 1s ease-in-out infinite' : 'none',
+                            backgroundColor: animatedBars[index] ? 'hsl(45, 100%, 65%)' : 'transparent'
+                          }}></span>
+                    Loading: {animatedBars[index] ? tech.percentage : 0}% Complete
                   </div>
                 </div>
               </div>
