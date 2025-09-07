@@ -144,12 +144,10 @@ export default function TechStack() {
                     </div>
                   </div>
                   <div className="text-xs text-muted-foreground mt-1 text-center">
-                    <span className="inline-block w-2 h-2 rounded-full mr-1" 
+                    <span className="inline-block w-2 h-2 rounded-full bg-gate-theme mr-1" 
                           style={{ 
                             animation: animatedBars[index] ? 'pulse 1s ease-in-out infinite' : 'none',
-                            backgroundColor: animatedBars[index] ? 
-                              ['hsl(220, 100%, 60%)', 'hsl(280, 100%, 60%)', 'hsl(340, 100%, 60%)', 'hsl(120, 100%, 60%)'][index] || 'hsl(220, 100%, 60%)'
-                              : 'transparent'
+                            backgroundColor: animatedBars[index] ? 'hsl(45, 100%, 65%)' : 'transparent'
                           }}></span>
                     Loading: {animatedBars[index] ? tech.percentage : 0}% Complete
                   </div>

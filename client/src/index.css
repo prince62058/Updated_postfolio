@@ -147,12 +147,7 @@
   }
 
   .skill-bar {
-    background: linear-gradient(90deg, 
-      hsl(220, 100%, 60%), 
-      hsl(280, 100%, 60%), 
-      hsl(340, 100%, 60%), 
-      hsl(120, 100%, 60%)
-    );
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan));
   }
 
   .floating-animation {
