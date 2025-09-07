@@ -25,28 +25,28 @@ export default function Education() {
   
 
   return (
-    <section id="education" className="py-20 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="education-title text-5xl font-light mb-6 text-accent">
+    <section id="education" className="py-12 sm:py-16 lg:py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="education-title text-3xl sm:text-4xl lg:text-5xl font-light mb-4 sm:mb-6 text-accent">
             Education Journey
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto font-light">
             My academic path and continuous learning journey in technology and computer science.
           </p>
         </div>
 
         <div className="education-timeline relative max-w-4xl mx-auto">
-          {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-cyan-500 to-purple-500 opacity-30"></div>
+          {/* Timeline Line - Hidden on mobile, shown on desktop */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-cyan-500 to-purple-500 opacity-30"></div>
 
           {educationData.map((item, index) => (
-            <div key={index} className={`education-item flex items-center mb-16 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+            <div key={index} className={`education-item flex items-center mb-8 sm:mb-12 lg:mb-16 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col md:flex-row`}>
               {/* Content Card */}
-              <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8' : 'pl-8'}`}>
-                <div className="glassmorphic p-8 rounded-2xl border border-blue-500/20 hover:border-cyan-400/40 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-400/20">
+              <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'} mb-4 md:mb-0`}>
+                <div className="glassmorphic p-4 sm:p-6 lg:p-8 rounded-2xl border border-blue-500/20 hover:border-cyan-400/40 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-400/20">
                   <div className="flex items-center justify-between mb-4">
-                    <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
+                    <span className={`px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold ${
                       item.status === 'Current' 
                         ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
                         : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
@@ -59,36 +59,36 @@ export default function Education() {
                     </div>
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2">
                     {item.degree}
                   </h3>
                   
-                  <div className="flex items-center text-gray-300 mb-3">
+                  <div className="flex items-center text-gray-300 mb-2 sm:mb-3">
                     <GraduationCap className="w-5 h-5 mr-2 text-purple-400" />
-                    <span className="text-lg">{item.institution}</span>
+                    <span className="text-sm sm:text-base lg:text-lg">{item.institution}</span>
                   </div>
                   
-                  <div className="flex items-center text-gray-400 mb-2">
+                  <div className="flex items-center text-gray-400 mb-1 sm:mb-2">
                     <Calendar className="w-4 h-4 mr-2" />
-                    <span>{item.duration}</span>
+                    <span className="text-sm sm:text-base">{item.duration}</span>
                   </div>
                   
                   <div className="flex items-center text-gray-400">
                     <MapPin className="w-4 h-4 mr-2" />
-                    <span>{item.location}</span>
+                    <span className="text-sm sm:text-base">{item.location}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Timeline Node */}
-              <div className="w-2/12 flex justify-center">
+              {/* Timeline Node - Hidden on mobile */}
+              <div className="hidden md:flex w-2/12 justify-center">
                 <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full border-4 border-gray-900 shadow-lg shadow-cyan-400/30 relative z-10">
                   <div className="w-full h-full bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full animate-pulse"></div>
                 </div>
               </div>
 
-              {/* Empty space for alternating layout */}
-              <div className="w-5/12"></div>
+              {/* Empty space for alternating layout - Hidden on mobile */}
+              <div className="hidden md:block w-5/12"></div>
             </div>
           ))}
         </div>

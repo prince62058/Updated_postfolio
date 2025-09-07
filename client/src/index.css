@@ -63,10 +63,18 @@
     @apply antialiased bg-background text-foreground;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
+    /* Improve touch scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent text size adjustment on orientation change */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
   }
 
   html {
     scroll-behavior: smooth;
+    /* Ensure full height on mobile */
+    height: 100%;
+    height: -webkit-fill-available;
   }
 }
 
@@ -88,6 +96,14 @@
   .btn-glow:hover {
     box-shadow: 0 0 30px var(--neon-blue);
     transform: scale(1.05);
+  }
+  
+  /* Touch-friendly button states */
+  @media (max-width: 768px) {
+    .btn-glow:active {
+      transform: scale(0.98);
+      box-shadow: 0 0 20px var(--neon-blue);
+    }
   }
 
   .progress-bar {
@@ -251,22 +267,36 @@
   overflow: hidden;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* Custom scrollbar - hidden on mobile, visible on desktop */
+@media (min-width: 769px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(240, 3.7%, 15.9%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--neon-blue), var(--neon-cyan));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple));
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: hsl(240, 3.7%, 15.9%);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--neon-blue), var(--neon-cyan));
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple));
+/* Hide scrollbars on mobile for cleaner look */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 }
 
 /* Form focus states */
@@ -275,17 +305,70 @@
   border-color: var(--neon-cyan);
 }
 
-/* Mobile responsiveness */
+/* Enhanced Mobile responsiveness */
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    line-height: 1.1;
   }
   
   .projects-container {
     gap: 1rem;
+    padding-bottom: 1rem;
   }
   
   .project-card {
-    width: 300px;
+    width: 280px;
+    min-width: 280px;
+  }
+  
+  /* Better touch targets */
+  button, .btn, a[role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve form inputs on mobile */
+  input, textarea, select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    border-radius: 0;
+  }
+  
+  /* Fix viewport height issues */
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Horizontal scroll improvements */
+  .overflow-x-auto {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Better spacing for mobile */
+  .section-padding {
+    padding: 3rem 1rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+  
+  .glassmorphic {
+    backdrop-filter: blur(10px);
+  }
+  
+  .project-card {
+    width: 260px;
+    min-width: 260px;
   }
 }
