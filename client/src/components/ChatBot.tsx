@@ -1,0 +1,46 @@
+import { useEffect } from 'react';
+import '@n8n/chat/style.css';
+import { createChat } from '@n8n/chat';
+
+export default function ChatBot() {
+  useEffect(() => {
+    createChat({
+      webhookUrl: 'https://prince5252.app.n8n.cloud/webhook/13e126da-a9f8-468b-b2f1-e8347f511182/chat',
+      initialMessages: [
+        "I'm Prince, your AI assistant. I can help you with web development, MERN stack projects, AI/ML, or any technical questions you have. Ask me anything, and I'll provide clear, detailed answers with examples if needed."
+      ],
+      i18n: {
+        en: {
+          title: 'Chat with Prince',
+          subtitle: 'AI Assistant for Web Development',
+          footer: '',
+          getStarted: 'Get Started',
+          inputPlaceholder: 'Type your message...',
+          closeButtonTooltip: 'Close chat'
+        }
+      },
+      theme: {
+        chatWindow: {
+          width: '400px',
+          height: '600px',
+          backgroundColor: 'hsl(240, 10%, 3.9%)',
+          borderColor: 'hsl(45, 100%, 65%)',
+          borderWidth: '1px',
+          borderRadius: '12px'
+        },
+        header: {
+          backgroundColor: 'hsl(240, 10%, 3.9%)',
+          color: 'hsl(0, 0%, 98%)',
+          borderColor: 'hsl(45, 100%, 65%)'
+        },
+        input: {
+          backgroundColor: 'hsl(240, 3.7%, 15.9%)',
+          color: 'hsl(0, 0%, 98%)',
+          borderColor: 'hsl(45, 100%, 65%)'
+        }
+      }
+    });
+  }, []);
+
+  return null; // The chat widget is rendered by the createChat function
+}
