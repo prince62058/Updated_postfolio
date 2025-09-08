@@ -9,6 +9,7 @@
 ## ✨ Features
 
 - **Modern Design**: Futuristic UI with glassmorphic elements and neon accents
+- **AI Chat Assistant**: Integrated N8n chatbot for visitor interaction
 - **Smooth Animations**: GSAP-powered scroll animations and transitions
 - **3D Integration**: Spline 3D elements in hero section
 - **Contact Form**: MongoDB integration with email notifications
@@ -24,6 +25,7 @@
 - **Tailwind CSS** - Utility-first styling
 - **GSAP** - Professional animations
 - **Locomotive Scroll** - Smooth scrolling effects
+- **N8n Chat** - AI chatbot integration
 - **Vite** - Fast development and builds
 
 ### Backend
@@ -38,6 +40,11 @@
 - **Radix UI** - Accessible primitives
 - **Lucide React** - Beautiful icons
 - **Framer Motion** - Advanced animations
+
+### AI & Chat Integration
+- **N8n Platform** - AI workflow automation
+- **Custom Webhook** - Seamless chat integration
+- **Contextual AI** - Intelligent visitor assistance
 
 ## 🚀 Featured Projects
 
@@ -99,6 +106,9 @@
    # SendGrid (optional)
    SENDGRID_API_KEY=your_sendgrid_api_key
    
+   # N8n Chat Integration (optional)
+   N8N_WEBHOOK_URL=your_n8n_chat_webhook_url
+   
    # Server Configuration
    PORT=5000
    NODE_ENV=development
@@ -147,6 +157,12 @@ portfolio/
 - **Email Notifications**: Automatic email alerts
 - **Admin Panel**: View and manage submissions
 
+### AI Chat Assistant
+- **N8n Integration**: Advanced AI workflow automation
+- **Custom Styling**: Chat widget matches portfolio theme
+- **Contextual Help**: Intelligent assistance for visitors
+- **Professional Positioning**: Bottom-right floating launcher
+
 ### Resume Management
 - **Database Storage**: MongoDB GridFS for file storage
 - **Direct Download**: One-click resume download
@@ -162,6 +178,11 @@ portfolio/
 - `GET /api/resume/download` - Download resume
 - `POST /api/resume/upload` - Upload new resume (admin)
 - `GET /api/resume/info` - Get resume metadata
+
+### Chat Integration
+- **N8n Webhook**: Connects to AI assistant workflow
+- **Real-time Chat**: Instant visitor support
+- **Custom Theming**: Matches portfolio aesthetic
 
 ### Database Management
 - `GET /api/database/status` - Database health check
