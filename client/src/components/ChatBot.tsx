@@ -21,12 +21,17 @@ export default function ChatBot() {
       },
       theme: {
         chatWindow: {
-          width: '400px',
-          height: '600px',
+          width: '380px',
+          height: '500px',
           backgroundColor: 'hsl(240, 10%, 3.9%)',
           borderColor: 'hsl(45, 100%, 65%)',
           borderWidth: '1px',
-          borderRadius: '12px'
+          borderRadius: '12px',
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          zIndex: '9999',
+          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3), 0 0 20px hsla(45, 100%, 65%, 0.2)'
         },
         header: {
           backgroundColor: 'hsl(240, 10%, 3.9%)',
@@ -37,6 +42,17 @@ export default function ChatBot() {
           backgroundColor: 'hsl(240, 3.7%, 15.9%)',
           color: 'hsl(0, 0%, 98%)',
           borderColor: 'hsl(45, 100%, 65%)'
+        },
+        launcher: {
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          zIndex: '9998',
+          backgroundColor: 'hsl(45, 100%, 65%)',
+          borderRadius: '50%',
+          width: '60px',
+          height: '60px',
+          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), 0 0 10px hsla(45, 100%, 65%, 0.3)'
         }
       }
     });
