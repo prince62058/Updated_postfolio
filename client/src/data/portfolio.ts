@@ -38,7 +38,7 @@ export const projects = [
       { name: "PostgreSQL", color: "bg-green-500/20 text-green-300" },
       { name: "Replit Auth", color: "bg-orange-500/20 text-orange-300" }
     ],
-    liveDemo: "https://ownai-t9uc.onrender.com/",
+    liveDemo: "https://princetechai.onrender.com/",
     downloadLink: "https://github.com/prince62058/OWNAI/archive/refs/heads/main.zip"
   },
   {
