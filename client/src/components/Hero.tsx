@@ -120,23 +120,6 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center">
-      {/* Spline 3D Background - Show on all devices */}
-      <div className="absolute inset-0 z-0">
-        <iframe 
-          src='https://my.spline.design/tvatimedoor-Ma5V5HRHuD3vpNuao3Dznnfy/' 
-          frameBorder='0' 
-          width='100%' 
-          height='100%'
-          style={{ 
-            background: 'transparent',
-            border: 'none',
-            outline: 'none'
-          }}
-          title="3D Gate Animation"
-          loading="eager"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        />
-      </div>
       
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
         <h1 
