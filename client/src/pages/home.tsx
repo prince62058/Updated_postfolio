@@ -9,6 +9,7 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import BackgroundOrbs from "@/components/BackgroundOrbs";
+import ChatBot from "@/components/ChatBot";
 import { useGSAP } from "@/hooks/use-gsap";
 
 export default function Home() {
@@ -35,6 +36,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <ChatBot />
     </div>
   );
 }

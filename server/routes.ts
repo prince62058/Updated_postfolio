@@ -7,6 +7,25 @@ import fs from 'fs';
 import path from 'path';
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // n8n Chat Proxy to bypass CORS
+  app.post('/api/n8n-chat', async (req, res) => {
+    try {
+      const response = await fetch('https://prince5252.app.n8n.cloud/webhook/13e126da-a9f8-468b-b2f1-e8347f511182/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(req.body)
+      });
+
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error('n8n proxy error:', error);
+      res.status(500).json({ error: 'Failed to connect to chatbot' });
+    }
+  });
+
   // Contact form submission endpoint
   app.post('/api/contact', async (req, res) => {
     try {

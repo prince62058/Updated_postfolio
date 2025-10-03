@@ -6,7 +6,7 @@ export default function ChatBot() {
   useEffect(() => {
     try {
       createChat({
-        webhookUrl: 'https://prince5252.app.n8n.cloud/webhook/13e126da-a9f8-468b-b2f1-e8347f511182/chat',
+        webhookUrl: '/api/n8n-chat',
         initialMessages: [
           "I'm Prince, your AI assistant. I can help you with web development, MERN stack projects, AI/ML, or any technical questions you have. Ask me anything, and I'll provide clear, detailed answers with examples if needed."
         ],

@@ -120,6 +120,14 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center">
+      {/* Animated Gradient Background */}
+      <div 
+        className="absolute inset-0 z-0 animate-gradient-shift" 
+        style={{
+          background: 'linear-gradient(-45deg, hsl(240, 10%, 3.9%), hsl(240, 10%, 5%), hsl(45, 100%, 15%), hsl(240, 10%, 3.9%))',
+          backgroundSize: '400% 400%'
+        }}
+      ></div>
       
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
         <h1 
