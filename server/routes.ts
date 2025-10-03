@@ -348,7 +348,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const result = await storage.createResume({
         ...resumeData,
-        fileData: resumeData.fileData
+        fileData: resumeData.fileData as any
       });
       
       // Verify the new resume is active
@@ -428,7 +428,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const resume = await storage.createResume({
         filename,
         contentType,
-        fileData: buffer
+        fileData: buffer as any
       });
 
       res.json({
