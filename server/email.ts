@@ -89,11 +89,20 @@ function createNodemailerTransporter() {
   }
 
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // Use STARTTLS
     auth: {
       user: gmailUser,
       pass: gmailPassword // This should be an App Password, not your regular password
-    }
+    },
+    tls: {
+      rejectUnauthorized: true,
+      minVersion: 'TLSv1.2'
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000
   });
 }
 
@@ -156,11 +165,17 @@ Reply to: ${formData.email}
       `
     };
 
-    await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully via Nodemailer');
+    const info = await transporter.sendMail(mailOptions);
+    console.log('✅ Email sent successfully via Nodemailer');
+    console.log('Message ID:', info.messageId);
+    console.log('Response:', info.response);
     return true;
-  } catch (error) {
-    console.error('Nodemailer error:', error);
+  } catch (error: any) {
+    console.error('❌ Nodemailer error details:');
+    console.error('Error message:', error.message);
+    console.error('Error code:', error.code);
+    console.error('Error command:', error.command);
+    console.error('Full error:', JSON.stringify(error, null, 2));
     return false;
   }
 }

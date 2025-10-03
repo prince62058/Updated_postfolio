@@ -26,6 +26,64 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Email test endpoint - to verify email configuration
+  app.get('/api/test-email', async (req, res) => {
+    try {
+      const gmailUser = process.env.GMAIL_USER;
+      const gmailPass = process.env.GMAIL_PASS;
+      
+      if (!gmailUser || !gmailPass) {
+        return res.status(500).json({
+          success: false,
+          message: 'Gmail credentials not configured',
+          debug: {
+            gmailUserSet: !!gmailUser,
+            gmailPassSet: !!gmailPass
+          }
+        });
+      }
+
+      // Send test email
+      const testData = {
+        name: 'Email Test',
+        email: 'test@example.com',
+        subject: 'Email Configuration Test',
+        message: 'This is a test email to verify your email configuration is working on Render deployment.'
+      };
+
+      const emailSent = await sendContactEmailAlternative(testData);
+
+      if (emailSent) {
+        res.json({
+          success: true,
+          message: 'Test email sent successfully! Check your inbox at princekumar5252@gmail.com',
+          config: {
+            gmailUser,
+            smtpHost: 'smtp.gmail.com',
+            smtpPort: 587
+          }
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: 'Failed to send test email. Check server logs for details.',
+          config: {
+            gmailUser,
+            smtpHost: 'smtp.gmail.com',
+            smtpPort: 587
+          }
+        });
+      }
+    } catch (error: any) {
+      console.error('Email test error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Email test failed',
+        error: error.message
+      });
+    }
+  });
+
   // Contact form submission endpoint
   app.post('/api/contact', async (req, res) => {
     try {
