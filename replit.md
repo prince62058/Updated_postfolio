@@ -8,6 +8,14 @@ The portfolio includes sections for hero/landing, about, projects, and contact, 
 
 ## Recent Changes
 
+**Email Setup & PhoneStore Project Added (October 4, 2025)**
+- Successfully configured Gmail SMTP integration with Nodemailer for contact form emails
+- Added GMAIL_USER and GMAIL_PASS secrets to Replit environment
+- Tested email functionality - emails sending successfully to princekumar5252@gmail.com
+- Added PhoneStore E-commerce Platform to projects section with live demo at https://phoneshopshy.netlify.app/
+- Updated PhoneStore technologies to React.js, Tailwind CSS, JavaScript, and E-commerce
+- Contact form now fully functional with both database storage and email notifications
+
 **GitHub Import Setup Completed (October 3, 2025)**
 - Successfully imported portfolio project from GitHub to Replit environment
 - Configured workflow to run on port 5000 with webview output for frontend display
