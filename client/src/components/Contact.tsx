@@ -37,43 +37,21 @@ export default function Contact() {
     });
     
     try {
-      // Try Gmail SMTP through our backend API first
-      const emailEndpoints = [
-        '/api/contact',  // Our own Gmail SMTP endpoint
-        'http://localhost:5000/api/contact' // Local development
-      ];
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      let emailSent = false;
+      const result = await response.json();
 
-      // Try Gmail SMTP endpoints
-      for (const endpoint of emailEndpoints) {
-        try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-
-          if (response.ok) {
-            const result = await response.json();
-            if (result.success) {
-              console.log('Gmail SMTP success:', result);
-              emailSent = true;
-              break;
-            }
-          }
-        } catch (endpointError) {
-          console.log(`Failed to reach ${endpoint}:`, endpointError);
-          continue;
-        }
-      }
-
-      if (emailSent) {
+      if (response.ok && result.success) {
         toast({
-          title: "Message Sent Successfully!",
-          description: "Thank you for your message. I've received your email and will get back to you soon!",
+          title: "✅ Message Sent Successfully!",
+          description: "Thank you for reaching out! I've received your message and will get back to you soon. 🚀",
+          variant: "default",
         });
 
         // Reset form
@@ -84,16 +62,16 @@ export default function Contact() {
           message: ''
         });
       } else {
-        // Gmail SMTP failed, show error
-        throw new Error('Gmail SMTP service unavailable');
+        throw new Error(result.message || 'Failed to send message');
       }
 
     } catch (error) {
       console.error('Contact form error:', error);
       
       toast({
-        title: "Please Contact Directly",
-        description: "Email: princekumar5252@gmail.com | Phone: +916205872519",
+        title: "❌ Failed to Send Message",
+        description: "Please contact me directly: princekumar5252@gmail.com | +916205872519",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
