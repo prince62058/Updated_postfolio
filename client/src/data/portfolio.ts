@@ -1,5 +1,18 @@
 export const projects = [
   {
+    title: "PhoneStore E-commerce Platform",
+    description: "Modern e-commerce platform for mobile phones featuring product catalog, shopping cart, secure checkout, and responsive design for seamless shopping experience across all devices.",
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
+    technologies: [
+      { name: "HTML", color: "bg-orange-500/20 text-orange-300" },
+      { name: "CSS", color: "bg-blue-500/20 text-blue-300" },
+      { name: "JavaScript", color: "bg-yellow-500/20 text-yellow-300" },
+      { name: "E-commerce", color: "bg-green-500/20 text-green-300" }
+    ],
+    liveDemo: "https://phoneshopshy.netlify.app/",
+    downloadLink: "https://github.com/prince62058/PhoneStore/archive/refs/heads/main.zip"
+  },
+  {
     title: "AI-Powered Communication Assistant",
     description: "Intelligent email management system that automatically processes, analyzes, and generates responses for customer support emails using AI. Features Gmail integration, sentiment analysis, and OpenAI GPT-4 powered response generation.",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
