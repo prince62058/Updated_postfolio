@@ -62,10 +62,26 @@ export function registerRoutes(app: Express): Server {
         });
       }
 
-      // Convert fileData to Buffer if needed
-      const buffer = Buffer.isBuffer(resume.fileData) 
-        ? resume.fileData 
-        : Buffer.from(resume.fileData);
+      // Handle different data formats from MongoDB
+      let buffer: Buffer;
+      
+      if (Buffer.isBuffer(resume.fileData)) {
+        buffer = resume.fileData;
+      } else if (resume.fileData && typeof resume.fileData === 'object' && 'buffer' in resume.fileData) {
+        // MongoDB Binary type has a buffer property
+        buffer = Buffer.from(resume.fileData.buffer);
+      } else if (typeof resume.fileData === 'string') {
+        // Base64 string
+        buffer = Buffer.from(resume.fileData, 'base64');
+      } else if (Array.isArray(resume.fileData)) {
+        // Array of bytes
+        buffer = Buffer.from(resume.fileData);
+      } else {
+        console.error('Unknown fileData format:', typeof resume.fileData);
+        throw new Error('Invalid file data format');
+      }
+      
+      console.log(`Sending resume: ${resume.filename}, size: ${buffer.length} bytes`);
       
       // Set proper headers for PDF download
       res.setHeader('Content-Type', 'application/pdf');
