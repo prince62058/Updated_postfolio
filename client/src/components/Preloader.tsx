@@ -11,42 +11,13 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   useEffect(() => {
     // Optimize preloader timing for mobile
     const isMobile = window.innerWidth <= 768;
-    const progressDuration = isMobile ? 0.8 : 1;
-    const hideDuration = isMobile ? 0.3 : 0.5;
     const initialDelay = isMobile ? 150 : 250;
     
     const timer = setTimeout(() => {
-      if (typeof window !== 'undefined' && window.gsap && progressBarRef.current && preloaderRef.current) {
-        // Animate progress bar from 0 to 100%
-        window.gsap.to(progressBarRef.current, {
-          width: "100%",
-          duration: progressDuration,
-          ease: "power2.out",
-          onComplete: () => {
-            // Hide preloader after progress completes
-            window.gsap.to(preloaderRef.current, {
-              opacity: 0,
-              scale: 0.9,
-              duration: hideDuration,
-              ease: "power2.inOut",
-              onComplete: () => {
-                if (preloaderRef.current) {
-                  preloaderRef.current.style.display = "none";
-                }
-                onComplete();
-              }
-            });
-          }
-        });
-      } else {
-        // Fallback without GSAP
-        setTimeout(() => {
-          if (preloaderRef.current) {
-            preloaderRef.current.style.display = "none";
-          }
-          onComplete();
-        }, isMobile ? 1000 : 1500);
+      if (preloaderRef.current) {
+        preloaderRef.current.style.display = "none";
       }
+      onComplete();
     }, initialDelay);
 
     return () => clearTimeout(timer);

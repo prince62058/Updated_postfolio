@@ -5,7 +5,7 @@ export function useGSAP() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const initializeAnimations = useCallback(() => {
-    if (typeof window !== 'undefined' && window.gsap) {
+    if (typeof window !== 'undefined') {
       // Initialize smooth scroll first
       initializeSmoothScroll();
       

@@ -1,8 +1,9 @@
-declare global {
-  interface Window {
-    gsap: any;
-    ScrollTrigger: any;
-  }
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register GSAP plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 // Initialize optimized smooth scroll for the entire site
@@ -15,16 +16,7 @@ export function initializeSmoothScroll() {
   // Optimized smooth scroll for internal links
   const smoothScrollTo = (target: string) => {
     const element = document.getElementById(target);
-    if (element && window.gsap) {
-      window.gsap.to(window, {
-        duration: 0.3,
-        scrollTo: {
-          y: element,
-          offsetY: 80
-        },
-        ease: 'power1.inOut'
-      });
-    } else if (element) {
+    if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
@@ -76,9 +68,8 @@ export function initializeSmoothScroll() {
 }
 
 export function initializeHeroAnimations() {
-  if (typeof window === 'undefined' || !window.gsap) return;
+  if (typeof window === 'undefined') return;
 
-  const { gsap } = window;
   const isMobile = window.innerWidth <= 768;
 
   // Force immediate visibility on mobile
@@ -127,9 +118,7 @@ export function initializeHeroAnimations() {
 }
 
 export function initializeScrollAnimations() {
-  if (typeof window === 'undefined' || !window.gsap) return;
-
-  const { gsap } = window;
+  if (typeof window === 'undefined') return;
   
   // Show all elements immediately without scroll triggers
   setTimeout(() => {
@@ -165,9 +154,7 @@ export function initializeScrollAnimations() {
 }
 
 export function initializeFloatingAnimations() {
-  if (typeof window === 'undefined' || !window.gsap) return;
-
-  const { gsap } = window;
+  if (typeof window === 'undefined') return;
 
   // Floating animations for background orbs
   gsap.to(".orb", {
