@@ -9,9 +9,9 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Optimize preloader timing for mobile
+    // Preloader timing
     const isMobile = window.innerWidth <= 768;
-    const initialDelay = isMobile ? 150 : 250;
+    const initialDelay = isMobile ? 2000 : 3000;
     
     const timer = setTimeout(() => {
       if (preloaderRef.current) {
