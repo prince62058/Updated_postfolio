@@ -40,9 +40,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // Create transporter
+    // Create transporter with timeout fixes
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
       host: 'smtp.gmail.com',
       port: 587,
       secure: false,
@@ -52,7 +51,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
       tls: {
         rejectUnauthorized: false
-      }
+      },
+      connectionTimeout: 30000, // 30 seconds
+      greetingTimeout: 30000,
+      socketTimeout: 60000, // 60 seconds
+      pool: true,
+      maxConnections: 3
     });
 
     // Verify transporter

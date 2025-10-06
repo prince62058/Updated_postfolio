@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import sgMail from '@sendgrid/mail';
 
 interface ContactFormData {
   name: string;
@@ -7,7 +8,7 @@ interface ContactFormData {
   message: string;
 }
 
-// Optimized Gmail transporter with faster connection settings
+// Optimized Gmail transporter with timeout fixes for Render deployment
 function createFastGmailTransporter() {
   const gmailUser = process.env.GMAIL_USER;
   const gmailPassword = process.env.GMAIL_APP_PASSWORD;
@@ -17,16 +18,22 @@ function createFastGmailTransporter() {
   }
 
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // use TLS
     auth: {
       user: gmailUser,
       pass: gmailPassword
     },
-    pool: true, // Use pooled connections for faster sending
-    maxConnections: 5,
-    maxMessages: 10,
-    rateDelta: 1000,
-    rateLimit: 5
+    tls: {
+      rejectUnauthorized: false
+    },
+    connectionTimeout: 30000, // 30 seconds
+    greetingTimeout: 30000,
+    socketTimeout: 60000, // 60 seconds
+    pool: true,
+    maxConnections: 3,
+    maxMessages: 5
   });
 }
 
