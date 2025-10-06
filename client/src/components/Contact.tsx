@@ -32,11 +32,12 @@ export default function Contact() {
     setIsSubmitting(true);
     
     toast({
-      title: "Sending your message...",
+      title: "📧 Sending your message...",
       description: "Please wait while I send your email.",
     });
     
     try {
+      // Try the API endpoint
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -66,12 +67,25 @@ export default function Contact() {
       }
 
     } catch (error) {
-      console.error('Contact form error:', error);
+      console.error('❌ Email sending failed:', error);
+      
+      // Fallback: Open email client as backup
+      const mailtoLink = `mailto:princekumar5252@gmail.com?subject=${encodeURIComponent(`Portfolio Contact: ${formData.subject}`)}&body=${encodeURIComponent(`Hi Prince,\n\nI'm reaching out through your portfolio website.\n\nName: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}\n\nBest regards,\n${formData.name}\n\n---\nSent from your portfolio contact form`)}`;
+      
+      window.open(mailtoLink, '_blank');
       
       toast({
-        title: "❌ Failed to Send Message",
-        description: "Please contact me directly: princekumar5252@gmail.com | +916205872519",
-        variant: "destructive",
+        title: "📧 Email Client Opened",
+        description: "Please send the email from your email app. Or contact me directly: princekumar5252@gmail.com",
+        variant: "default",
+      });
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
       });
     } finally {
       setIsSubmitting(false);
