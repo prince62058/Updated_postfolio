@@ -69,7 +69,7 @@ export function registerRoutes(app: Express): Server {
         buffer = resume.fileData;
       } else if (resume.fileData && typeof resume.fileData === 'object' && 'buffer' in resume.fileData) {
         // MongoDB Binary type has a buffer property
-        buffer = Buffer.from(resume.fileData.buffer);
+        buffer = Buffer.from((resume.fileData as any).buffer);
       } else if (typeof resume.fileData === 'string') {
         // Base64 string
         buffer = Buffer.from(resume.fileData, 'base64');
