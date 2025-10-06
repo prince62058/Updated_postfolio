@@ -1,46 +1,4 @@
-import sgMail from '@sendgrid/mail';
-
-let connectionSettings: any;
-
-async function getCredentials() {
-  const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME
-  const xReplitToken = process.env.REPL_IDENTITY 
-    ? 'repl ' + process.env.REPL_IDENTITY 
-    : process.env.WEB_REPL_RENEWAL 
-    ? 'depl ' + process.env.WEB_REPL_RENEWAL 
-    : null;
-
-  if (!xReplitToken) {
-    throw new Error('X_REPLIT_TOKEN not found for repl/depl');
-  }
-
-  connectionSettings = await fetch(
-    'https://' + hostname + '/api/v2/connection?include_secrets=true&connector_names=sendgrid',
-    {
-      headers: {
-        'Accept': 'application/json',
-        'X_REPLIT_TOKEN': xReplitToken
-      }
-    }
-  ).then(res => res.json()).then(data => data.items?.[0]);
-
-  if (!connectionSettings || (!connectionSettings.settings.api_key || !connectionSettings.settings.from_email)) {
-    throw new Error('SendGrid not connected');
-  }
-  return {apiKey: connectionSettings.settings.api_key, email: connectionSettings.settings.from_email};
-}
-
-// WARNING: Never cache this client.
-// Access tokens expire, so a new client must be created each time.
-// Always call this function again to get a fresh client.
-async function getUncachableSendGridClient() {
-  const {apiKey, email} = await getCredentials();
-  sgMail.setApiKey(apiKey);
-  return {
-    client: sgMail,
-    fromEmail: email
-  };
-}
+import nodemailer from 'nodemailer';
 
 interface ContactFormData {
   name: string;
@@ -49,14 +7,33 @@ interface ContactFormData {
   message: string;
 }
 
+// Create Gmail transporter
+function createGmailTransporter() {
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailPassword = process.env.GMAIL_APP_PASSWORD;
+  
+  if (!gmailUser || !gmailPassword) {
+    throw new Error('Gmail credentials not configured. Please set GMAIL_USER and GMAIL_APP_PASSWORD in secrets.');
+  }
+
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: gmailUser,
+      pass: gmailPassword
+    }
+  });
+}
+
+// Send contact email via Gmail
 export async function sendContactEmailAlternative(formData: ContactFormData): Promise<boolean> {
   try {
-    console.log('📧 Sending email via SendGrid...');
-    const { client, fromEmail } = await getUncachableSendGridClient();
+    console.log('📧 Sending email via Gmail...');
+    const transporter = createGmailTransporter();
 
-    const emailContent = {
-      to: 'princekumar5252@gmail.com',
-      from: fromEmail,
+    const mailOptions = {
+      from: process.env.GMAIL_USER,
+      to: process.env.GMAIL_USER, // Send to yourself
       subject: `Portfolio Contact: ${formData.subject}`,
       replyTo: formData.email,
       html: `
@@ -90,7 +67,7 @@ export async function sendContactEmailAlternative(formData: ContactFormData): Pr
         </div>
       `,
       text: `
-New Contact Form Submission
+New Contact Form Submission from Portfolio Website
 
 Name: ${formData.name}
 Email: ${formData.email}
@@ -104,14 +81,12 @@ Reply to: ${formData.email}
       `
     };
 
-    await client.send(emailContent);
-    console.log('✅ Email sent successfully via SendGrid');
+    const info = await transporter.sendMail(mailOptions);
+    console.log('✅ Email sent successfully via Gmail');
+    console.log('Message ID:', info.messageId);
     return true;
   } catch (error: any) {
-    console.error('❌ SendGrid email error:', error);
-    if (error.response) {
-      console.error('Error response:', error.response.body);
-    }
+    console.error('❌ Gmail error:', error.message);
     return false;
   }
 }
