@@ -30,12 +30,12 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     toast({
       title: "📧 Sending your message...",
       description: "Please wait while I send your email.",
     });
-    
+
     try {
       // Try the API endpoint
       const response = await fetch('/api/contact', {
@@ -46,13 +46,12 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      const data = await response.json();
 
-      if (response.ok && result.success) {
+      if (response.ok && data.success) {
         toast({
-          title: "✅ Message Sent Successfully!",
-          description: "Thank you for reaching out! I've received your message and will get back to you soon. 🚀",
-          variant: "default",
+          title: "✅ Success!",
+          description: data.message || "Message sent successfully!",
         });
 
         // Reset form
@@ -63,23 +62,29 @@ export default function Contact() {
           message: ''
         });
       } else {
-        throw new Error(result.message || 'Failed to send message');
+        // Email failed - show contact information
+        toast({
+          variant: "destructive",
+          title: "❌ Email Failed",
+          description: data.message || 'Please contact us directly at princekumar5252@gmail.com or call +91 9661513636',
+          duration: 8000,
+        });
       }
 
     } catch (error) {
       console.error('❌ Email sending failed:', error);
-      
+
       // Fallback: Open email client as backup
       const mailtoLink = `mailto:princekumar5252@gmail.com?subject=${encodeURIComponent(`Portfolio Contact: ${formData.subject}`)}&body=${encodeURIComponent(`Hi Prince,\n\nI'm reaching out through your portfolio website.\n\nName: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}\n\nBest regards,\n${formData.name}\n\n---\nSent from your portfolio contact form`)}`;
-      
+
       window.open(mailtoLink, '_blank');
-      
+
       toast({
         title: "📧 Email Client Opened",
         description: "Please send the email from your email app. Or contact me directly: princekumar5252@gmail.com",
         variant: "default",
       });
-      
+
       // Reset form
       setFormData({
         name: '',
@@ -141,7 +146,7 @@ export default function Contact() {
         >
           Get In Touch
         </h2>
-        
+
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Info */}
           <div ref={infoRef} className="contact-info">
@@ -149,7 +154,7 @@ export default function Contact() {
             <p className="text-muted-foreground mb-6 sm:mb-8 font-light text-sm sm:text-base">
               Whether you're looking for a developer, have a question about my projects, or just want to say hello, I'd love to hear from you.
             </p>
-            
+
             <div className="space-y-6">
               {contactInfo.map((item, index) => (
                 <div key={index} className="flex items-center space-x-3 sm:space-x-4">
@@ -175,7 +180,7 @@ export default function Contact() {
               ))}
             </div>
           </div>
-          
+
           {/* Contact Form */}
           <div ref={formRef} className="contact-form">
             <form onSubmit={handleSubmit} className="space-y-6">

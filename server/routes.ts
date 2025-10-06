@@ -8,44 +8,42 @@ export function registerRoutes(app: Express): Server {
   // Contact form submission endpoint
   app.post("/api/contact", async (req, res) => {
     try {
-      // Validate request body using Zod schema
-      const validationResult = insertContactSubmissionSchema.safeParse(req.body);
-      
-      if (!validationResult.success) {
+      const { name, email, subject, message } = req.body;
+
+      if (!name || !email || !subject || !message) {
         return res.status(400).json({ 
           success: false, 
-          message: 'Invalid form data',
-          errors: validationResult.error.errors
+          message: 'All fields are required' 
         });
       }
 
-      const submissionData = validationResult.data;
+      // Try to send email with fallback system
+      let emailSent = false;
+      try {
+        emailSent = await sendContactEmailAlternative({ name, email, subject, message });
+      } catch (emailError) {
+        console.error('Email sending failed:', emailError);
+        emailSent = false;
+      }
 
-      // Store in database first (so we don't lose the message even if email fails)
-      const storedSubmission = await storage.createContactSubmission(submissionData);
-      
-      // Try to send email notification
-      const emailSent = await sendContactEmailAlternative(submissionData);
-
+      // Return appropriate response based on email status
       if (emailSent) {
         return res.json({ 
           success: true, 
-          message: 'Message sent and stored successfully!',
-          submissionId: storedSubmission.id
+          message: 'Message sent successfully!' 
         });
       } else {
-        // Even if email fails, we still stored the submission in database
-        return res.json({ 
-          success: true, 
-          message: 'Message stored successfully! We will review it soon.',
-          submissionId: storedSubmission.id
+        // Email failed - tell user to contact directly
+        return res.status(500).json({ 
+          success: false, 
+          message: 'Unable to send email. Please contact us directly at princekumar5252@gmail.com or call +91 9661513636' 
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Contact form error:', error);
       return res.status(500).json({ 
         success: false, 
-        message: 'Server error. Please try again later.' 
+        message: 'Failed to send message. Please contact us at princekumar5252@gmail.com' 
       });
     }
   });
@@ -54,7 +52,7 @@ export function registerRoutes(app: Express): Server {
   app.get("/api/resume/download", async (req, res) => {
     try {
       const resume = await storage.getActiveResume();
-      
+
       if (!resume) {
         return res.status(404).json({ 
           success: false, 
@@ -64,7 +62,7 @@ export function registerRoutes(app: Express): Server {
 
       // Handle different data formats from MongoDB
       let buffer: Buffer;
-      
+
       if (Buffer.isBuffer(resume.fileData)) {
         buffer = resume.fileData;
       } else if (resume.fileData && typeof resume.fileData === 'object' && 'buffer' in resume.fileData) {
@@ -80,17 +78,17 @@ export function registerRoutes(app: Express): Server {
         console.error('Unknown fileData format:', typeof resume.fileData);
         throw new Error('Invalid file data format');
       }
-      
+
       console.log(`Sending resume: ${resume.filename}, size: ${buffer.length} bytes`);
-      
+
       // Set proper headers for PDF download
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', `attachment; filename="${resume.filename}"`);
       res.setHeader('Content-Length', buffer.length.toString());
-      
+
       // Send the binary data
       return res.send(buffer);
-      
+
     } catch (error) {
       console.error('Resume download error:', error);
       return res.status(500).json({ 
