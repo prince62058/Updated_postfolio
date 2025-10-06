@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { sendContactEmailAlternative } from "./email";
+import { sendContactEmail } from "./email";
 import { insertContactSubmissionSchema } from "../shared/mongodb-schema";
 
 export function registerRoutes(app: Express): Server {
@@ -20,7 +20,7 @@ export function registerRoutes(app: Express): Server {
       // Try to send email with fallback system
       let emailSent = false;
       try {
-        emailSent = await sendContactEmailAlternative({ name, email, subject, message });
+        emailSent = await sendContactEmail({ name, email, subject, message });
       } catch (emailError) {
         console.error('Email sending failed:', emailError);
         emailSent = false;
