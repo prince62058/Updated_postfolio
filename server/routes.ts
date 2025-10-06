@@ -62,13 +62,18 @@ export function registerRoutes(app: Express): Server {
         });
       }
 
+      // Convert fileData to Buffer if needed
+      const buffer = Buffer.isBuffer(resume.fileData) 
+        ? resume.fileData 
+        : Buffer.from(resume.fileData);
+      
       // Set proper headers for PDF download
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', `attachment; filename="${resume.filename}"`);
-      res.setHeader('Content-Length', resume.fileData.length);
+      res.setHeader('Content-Length', buffer.length.toString());
       
       // Send the binary data
-      return res.send(Buffer.from(resume.fileData));
+      return res.send(buffer);
       
     } catch (error) {
       console.error('Resume download error:', error);

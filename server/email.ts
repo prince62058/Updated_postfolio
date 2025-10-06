@@ -90,19 +90,18 @@ function createNodemailerTransporter() {
 
   return nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // Use STARTTLS
+    port: 465,
+    secure: true, // Use SSL
     auth: {
       user: gmailUser,
       pass: gmailPassword // This should be an App Password, not your regular password
     },
     tls: {
-      rejectUnauthorized: true,
-      minVersion: 'TLSv1.2'
+      rejectUnauthorized: false
     },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000
+    connectionTimeout: 15000,
+    greetingTimeout: 15000,
+    socketTimeout: 15000
   });
 }
 

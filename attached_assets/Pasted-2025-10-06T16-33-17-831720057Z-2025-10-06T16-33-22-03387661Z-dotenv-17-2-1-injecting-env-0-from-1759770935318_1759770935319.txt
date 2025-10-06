@@ -1,0 +1,87 @@
+2025-10-06T16:33:17.831720057Z 
+2025-10-06T16:33:22.03387661Z [dotenv@17.2.1] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+2025-10-06T16:33:22.228078801Z 4:33:22 PM [express] serving on port 10000
+2025-10-06T16:33:24.921058229Z ==> Your service is live 🎉
+2025-10-06T16:33:24.949854029Z ==> 
+2025-10-06T16:33:24.978276418Z ==> ///////////////////////////////////////////////////////////
+2025-10-06T16:33:25.010383818Z ==> 
+2025-10-06T16:33:25.039465608Z ==> Available at your primary URL https://princeport.onrender.com
+2025-10-06T16:33:25.088392948Z ==> 
+2025-10-06T16:33:25.127500327Z ==> ///////////////////////////////////////////////////////////
+2025-10-06T16:38:20.795598337Z ==> Deploying...
+2025-10-06T16:38:42.853628876Z ==> Running 'npm run start'
+2025-10-06T16:38:43.858197342Z 
+2025-10-06T16:38:43.858231223Z > rest-express@1.0.0 start
+2025-10-06T16:38:43.858238663Z > NODE_ENV=production node dist/index.js
+2025-10-06T16:38:43.858241393Z 
+2025-10-06T16:38:48.154090189Z [dotenv@17.2.1] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+2025-10-06T16:38:48.261263898Z 4:38:48 PM [express] serving on port 10000
+2025-10-06T16:38:51.659980864Z ==> Your service is live 🎉
+2025-10-06T16:38:51.689486613Z ==> 
+2025-10-06T16:38:51.714512574Z ==> ///////////////////////////////////////////////////////////
+2025-10-06T16:38:51.743351693Z ==> 
+2025-10-06T16:38:51.770580363Z ==> Available at your primary URL https://princeport.onrender.com
+2025-10-06T16:38:51.797487643Z ==> 
+2025-10-06T16:38:51.852123592Z ==> ///////////////////////////////////////////////////////////
+2025-10-06T16:43:53.90855916Z ==> Detected service running on port 10000
+2025-10-06T16:43:54.042334959Z ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
+2025-10-06T17:10:15.555184859Z ==> Running 'npm run start'
+2025-10-06T17:10:16.561822275Z 
+2025-10-06T17:10:16.561862318Z > rest-express@1.0.0 start
+2025-10-06T17:10:16.561867569Z > NODE_ENV=production node dist/index.js
+2025-10-06T17:10:16.561869658Z 
+2025-10-06T17:10:20.756007513Z [dotenv@17.2.1] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+2025-10-06T17:10:20.863232691Z 5:10:20 PM [express] serving on port 10000
+2025-10-06T17:10:26.851603218Z 5:10:26 PM [express] POST /api/n8n-chat 200 in 60ms
+2025-10-06T17:12:41.171145998Z ==> Deploying...
+2025-10-06T17:13:05.161774046Z ==> Running 'npm run start'
+2025-10-06T17:13:06.353574194Z 
+2025-10-06T17:13:06.353596175Z > rest-express@1.0.0 start
+2025-10-06T17:13:06.353602315Z > NODE_ENV=production node dist/index.js
+2025-10-06T17:13:06.353606155Z 
+2025-10-06T17:13:10.558708264Z [dotenv@17.2.1] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+2025-10-06T17:13:10.668115461Z 5:13:10 PM [express] serving on port 10000
+2025-10-06T17:13:12.183112476Z ==> Your service is live 🎉
+2025-10-06T17:13:12.221868426Z ==> 
+2025-10-06T17:13:12.260776755Z ==> ///////////////////////////////////////////////////////////
+2025-10-06T17:13:12.298987485Z ==> 
+2025-10-06T17:13:12.331797415Z ==> Available at your primary URL https://princeport.onrender.com
+2025-10-06T17:13:12.360394365Z ==> 
+2025-10-06T17:13:12.389608855Z ==> ///////////////////////////////////////////////////////////
+2025-10-06T17:14:18.266346045Z 5:14:18 PM [express] POST /api/n8n-chat 200 in 2ms
+2025-10-06T17:14:21.51272799Z Connecting to MongoDB...
+2025-10-06T17:14:24.044067Z Connected to MongoDB database: portfolio_db
+2025-10-06T17:14:25.007651918Z MongoDB indexes created successfully
+2025-10-06T17:14:25.007763001Z Using MongoDB storage
+2025-10-06T17:14:26.116771331Z Resume download error: TypeError [ERR_INVALID_CHAR]: Invalid character in header content ["Content-Length"]
+2025-10-06T17:14:26.116804162Z     at ServerResponse.setHeader (node:_http_outgoing:702:3)
+2025-10-06T17:14:26.116808922Z     at file:///opt/render/project/src/dist/index.js:526:11
+2025-10-06T17:14:26.116813642Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+2025-10-06T17:14:26.116818272Z   code: 'ERR_INVALID_CHAR'
+2025-10-06T17:14:26.116822152Z }
+2025-10-06T17:14:26.118051695Z 5:14:26 PM [express] GET /api/resume/download 500 in 4605ms :: {"success":false,"message":"Error dow…
+2025-10-06T17:14:56.990144112Z Resume download error: TypeError [ERR_INVALID_CHAR]: Invalid character in header content ["Content-Length"]
+2025-10-06T17:14:56.990182132Z     at ServerResponse.setHeader (node:_http_outgoing:702:3)
+2025-10-06T17:14:56.990186542Z     at file:///opt/render/project/src/dist/index.js:526:11
+2025-10-06T17:14:56.990191093Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+2025-10-06T17:14:56.990195502Z   code: 'ERR_INVALID_CHAR'
+2025-10-06T17:14:56.990199243Z }
+2025-10-06T17:14:56.990893825Z 5:14:56 PM [express] GET /api/resume/download 500 in 1090ms :: {"success":false,"message":"Error dow…
+2025-10-06T17:15:01.835059332Z ❌ Nodemailer error details:
+2025-10-06T17:15:01.835103993Z Error message: Connection timeout
+2025-10-06T17:15:01.835110733Z Error code: ETIMEDOUT
+2025-10-06T17:15:01.835119003Z Error command: CONN
+2025-10-06T17:15:01.835122693Z Full error: {
+2025-10-06T17:15:01.835126873Z   "code": "ETIMEDOUT",
+2025-10-06T17:15:01.835131023Z   "command": "CONN"
+2025-10-06T17:15:01.835139093Z }
+2025-10-06T17:15:01.835157663Z SENDGRID_API_KEY not set - email functionality will be disabled
+2025-10-06T17:15:01.835174394Z No email service available - contact form submission logged only
+2025-10-06T17:15:01.836169112Z 5:15:01 PM [express] POST /api/contact 200 in 10307ms :: {"success":true,"message":"Message stored s…
+2025-10-06T17:15:19.771266081Z Resume download error: TypeError [ERR_INVALID_CHAR]: Invalid character in header content ["Content-Length"]
+2025-10-06T17:15:19.771289392Z     at ServerResponse.setHeader (node:_http_outgoing:702:3)
+2025-10-06T17:15:19.771292922Z     at file:///opt/render/project/src/dist/index.js:526:11
+2025-10-06T17:15:19.771297012Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+2025-10-06T17:15:19.771300392Z   code: 'ERR_INVALID_CHAR'
+2025-10-06T17:15:19.771336923Z }
+2025-10-06T17:15:19.772165228Z 5:15:19 PM [express] GET /api/resume/download 500 in 1091ms :: {"success":false,"message":"Error dow…
