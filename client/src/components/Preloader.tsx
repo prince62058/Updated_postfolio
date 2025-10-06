@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -9,15 +10,43 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Preloader timing
     const isMobile = window.innerWidth <= 768;
-    const initialDelay = isMobile ? 2000 : 3000;
+    const progressDuration = isMobile ? 1.5 : 2;
+    const hideDuration = isMobile ? 0.4 : 0.6;
+    const initialDelay = isMobile ? 200 : 300;
     
     const timer = setTimeout(() => {
-      if (preloaderRef.current) {
-        preloaderRef.current.style.display = "none";
+      if (progressBarRef.current && preloaderRef.current) {
+        // Animate progress bar from 0 to 100%
+        gsap.to(progressBarRef.current, {
+          width: "100%",
+          duration: progressDuration,
+          ease: "power2.out",
+          onComplete: () => {
+            // Hide preloader after progress completes
+            gsap.to(preloaderRef.current, {
+              opacity: 0,
+              scale: 0.95,
+              duration: hideDuration,
+              ease: "power2.inOut",
+              onComplete: () => {
+                if (preloaderRef.current) {
+                  preloaderRef.current.style.display = "none";
+                }
+                onComplete();
+              }
+            });
+          }
+        });
+      } else {
+        // Fallback without animation
+        setTimeout(() => {
+          if (preloaderRef.current) {
+            preloaderRef.current.style.display = "none";
+          }
+          onComplete();
+        }, 2000);
       }
-      onComplete();
     }, initialDelay);
 
     return () => clearTimeout(timer);
