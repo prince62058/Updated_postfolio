@@ -7,13 +7,13 @@ interface ContactFormData {
   message: string;
 }
 
-// Create Gmail transporter
-function createGmailTransporter() {
+// Optimized Gmail transporter with faster connection settings
+function createFastGmailTransporter() {
   const gmailUser = process.env.GMAIL_USER;
   const gmailPassword = process.env.GMAIL_APP_PASSWORD;
   
   if (!gmailUser || !gmailPassword) {
-    throw new Error('Gmail credentials not configured. Please set GMAIL_USER and GMAIL_APP_PASSWORD in secrets.');
+    throw new Error('Gmail credentials not configured');
   }
 
   return nodemailer.createTransport({
@@ -21,19 +21,33 @@ function createGmailTransporter() {
     auth: {
       user: gmailUser,
       pass: gmailPassword
-    }
+    },
+    pool: true, // Use pooled connections for faster sending
+    maxConnections: 5,
+    maxMessages: 10,
+    rateDelta: 1000,
+    rateLimit: 5
   });
 }
 
-// Send contact email via Gmail
+// Create transporter once and reuse
+let transporter: any = null;
+
+function getTransporter() {
+  if (!transporter) {
+    transporter = createFastGmailTransporter();
+  }
+  return transporter;
+}
+
+// Fast email sending function
 export async function sendContactEmailAlternative(formData: ContactFormData): Promise<boolean> {
   try {
     console.log('📧 Sending email via Gmail...');
-    const transporter = createGmailTransporter();
-
+    
     const mailOptions = {
       from: process.env.GMAIL_USER,
-      to: process.env.GMAIL_USER, // Send to yourself
+      to: process.env.GMAIL_USER,
       subject: `Portfolio Contact: ${formData.subject}`,
       replyTo: formData.email,
       html: `
@@ -81,7 +95,7 @@ Reply to: ${formData.email}
       `
     };
 
-    const info = await transporter.sendMail(mailOptions);
+    const info = await getTransporter().sendMail(mailOptions);
     console.log('✅ Email sent successfully via Gmail');
     console.log('Message ID:', info.messageId);
     return true;
