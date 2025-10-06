@@ -1,0 +1,42 @@
+2025-10-06T17:53:37.164957773Z ==> Running 'npm run start'
+2025-10-06T17:53:38.165453935Z 
+2025-10-06T17:53:38.165480716Z > rest-express@1.0.0 start
+2025-10-06T17:53:38.165487436Z > NODE_ENV=production node dist/index.js
+2025-10-06T17:53:38.165489696Z 
+2025-10-06T17:53:42.174244276Z [dotenv@17.2.1] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+2025-10-06T17:53:42.469108164Z 5:53:42 PM [express] serving on port 10000
+2025-10-06T17:54:29.709088375Z 5:54:29 PM [express] POST /api/n8n-chat 200 in 4ms
+2025-10-06T17:54:40.236512538Z Connecting to MongoDB...
+2025-10-06T17:54:42.757290764Z Connected to MongoDB database: portfolio_db
+2025-10-06T17:54:43.715576958Z MongoDB indexes created successfully
+2025-10-06T17:54:43.715596558Z Using MongoDB storage
+2025-10-06T17:54:44.807734809Z Sending resume: Prince_Kumar_Resume.pdf, size: 298755 bytes
+2025-10-06T17:54:44.808814344Z 5:54:44 PM [express] GET /api/resume/download 304 in 4573ms
+2025-10-06T17:54:54.470009162Z 5:54:54 PM [express] POST /api/n8n-chat 200 in 1ms
+2025-10-06T17:55:05.364513428Z 5:55:05 PM [express] POST /api/n8n-chat 200 in 3ms
+2025-10-06T17:55:29.620321306Z 📧 Attempting to send email via Gmail SMTP...
+2025-10-06T17:55:44.633808413Z ❌ Nodemailer error details:
+2025-10-06T17:55:44.633846264Z Error message: Connection timeout
+2025-10-06T17:55:44.633851144Z Error code: ETIMEDOUT
+2025-10-06T17:55:44.633855024Z Error command: CONN
+2025-10-06T17:55:44.633865024Z Full error: {
+2025-10-06T17:55:44.633868504Z   "code": "ETIMEDOUT",
+2025-10-06T17:55:44.633871984Z   "command": "CONN"
+2025-10-06T17:55:44.633875544Z }
+2025-10-06T17:55:44.633991367Z SENDGRID_API_KEY not set - email functionality will be disabled
+2025-10-06T17:55:44.634005567Z 📧 Gmail failed, trying SendGrid...
+2025-10-06T17:55:44.634010198Z ⚠️ No email service available - message saved to database only
+2025-10-06T17:55:44.635263587Z 5:55:44 PM [express] POST /api/contact 500 in 15016ms :: {"success":false,"message":"Unable to send …
+2025-10-06T17:55:47.856360414Z 📧 Attempting to send email via Gmail SMTP...
+2025-10-06T17:56:02.858338892Z ❌ Nodemailer error details:
+2025-10-06T17:56:02.858370153Z Error message: Connection timeout
+2025-10-06T17:56:02.858383393Z Error code: ETIMEDOUT
+2025-10-06T17:56:02.858387803Z Error command: CONN
+2025-10-06T17:56:02.858429224Z 📧 Gmail failed, trying SendGrid...
+2025-10-06T17:56:02.858452175Z ⚠️ No email service available - message saved to database only
+2025-10-06T17:56:02.858532927Z Full error: {
+2025-10-06T17:56:02.858562578Z   "code": "ETIMEDOUT",
+2025-10-06T17:56:02.858569348Z   "command": "CONN"
+2025-10-06T17:56:02.858573498Z }
+2025-10-06T17:56:02.858578398Z SENDGRID_API_KEY not set - email functionality will be disabled
+2025-10-06T17:56:02.859437558Z 5:56:02 PM [express] POST /api/contact 500 in 15003ms :: {"success":false,"message":"Unable to send …
