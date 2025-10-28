@@ -14,7 +14,7 @@ async function reUploadResume() {
     console.log('Connected to database');
 
     // Read the PDF file from the correct path
-    const resumePath = process.argv[2] || path.join(__dirname, '..', 'attached_assets', 'PrinceResume2025Latest_1759764049708.pdf');
+    const resumePath = process.argv[2] || path.join(__dirname, '..', 'attached_assets', 'PRINCE-MERN-RESUME_1761682398066.pdf');
     
     if (!fs.existsSync(resumePath)) {
       console.error('Resume file not found at:', resumePath);
