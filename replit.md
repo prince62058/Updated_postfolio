@@ -8,6 +8,20 @@ The portfolio includes sections for hero/landing, about, projects, and contact, 
 
 ## Recent Changes
 
+**Gmail Contact Form Email Integration (October 28, 2025)**
+- Configured Gmail SMTP email sending for contact form submissions
+- Added GMAIL_USER and GMAIL_APP_PASSWORD environment secrets to Replit
+- Contact form now sends emails directly to princekumar5252@gmail.com when visitors submit inquiries
+- Email includes formatted HTML with contact details, subject, and message
+- Fallback system: SendGrid (primary) → Gmail (secondary) → User email client (fallback)
+- Verified email delivery working successfully with Nodemailer Gmail transport
+
+**Resume Update & Download Fix (October 28, 2025)**
+- Uploaded latest resume (PRINCE-MERN-RESUME) to MongoDB backend database
+- Fixed resume download filename to consistently use "Prince_Kumar_Resume.pdf"
+- Removed old resume files from project to keep storage clean
+- Resume download functionality working correctly from Hero section
+
 **Email Setup & PhoneStore Project Added (October 4, 2025)**
 - Successfully configured Gmail SMTP integration with Nodemailer for contact form emails
 - Added GMAIL_USER and GMAIL_PASS secrets to Replit environment
