@@ -1,10 +1,12 @@
+// This file is deprecated - using server/services/email.ts instead
+
 import nodemailer from 'nodemailer';
 
 interface ContactFormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
+ name: string;
+ email: string;
+ subject: string;
+ message: string;
 }
 
 // Send contact email using Gmail SMTP via Nodemailer
