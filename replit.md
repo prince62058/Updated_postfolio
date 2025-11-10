@@ -10,13 +10,12 @@ Full-stack portfolio website built with React, Express, and MongoDB.
 - ✅ Resume download API working: `/api/resume/download`
 
 ## Email Configuration Status
-- **Status:** Pending setup
-- **Integration:** SendGrid (manually configured - user declined connector integration)
+- **Status:** Using Gmail SMTP (Nodemailer)
+- **Integration:** Gmail App Password (user preferred over SendGrid)
 - **Required Secrets:**
-  - `SENDGRID_API_KEY` - Get from SendGrid dashboard
-  - `SENDGRID_FROM_EMAIL` - Verified sender email
-- **Note:** User needs to add these secrets manually in Replit Secrets panel
-- **Fallback:** Gmail SMTP configured but requires `GMAIL_USER` and `GMAIL_APP_PASSWORD`
+  - `GMAIL_USER` - Gmail address (default: princekumar5252@gmail.com)
+  - `GMAIL_APP_PASSWORD` - Gmail App Password (NOT regular password!)
+- **Note:** SendGrid removed per user request - using only Nodemailer now
 
 ## Tech Stack
 - **Frontend:** React, Vite, TailwindCSS, Framer Motion, GSAP
