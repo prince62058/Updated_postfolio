@@ -1,196 +1,94 @@
-import { storage } from "../storage";
-import { analyzeSentiment, analyzePriority, extractInformation, generateResponse } from "./openai";
-import type { InsertEmail, InsertEmailResponse } from "@shared/schema";
+import nodemailer from 'nodemailer';
 
-export interface ProcessedEmail {
-  id: string;
-  sender: string;
+interface ContactFormData {
+  name: string;
+  email: string;
   subject: string;
-  body: string;
-  receivedAt: Date;
-  priority: "urgent" | "normal";
-  sentiment: "positive" | "negative" | "neutral";
-  category: string;
-  extractedInfo: any;
-  hasResponse: boolean;
-  generatedResponse?: string;
+  message: string;
 }
 
-export class EmailService {
-  async processEmail(
-    sender: string,
-    subject: string,
-    body: string,
-    receivedAt: Date = new Date()
-  ): Promise<ProcessedEmail> {
-    try {
-      // Analyze sentiment, priority, and extract info in parallel
-      const [sentimentAnalysis, priorityAnalysis, extractedInfo] = await Promise.all([
-        analyzeSentiment(body, subject),
-        analyzePriority(body, subject),
-        extractInformation(body, subject, sender)
-      ]);
+// Send contact email using Gmail SMTP via Nodemailer
+export async function sendContactEmail(formData: ContactFormData): Promise<boolean> {
+  try {
+    console.log('📧 Sending email via Gmail SMTP...');
 
-      const emailData: InsertEmail = {
-        sender,
-        subject,
-        body,
-        receivedAt,
-        priority: priorityAnalysis.priority,
-        sentiment: sentimentAnalysis.sentiment,
-        category: extractedInfo.category || "General Inquiry",
-        extractedInfo: {
-          phoneNumbers: extractedInfo.phoneNumbers || [],
-          alternateEmails: extractedInfo.alternateEmails || [],
-          customerRequirements: extractedInfo.customerRequirements || [],
-          sentimentIndicators: extractedInfo.sentimentIndicators || [],
-          sentimentReasoning: sentimentAnalysis.reasoning,
-          priorityKeywords: priorityAnalysis.keywords,
-          sentimentConfidence: sentimentAnalysis.confidence,
-          priorityConfidence: priorityAnalysis.confidence
-        },
-        isProcessed: true
-      };
+    const gmailUser = process.env.GMAIL_USER || 'princekumar5252@gmail.com';
+    const gmailPass = process.env.GMAIL_APP_PASSWORD;
 
-      const email = await storage.createEmail(emailData);
-
-      let generatedResponse: string | undefined;
-      if (priorityAnalysis.priority === "urgent") {
-        const responseData = await generateResponse(
-          body,
-          subject,
-          sender,
-          sentimentAnalysis.sentiment,
-          priorityAnalysis.priority,
-          extractedInfo
-        );
-
-        const emailResponseData: InsertEmailResponse = {
-          emailId: email.id!,
-          generatedResponse: responseData.response,
-          confidence: Math.round(responseData.confidence * 100),
-          isEdited: false,
-          finalResponse: undefined,
-          sentAt: undefined
-        };
-
-        const response = await storage.createEmailResponse(emailResponseData);
-        generatedResponse = response.generatedResponse;
-      }
-
-      return {
-        id: email.id!,
-        sender: email.sender,
-        subject: email.subject,
-        body: email.body,
-        receivedAt: email.receivedAt,
-        priority: email.priority as "urgent" | "normal",
-        sentiment: email.sentiment as "positive" | "negative" | "neutral",
-        category: email.category || "General Inquiry",
-        extractedInfo: email.extractedInfo,
-        hasResponse: !!generatedResponse,
-        generatedResponse
-      };
-    } catch (error: any) {
-      console.error("❌ Email processing failed:", error);
-      throw new Error(`Failed to process email: ${error.message || "Unknown error"}`);
+    if (!gmailPass) {
+      console.error('❌ GMAIL_APP_PASSWORD not set');
+      return false;
     }
-  }
 
-  async generateResponseForEmail(emailId: string): Promise<string> {
-    try {
-      const email = await storage.getEmailById(emailId);
-      if (!email) throw new Error("Email not found");
-
-      const existingResponses = await storage.getResponsesByEmailId(emailId);
-      if (existingResponses.length > 0) return existingResponses[0].generatedResponse;
-
-      const responseData = await generateResponse(
-        email.body,
-        email.subject,
-        email.sender,
-        email.sentiment || "neutral",
-        email.priority || "normal",
-        email.extractedInfo
-      );
-
-      const emailResponseData: InsertEmailResponse = {
-        emailId: email.id!,
-        generatedResponse: responseData.response,
-        confidence: Math.round(responseData.confidence * 100),
-        isEdited: false,
-        finalResponse: undefined,
-        sentAt: undefined
-      };
-
-      const response = await storage.createEmailResponse(emailResponseData);
-      return response.generatedResponse;
-    } catch (error) {
-      console.error(`❌ generateResponseForEmail error for ${emailId}:`, error);
-
-      return `Dear Customer,
-
-Thank you for reaching out. We have received your message and will review it shortly.
-
-Our team will respond within 24 hours.
-
-Best regards,
-Support Team`;
-    }
-  }
-
-  async sendResponse(emailId: string, finalResponse: string): Promise<void> {
-    const responses = await storage.getResponsesByEmailId(emailId);
-    if (responses.length === 0) throw new Error("No response found for this email");
-
-    const response = responses[0];
-    await storage.updateEmailResponse(response.id!.toString(), {
-      finalResponse,
-      sentAt: new Date(),
-      isEdited: finalResponse !== response.generatedResponse
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: gmailUser,
+        pass: gmailPass,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+      connectionTimeout: 30000,
+      greetingTimeout: 30000,
+      socketTimeout: 60000,
     });
 
-    console.log(`✅ Response sent for email ${emailId}: ${finalResponse.substring(0, 50)}...`);
-  }
+    const mailOptions = {
+      from: `"Portfolio Contact" <${gmailUser}>`,
+      to: gmailUser,
+      subject: `Portfolio Contact: ${formData.subject}`,
+      replyTo: formData.email,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #fff; padding: 20px;">
+          <div style="background: linear-gradient(135deg, #0ea5e9, #06b6d4); padding: 20px; border-radius: 8px 8px 0 0; color: white;">
+            <h2 style="margin: 0; color: white;">💼 New Contact Form Submission</h2>
+            <p style="margin: 5px 0 0 0; opacity: 0.9; color: white;">From your portfolio website</p>
+          </div>
+          <div style="background: #f8fafc; padding: 20px; border-left: 4px solid #0ea5e9;">
+            <h3 style="color: #1e293b; margin-top: 0;">Contact Details</h3>
+            <p style="margin: 5px 0; color: #334155;"><strong>👤 Name:</strong> ${formData.name}</p>
+            <p style="margin: 5px 0; color: #334155;"><strong>📧 Email:</strong> ${formData.email}</p>
+            <p style="margin: 5px 0; color: #334155;"><strong>📝 Subject:</strong> ${formData.subject}</p>
+          </div>
+          <div style="background: #fff; padding: 20px; border: 1px solid #e2e8f0; margin-top: 10px;">
+            <h3 style="color: #1e293b; margin-top: 0;">💬 Message</h3>
+            <div style="background: #f1f5f9; padding: 15px; border-radius: 6px; line-height: 1.6; color: #334155;">
+              ${formData.message.replace(/\n/g, '<br>')}
+            </div>
+          </div>
+          <div style="background: #f8fafc; padding: 15px; margin-top: 10px; border-radius: 0 0 8px 8px; text-align: center;">
+            <p style="margin: 0; font-size: 12px; color: #64748b;">
+              📅 Received: ${new Date().toLocaleString()} | 🌐 Portfolio Contact Form | 💌 Reply to: ${formData.email}
+            </p>
+          </div>
+        </div>
+      `,
+      text: `
+New Contact Form Submission from Portfolio Website
 
-  async filterSupportEmails(emails: any[]): Promise<any[]> {
-    const supportKeywords = ["support", "query", "request", "help"];
-    return emails.filter(email => supportKeywords.some(k => (email.subject?.toLowerCase() || "").includes(k)));
-  }
+Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
 
-  async getEmailsWithResponses(limit = 50, offset = 0): Promise<ProcessedEmail[]> {
-    try {
-      const emails = await storage.getEmails(limit, offset);
+Message:
+${formData.message}
 
-      const emailsWithResponses = await Promise.all(
-        emails.map(async (email) => {
-          const responses = await storage.getResponsesByEmailId(email.id!.toString());
-          return {
-            id: email.id!.toString(),
-            sender: email.sender,
-            subject: email.subject,
-            body: email.body,
-            receivedAt: email.receivedAt,
-            priority: email.priority as "urgent" | "normal",
-            sentiment: email.sentiment as "positive" | "negative" | "neutral",
-            category: email.category || "General Inquiry",
-            extractedInfo: email.extractedInfo,
-            hasResponse: responses.length > 0,
-            generatedResponse: responses[0]?.generatedResponse
-          };
-        })
-      );
+Received: ${new Date().toLocaleString()}
+Reply to: ${formData.email}
+      `,
+    };
 
-      return emailsWithResponses.sort((a, b) => {
-        if (a.priority === "urgent" && b.priority !== "urgent") return -1;
-        if (b.priority === "urgent" && a.priority !== "urgent") return 1;
-        return new Date(b.receivedAt).getTime() - new Date(a.receivedAt).getTime();
-      });
-    } catch (error) {
-      console.error("❌ getEmailsWithResponses error:", error);
-      return [];
+    const info = await transporter.sendMail(mailOptions);
+    console.log('✅ Email sent successfully via Gmail:', info.messageId);
+    return true;
+  } catch (error: any) {
+    console.error('❌ Gmail SMTP error:', error.message);
+    if (error.code) {
+      console.error('   Error Code:', error.code);
     }
+    return false;
   }
 }
-
-export const emailService = new EmailService();
