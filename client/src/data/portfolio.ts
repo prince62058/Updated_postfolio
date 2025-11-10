@@ -1,5 +1,19 @@
 export const projects = [
   {
+    title: "Cloud Kitchen Food Delivery Platform",
+    description: "Full-stack food delivery web application with admin panel, real-time order management, secure payment integration, and responsive design for seamless food ordering experience.",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
+    technologies: [
+      { name: "React.js", color: "bg-cyan-500/20 text-cyan-300" },
+      { name: "Node.js", color: "bg-green-500/20 text-green-300" },
+      { name: "MongoDB", color: "bg-green-500/20 text-green-300" },
+      { name: "Express.js", color: "bg-gray-500/20 text-gray-300" },
+      { name: "Payment API", color: "bg-purple-500/20 text-purple-300" }
+    ],
+    liveDemo: "https://food-del-frontend-e4u5.onrender.com/",
+    downloadLink: "https://github.com/prince62058/Cloud-Kitchen-WEB-APP/archive/refs/heads/main.zip"
+  },
+  {
     title: "PhoneStore E-commerce Platform",
     description: "Modern e-commerce platform for mobile phones featuring product catalog, shopping cart, secure checkout, and responsive design for seamless shopping experience across all devices.",
     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
